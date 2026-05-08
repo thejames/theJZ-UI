@@ -76,3 +76,9 @@ Generates utilities like `bg-brand-700`, `text-accent-500`, `border-neutral-200`
 Generates utilities like `bg-primary`, `text-danger`, `border-success`.
 
 The rest (typography, radii, shadows, breakpoints) follows Tailwind v4 conventions; see `src/theme.css` for exact values.
+
+## Showcase
+
+See [`showcase/page.tsx`](showcase/page.tsx) for a single-page reference of every component in this package, rendered with the full design system applied.
+
+To use it locally, drop the file into any Next.js 14+ App Router app at `app/design-system/page.tsx` and visit `/design-system`. Requires Tailwind CSS v4 set up in the consuming app and Inter loaded via `next/font` (per the Setup section above).
