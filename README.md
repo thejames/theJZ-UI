@@ -10,6 +10,26 @@ Distributed via git (no registry yet). From a consuming Next.js app:
 pnpm add git+ssh://git@github.com:thejames/theJZ-UI.git
 ```
 
+To pin to a specific release, append a tag:
+
+```bash
+pnpm add git+ssh://git@github.com:thejames/theJZ-UI.git#v2026.0508
+```
+
+## Versioning
+
+Date-based, one version per push:
+
+- `YYYY.MMDD` — first release of a given day (e.g. `2026.0508`)
+- `YYYY.MMDDa`, `YYYY.MMDDb`, … — second, third, ... releases on the same day
+
+Each release is tagged in git as `vYYYY.MMDD[suffix]`. To cut a release before pushing:
+
+```bash
+pnpm release           # bumps package.json, commits, tags
+git push --follow-tags
+```
+
 ## Setup
 
 Add the following to the consuming app's global stylesheet:
