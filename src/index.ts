@@ -29,3 +29,20 @@ export { Alert } from "./components/Alert";
 export type { AlertProps } from "./components/Alert";
 export { Badge } from "./components/Badge";
 export type { BadgeProps } from "./components/Badge";
+
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardBody,
+  CardFooter,
+} from "./components/Card";
+export type {
+  CardProps,
+  CardHeaderProps,
+  CardTitleProps,
+  CardDescriptionProps,
+  CardBodyProps,
+  CardFooterProps,
+} from "./components/Card";
