@@ -7,7 +7,7 @@ Private design system for jameszambon Next.js apps. Ships React components and a
 Distributed via git (no registry yet). From a consuming Next.js app:
 
 ```bash
-pnpm add git+ssh://git@github.com:jameszambon/ui.git
+pnpm add git+ssh://git@github.com:thejames/theJZ-UI.git
 ```
 
 ## Usage

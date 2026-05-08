@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "description": "Private design system for jameszambon Next.js apps.",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/thejames/theJZ-UI.git"
+  },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
