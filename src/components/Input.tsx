@@ -1,0 +1,42 @@
+import { forwardRef, type InputHTMLAttributes } from "react";
+import { cva } from "class-variance-authority";
+import { cn } from "../lib/cn";
+
+const inputVariants = cva(
+  "block w-full bg-neutral-50 text-neutral-950 placeholder:text-neutral-400 border border-neutral-300 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 disabled:bg-neutral-100 disabled:opacity-60 disabled:cursor-not-allowed transition-colors",
+  {
+    variants: {
+      size: {
+        sm: "h-8 px-3 py-1 text-sm rounded-sm",
+        md: "h-10 px-3 py-2 text-base rounded-md",
+        lg: "h-12 px-4 py-3 text-lg rounded-lg",
+      },
+      invalid: {
+        true: "border-danger focus:border-danger focus:ring-danger/30",
+        false: "",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      invalid: false,
+    },
+  },
+);
+
+export interface InputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
+  size?: "sm" | "md" | "lg";
+  invalid?: boolean;
+}
+
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ className, size, invalid, ...props }, ref) => (
+    <input
+      ref={ref}
+      aria-invalid={invalid || undefined}
+      className={cn(inputVariants({ size, invalid }), className)}
+      {...props}
+    />
+  ),
+);
+Input.displayName = "Input";
