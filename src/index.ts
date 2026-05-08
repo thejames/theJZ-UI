@@ -24,3 +24,8 @@ export { RadioGroup, Radio } from "./components/RadioGroup";
 export type { RadioGroupProps, RadioProps } from "./components/RadioGroup";
 export { Switch } from "./components/Switch";
 export type { SwitchProps } from "./components/Switch";
+
+export { Alert } from "./components/Alert";
+export type { AlertProps } from "./components/Alert";
+export { Badge } from "./components/Badge";
+export type { BadgeProps } from "./components/Badge";
