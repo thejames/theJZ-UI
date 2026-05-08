@@ -17,3 +17,10 @@ export { FormHelperText } from "./components/FormHelperText";
 export type { FormHelperTextProps } from "./components/FormHelperText";
 export { FormErrorMessage } from "./components/FormErrorMessage";
 export type { FormErrorMessageProps } from "./components/FormErrorMessage";
+
+export { Checkbox } from "./components/Checkbox";
+export type { CheckboxProps } from "./components/Checkbox";
+export { RadioGroup, Radio } from "./components/RadioGroup";
+export type { RadioGroupProps, RadioProps } from "./components/RadioGroup";
+export { Switch } from "./components/Switch";
+export type { SwitchProps } from "./components/Switch";
