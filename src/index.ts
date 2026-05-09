@@ -46,3 +46,14 @@ export type {
   CardBodyProps,
   CardFooterProps,
 } from "./components/Card";
+
+export { Heading } from "./components/Heading";
+export type { HeadingProps } from "./components/Heading";
+export { Separator } from "./components/Separator";
+export type { SeparatorProps } from "./components/Separator";
+export { Code } from "./components/Code";
+export type { CodeProps } from "./components/Code";
+export { Kbd } from "./components/Kbd";
+export type { KbdProps } from "./components/Kbd";
+export { Spinner } from "./components/Spinner";
+export type { SpinnerProps } from "./components/Spinner";
