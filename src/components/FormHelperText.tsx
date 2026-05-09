@@ -7,7 +7,7 @@ export const FormHelperText = forwardRef<HTMLParagraphElement, FormHelperTextPro
   ({ className, ...props }, ref) => (
     <p
       ref={ref}
-      className={cn("text-sm text-neutral-600", className)}
+      className={cn("text-sm text-foreground-muted transition-colors", className)}
       {...props}
     />
   ),

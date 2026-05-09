@@ -9,14 +9,14 @@ import { cn } from "../lib/cn";
 type AlertVariant = "info" | "success" | "warning" | "danger";
 
 const alertVariants = cva(
-  "relative flex items-start gap-3 rounded-md border p-4 text-sm",
+  "relative flex items-start gap-3 rounded-md border p-4 text-sm transition-colors",
   {
     variants: {
       variant: {
-        info: "bg-cyan-50 border-cyan-200 text-cyan-900",
-        success: "bg-emerald-50 border-emerald-200 text-emerald-900",
-        warning: "bg-yellow-50 border-yellow-200 text-yellow-900",
-        danger: "bg-red-50 border-red-200 text-red-900",
+        info: "bg-cyan-50 border-cyan-200 text-cyan-900 dark:bg-cyan-950/40 dark:border-cyan-800 dark:text-cyan-200",
+        success: "bg-emerald-50 border-emerald-200 text-emerald-900 dark:bg-emerald-950/40 dark:border-emerald-800 dark:text-emerald-200",
+        warning: "bg-yellow-50 border-yellow-200 text-yellow-900 dark:bg-yellow-950/40 dark:border-yellow-800 dark:text-yellow-200",
+        danger: "bg-red-50 border-red-200 text-red-900 dark:bg-red-950/40 dark:border-red-800 dark:text-red-200",
       },
     },
     defaultVariants: {

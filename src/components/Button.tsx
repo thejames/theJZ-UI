@@ -6,12 +6,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib/cn";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-50 disabled:opacity-50 disabled:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:opacity-50 disabled:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         primary:
-          "bg-brand-700 text-neutral-50 hover:bg-brand-800 active:bg-brand-900 focus-visible:ring-brand-500/40",
+          "bg-brand-700 text-neutral-50 hover:bg-brand-800 active:bg-brand-900 focus-visible:ring-ring/40",
         secondary:
           "bg-neutral-600 text-neutral-50 hover:bg-neutral-700 active:bg-neutral-800 focus-visible:ring-neutral-500/40",
         accent:
@@ -25,27 +25,27 @@ const buttonVariants = cva(
         info:
           "bg-info text-neutral-950 hover:bg-cyan-600 active:bg-cyan-700 focus-visible:ring-cyan-400/40",
         light:
-          "bg-neutral-50 text-neutral-950 border border-neutral-200 hover:bg-neutral-100 active:bg-neutral-200 focus-visible:ring-neutral-400/40",
+          "bg-surface text-foreground border border-border hover:bg-muted active:bg-muted-stronger focus-visible:ring-foreground-muted/40",
         dark:
           "bg-neutral-950 text-neutral-50 hover:bg-neutral-900 active:bg-neutral-800 focus-visible:ring-neutral-700/40",
         "outline-primary":
-          "border border-brand-700 text-brand-700 hover:bg-brand-700 hover:text-neutral-50 active:bg-brand-800 focus-visible:ring-brand-500/40",
+          "border border-brand-700 text-brand-700 hover:bg-brand-700 hover:text-neutral-50 active:bg-brand-800 focus-visible:ring-ring/40",
         "outline-secondary":
-          "border border-neutral-600 text-neutral-700 hover:bg-neutral-600 hover:text-neutral-50 active:bg-neutral-700 focus-visible:ring-neutral-500/40",
+          "border border-neutral-600 text-foreground-muted hover:bg-neutral-600 hover:text-neutral-50 active:bg-neutral-700 focus-visible:ring-neutral-500/40",
         "outline-accent":
           "border border-accent-500 text-accent-700 hover:bg-accent-500 hover:text-neutral-950 active:bg-accent-600 focus-visible:ring-accent-500/40",
         "outline-success":
-          "border border-success text-success hover:bg-success hover:text-neutral-50 active:bg-emerald-700 focus-visible:ring-emerald-500/40",
+          "border border-success text-success-foreground hover:bg-success hover:text-neutral-50 active:bg-emerald-700 focus-visible:ring-emerald-500/40",
         "outline-danger":
-          "border border-danger text-danger hover:bg-danger hover:text-neutral-50 active:bg-red-700 focus-visible:ring-red-500/40",
+          "border border-danger text-danger-foreground hover:bg-danger hover:text-neutral-50 active:bg-red-700 focus-visible:ring-red-500/40",
         "outline-warning":
-          "border border-warning text-yellow-700 hover:bg-warning hover:text-neutral-950 active:bg-yellow-600 focus-visible:ring-yellow-400/40",
+          "border border-warning text-warning-foreground hover:bg-warning hover:text-neutral-950 active:bg-yellow-600 focus-visible:ring-yellow-400/40",
         "outline-info":
-          "border border-info text-cyan-700 hover:bg-info hover:text-neutral-950 active:bg-cyan-600 focus-visible:ring-cyan-400/40",
+          "border border-info text-info-foreground hover:bg-info hover:text-neutral-950 active:bg-cyan-600 focus-visible:ring-cyan-400/40",
         ghost:
-          "text-neutral-700 hover:bg-neutral-100 active:bg-neutral-200 focus-visible:ring-neutral-400/40",
+          "text-foreground-muted hover:bg-muted active:bg-muted-stronger focus-visible:ring-foreground-muted/40",
         link:
-          "text-brand-700 underline-offset-4 hover:underline hover:text-brand-800 focus-visible:ring-brand-500/40 px-0 py-0 h-auto",
+          "text-brand-700 underline-offset-4 hover:underline hover:text-brand-800 focus-visible:ring-ring/40 px-0 py-0 h-auto",
       },
       size: {
         sm: "h-8 px-3 py-1 text-sm rounded-sm",

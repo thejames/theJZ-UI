@@ -8,7 +8,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "../lib/cn";
 
 const switchRootVariants = cva(
-  "inline-flex shrink-0 items-center rounded-full border-2 border-transparent bg-neutral-300 data-[state=checked]:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer",
+  "inline-flex shrink-0 items-center rounded-full border-2 border-transparent bg-neutral-300 dark:bg-neutral-700 data-[state=checked]:bg-brand-700 dark:data-[state=checked]:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer",
   {
     variants: {
       size: {
@@ -29,7 +29,7 @@ const switchRootVariants = cva(
 );
 
 const switchThumbVariants = cva(
-  "pointer-events-none block rounded-full bg-neutral-50 shadow ring-0 transition-transform data-[state=unchecked]:translate-x-0",
+  "pointer-events-none block rounded-full bg-surface-elevated shadow ring-0 transition-transform data-[state=unchecked]:translate-x-0",
   {
     variants: {
       size: {

@@ -3,7 +3,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "../lib/cn";
 
 const selectVariants = cva(
-  "block w-full bg-neutral-50 text-neutral-950 placeholder:text-neutral-400 border border-neutral-300 focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/30 disabled:bg-neutral-100 disabled:opacity-60 disabled:cursor-not-allowed transition-colors appearance-none cursor-pointer",
+  "block w-full bg-input text-foreground placeholder:text-foreground-subtle border border-border focus:outline-none focus:border-ring focus:ring-2 focus:ring-ring/30 disabled:bg-border-subtle disabled:opacity-60 disabled:cursor-not-allowed transition-colors appearance-none cursor-pointer",
   {
     variants: {
       size: {
@@ -38,7 +38,7 @@ const ChevronDown = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
     aria-hidden="true"
-    className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 size-4 text-neutral-500"
+    className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 size-4 text-foreground-subtle"
   >
     <path d="m6 9 6 6 6-6" />
   </svg>

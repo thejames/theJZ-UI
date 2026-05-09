@@ -24,7 +24,7 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
     <div
       ref={ref}
       className={cn(
-        "rounded-lg border border-neutral-200 bg-neutral-50",
+        "rounded-lg border border-border bg-surface transition-colors",
         className,
       )}
       {...props}
@@ -53,7 +53,7 @@ export const CardTitle = forwardRef<HTMLHeadingElement, CardTitleProps>(
     <h3
       ref={ref}
       className={cn(
-        "text-xl font-semibold leading-tight tracking-tight text-neutral-950",
+        "text-xl font-semibold leading-tight tracking-tight text-foreground transition-colors",
         className,
       )}
       {...props}
@@ -70,7 +70,7 @@ export const CardDescription = forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-neutral-600", className)}
+    className={cn("text-sm text-foreground-muted transition-colors", className)}
     {...props}
   />
 ));
@@ -98,7 +98,7 @@ export const CardFooter = forwardRef<HTMLDivElement, CardFooterProps>(
     <div
       ref={ref}
       className={cn(
-        "flex items-center gap-2 px-6 py-4 border-t border-neutral-200",
+        "flex items-center gap-2 px-6 py-4 border-t border-border",
         className,
       )}
       {...props}

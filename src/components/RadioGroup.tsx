@@ -30,7 +30,7 @@ export const RadioGroup = forwardRef<
 RadioGroup.displayName = "RadioGroup";
 
 const radioVariants = cva(
-  "inline-flex items-center justify-center shrink-0 rounded-full border-2 border-neutral-300 bg-neutral-50 data-[state=checked]:border-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500/40 focus-visible:ring-offset-1 focus-visible:ring-offset-neutral-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer",
+  "inline-flex items-center justify-center shrink-0 rounded-full border-2 border-border bg-input data-[state=checked]:border-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer",
   {
     variants: {
       size: {

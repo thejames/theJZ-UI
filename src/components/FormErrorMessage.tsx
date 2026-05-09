@@ -7,7 +7,7 @@ export const FormErrorMessage = forwardRef<HTMLParagraphElement, FormErrorMessag
   ({ className, ...props }, ref) => (
     <p
       ref={ref}
-      className={cn("text-sm text-danger", className)}
+      className={cn("text-sm text-danger-foreground transition-colors", className)}
       {...props}
     />
   ),

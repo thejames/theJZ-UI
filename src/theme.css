@@ -9,6 +9,19 @@
  *   @import "@jameszambon/ui/theme.css";
  */
 
+/*
+ * Dark mode usage:
+ *   Add `class="dark"` to the <html> element (or any ancestor of your app) to enable dark mode.
+ *   The semantic tokens (--color-background, --color-foreground, --color-surface, etc.) automatically
+ *   resolve to dark values when an ancestor has the .dark class.
+ *
+ *   Components in this package reference these semantic tokens, not the raw neutral scale,
+ *   so dark mode "just works" without any per-component dark: variants.
+ *
+ *   To force light mode in a dark-mode app, omit the .dark class. To do system-preference dark mode,
+ *   read prefers-color-scheme and conditionally apply .dark in your app's root layout.
+ */
+
 @theme {
   /* ============================================================
    * Color scales
@@ -130,4 +143,76 @@
   --breakpoint-lg:  62rem;     /* 992px  — Bootstrap lg */
   --breakpoint-xl:  75rem;     /* 1200px — Bootstrap xl */
   --breakpoint-2xl: 87.5rem;   /* 1400px — Bootstrap xxl */
+
+  /* ============================================================
+   * Semantic surface tokens — referenced by components in light
+   * mode by default. Overridden under `.dark` (see block below).
+   * ============================================================ */
+
+  --color-background:        var(--color-neutral-100);  /* page background; cards sit on this */
+  --color-surface:           var(--color-neutral-50);   /* primary container bg (Card, popovers in light state) */
+  --color-surface-elevated:  var(--color-neutral-50);   /* same as surface in light, separate token for shadows + dark contrast */
+  --color-foreground:        var(--color-neutral-950);  /* primary text */
+  --color-foreground-muted:  var(--color-neutral-600);  /* secondary text (descriptions, helper text) */
+  --color-foreground-subtle: var(--color-neutral-500);  /* tertiary text (placeholders, captions, eyebrow labels) */
+  --color-border:            var(--color-neutral-200);  /* default border (Card, Input, Separator) */
+  --color-border-subtle:     var(--color-neutral-100);  /* softer divider (list separators within Cards) */
+
+  /*
+   * --color-muted, --color-muted-stronger: subtle interactive surfaces for
+   * hover/active states on transparent or surface-matching elements (Light and
+   * Ghost buttons). They flip per mode so hovers don't flash bright on dark pages.
+   */
+  --color-muted:             var(--color-neutral-100);
+  --color-muted-stronger:    var(--color-neutral-200);
+
+  --color-input:             var(--color-neutral-50);   /* input bg (typically same as surface in light, distinct in dark) */
+  --color-ring:              var(--color-brand-500);    /* focus ring base color (used at /40 opacity) */
+  --color-overlay:           color-mix(in oklab, var(--color-neutral-950) 40%, transparent);  /* modal backdrop, etc. */
+
+  /* ============================================================
+   * Status foreground tokens — text/border colors for status
+   * contexts (outline buttons, error messages, etc.). Darker
+   * shades in light mode, lighter shades in dark mode. Reference
+   * Tailwind v4 default palette.
+   * ============================================================ */
+
+  --color-success-foreground: var(--color-emerald-700);
+  --color-danger-foreground:  var(--color-red-700);
+  --color-warning-foreground: var(--color-yellow-700);
+  --color-info-foreground:    var(--color-cyan-700);
+}
+
+/* ============================================================
+ * Dark-mode override — applied when an ancestor (typically <html>)
+ * has the .dark class. Only the semantic tokens flip; the underlying
+ * neutral/brand/accent scales stay the same.
+ * ============================================================ */
+
+.dark {
+  --color-background:        var(--color-neutral-950);
+  --color-surface:           var(--color-neutral-900);
+  --color-surface-elevated:  var(--color-neutral-800);
+  --color-foreground:        var(--color-neutral-50);
+  --color-foreground-muted:  var(--color-neutral-400);
+  --color-foreground-subtle: oklch(0.660 0.024 236);
+  --color-border:            var(--color-neutral-800);
+  --color-border-subtle:     var(--color-neutral-900);
+
+  /*
+   * --color-muted, --color-muted-stronger: subtle interactive surfaces for
+   * hover/active states on transparent or surface-matching elements (Light and
+   * Ghost buttons). They flip per mode so hovers don't flash bright on dark pages.
+   */
+  --color-muted:             var(--color-neutral-800);
+  --color-muted-stronger:    var(--color-neutral-700);
+
+  --color-input:             var(--color-neutral-950);
+  --color-ring:              var(--color-brand-400);
+  --color-overlay:           color-mix(in oklab, var(--color-neutral-950) 70%, transparent);
+
+  --color-success-foreground: var(--color-emerald-300);
+  --color-danger-foreground:  var(--color-red-300);
+  --color-warning-foreground: var(--color-yellow-300);
+  --color-info-foreground:    var(--color-cyan-300);
 }

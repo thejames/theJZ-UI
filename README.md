@@ -59,6 +59,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 The `--font-sans` token lists `"Inter"` first with system-ui fallbacks, so anywhere Tailwind utilities resolve to `var(--font-sans)`, Inter is preferred when loaded.
 
+## Dark mode
+
+This package supports dark mode via semantic tokens. To enable dark mode in your app, add the `dark` class to your `<html>` element (or any ancestor of the components you want themed):
+
+```tsx
+// app/layout.tsx
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className="dark">
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+Components automatically respect the dark mode without any additional configuration. To enable it conditionally based on user/system preference, manage the class with your preferred approach (state hook, cookie, prefers-color-scheme media query, etc.).
+
+Note: as of v0.1.0, all components reference semantic tokens for surfaces, text, and borders. Status colors in Alerts and Badges (success/danger/warning/info) handle dark mode via `dark:` variants in component code rather than at the token level — this is intentional, since the soft-tinted backgrounds need different colors in each mode rather than just a foreground swap.
+
 ## Token reference
 
 **Color scales** (50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950):
