@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JZ semantic tokens preview</title>
+<style>
+  :root {
+    --color-neutral-50:  oklch(0.983 0.003 219.532);
+    --color-neutral-100: oklch(0.962 0.005 228.819);
+    --color-neutral-200: oklch(0.909 0.010 238.522);
+    --color-neutral-400: oklch(0.706 0.023 235.154);
+    --color-neutral-500: oklch(0.594 0.025 237.935);
+    --color-neutral-600: oklch(0.505 0.024 237.180);
+    --color-neutral-800: oklch(0.327 0.018 238.668);
+    --color-neutral-900: oklch(0.246 0.021 242.813);
+    --color-neutral-950: oklch(0.176 0.012 226.092);
+    --color-brand-400:   oklch(0.620 0.097 226.058);
+    --color-brand-500:   oklch(0.529 0.096 226.579);
+
+    --color-background:        var(--color-neutral-100);
+    --color-surface:           var(--color-neutral-50);
+    --color-surface-elevated:  var(--color-neutral-50);
+    --color-foreground:        var(--color-neutral-950);
+    --color-foreground-muted:  var(--color-neutral-600);
+    --color-foreground-subtle: var(--color-neutral-500);
+    --color-border:            var(--color-neutral-200);
+    --color-border-subtle:     var(--color-neutral-100);
+    --color-input:             var(--color-neutral-50);
+    --color-ring:              var(--color-brand-500);
+    --color-overlay: color-mix(in oklab, var(--color-neutral-950) 40%, transparent);
+  }
+  .dark {
+    --color-background:        var(--color-neutral-950);
+    --color-surface:           var(--color-neutral-900);
+    --color-surface-elevated:  var(--color-neutral-800);
+    --color-foreground:        var(--color-neutral-50);
+    --color-foreground-muted:  var(--color-neutral-400);
+    --color-foreground-subtle: var(--color-neutral-500);
+    --color-border:            var(--color-neutral-800);
+    --color-border-subtle:     var(--color-neutral-900);
+    --color-input:             var(--color-neutral-900);
+    --color-ring:              var(--color-brand-400);
+    --color-overlay: color-mix(in oklab, var(--color-neutral-950) 70%, transparent);
+  }
+  body { margin: 0; padding: 24px; font: 14px/1.4 system-ui, sans-serif;
+         background: var(--color-background); color: var(--color-foreground);
+         transition: background .15s, color .15s; }
+  button { padding: 8px 14px; font: inherit; cursor: pointer;
+           background: var(--color-surface); color: var(--color-foreground);
+           border: 1px solid var(--color-border); border-radius: 6px; }
+  button:focus-visible { outline: 2px solid var(--color-ring); outline-offset: 2px; }
+  .grid { display: grid; gap: 12px; margin-top: 16px;
+          grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .swatch { padding: 12px; border-radius: 8px;
+            background: var(--color-surface); border: 1px solid var(--color-border); }
+  .preview { height: 64px; border-radius: 6px; border: 1px solid var(--color-border-subtle); }
+  .name { margin-top: 8px; font-family: ui-monospace, monospace; font-size: 12px; }
+  .hint { font-size: 11px; color: var(--color-foreground-muted); }
+</style>
+</head>
+<body>
+  <button onclick="document.documentElement.classList.toggle('dark')">Toggle .dark</button>
+  <div class="grid" id="g"></div>
+  <script>
+    const tokens = ['background','surface','surface-elevated','foreground','foreground-muted',
+      'foreground-subtle','border','border-subtle','input','ring','overlay'];
+    document.getElementById('g').innerHTML = tokens.map(t =>
+      `<div class="swatch">
+         <div class="preview" style="background:var(--color-${t})"></div>
+         <div class="name">--color-${t}</div>
+         <div class="hint">resolves to current mode value</div>
+       </div>`).join('');
+  </script>
+</body>
+</html>

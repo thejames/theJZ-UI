@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@import "../../src/theme.css";
+
+@source "../../src";
+@source "../../showcase";
+
+html, body { height: 100%; }

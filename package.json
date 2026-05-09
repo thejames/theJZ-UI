@@ -27,6 +27,7 @@
     "copy:css": "node -e \"require('fs').copyFileSync('src/theme.css','dist/theme.css')\"",
     "typecheck": "tsc --noEmit",
     "dev": "tsup --watch",
+    "preview": "pnpm --filter playground dev",
     "release": "node scripts/release.mjs"
   },
   "peerDependencies": {
