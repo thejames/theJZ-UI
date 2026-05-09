@@ -25,7 +25,7 @@ const buttonVariants = cva(
         info:
           "bg-info text-neutral-950 hover:bg-cyan-600 active:bg-cyan-700 focus-visible:ring-cyan-400/40",
         light:
-          "bg-surface text-foreground border border-border hover:bg-muted active:bg-muted-stronger focus-visible:ring-foreground-muted/40",
+          "bg-surface text-foreground border border-border hover:bg-surface-muted active:bg-surface-muted-stronger focus-visible:ring-foreground-muted/40",
         dark:
           "bg-neutral-950 text-neutral-50 hover:bg-neutral-900 active:bg-neutral-800 focus-visible:ring-neutral-700/40",
         "outline-primary":
@@ -43,7 +43,7 @@ const buttonVariants = cva(
         "outline-info":
           "border border-info text-info-foreground hover:bg-info hover:text-neutral-950 active:bg-cyan-600 focus-visible:ring-cyan-400/40",
         ghost:
-          "text-foreground-muted hover:bg-muted active:bg-muted-stronger focus-visible:ring-foreground-muted/40",
+          "text-foreground-muted hover:bg-surface-muted active:bg-surface-muted-stronger focus-visible:ring-foreground-muted/40",
         link:
           "text-brand-700 underline-offset-4 hover:underline hover:text-brand-800 focus-visible:ring-ring/40 px-0 py-0 h-auto",
       },

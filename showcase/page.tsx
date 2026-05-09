@@ -244,7 +244,7 @@ export default function DesignSystemPage() {
             type="button"
             onClick={() => setIsDark(!isDark)}
             aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            className="ml-auto inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground-muted hover:bg-muted hover:text-foreground transition-colors"
+            className="ml-auto inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground-muted hover:bg-surface-muted hover:text-foreground transition-colors"
           >
             {isDark ? <SunIcon /> : <MoonIcon />}
             {isDark ? "Light" : "Dark"}
@@ -563,7 +563,7 @@ export default function DesignSystemPage() {
               <Label
                 key={p.value}
                 htmlFor={`ds-plan-${p.value}`}
-                className="mb-0 flex cursor-pointer items-start gap-3 rounded-md p-3 transition-colors hover:bg-muted"
+                className="mb-0 flex cursor-pointer items-start gap-3 rounded-md p-3 transition-colors hover:bg-surface-muted"
               >
                 <Radio id={`ds-plan-${p.value}`} value={p.value} className="mt-0.5" />
                 <div className="flex-1 font-normal">

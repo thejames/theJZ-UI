@@ -159,12 +159,14 @@
   --color-border-subtle:     var(--color-neutral-100);  /* softer divider (list separators within Cards) */
 
   /*
-   * --color-muted, --color-muted-stronger: subtle interactive surfaces for
-   * hover/active states on transparent or surface-matching elements (Light and
-   * Ghost buttons). They flip per mode so hovers don't flash bright on dark pages.
+   * --color-surface-muted, --color-surface-muted-stronger: subtle interactive
+   * surfaces for hover/active states on transparent or surface-matching
+   * elements (Light and Ghost buttons). They flip per mode so hovers don't
+   * flash bright on dark pages. Named with the "surface-" prefix to avoid
+   * colliding with consumer themes that use --color-muted as a foreground.
    */
-  --color-muted:             var(--color-neutral-100);
-  --color-muted-stronger:    var(--color-neutral-200);
+  --color-surface-muted:           var(--color-neutral-100);
+  --color-surface-muted-stronger:  var(--color-neutral-200);
 
   --color-input:             var(--color-neutral-50);   /* input bg (typically same as surface in light, distinct in dark) */
   --color-ring:              var(--color-brand-500);    /* focus ring base color (used at /40 opacity) */
@@ -200,12 +202,14 @@
   --color-border-subtle:     var(--color-neutral-900);
 
   /*
-   * --color-muted, --color-muted-stronger: subtle interactive surfaces for
-   * hover/active states on transparent or surface-matching elements (Light and
-   * Ghost buttons). They flip per mode so hovers don't flash bright on dark pages.
+   * --color-surface-muted, --color-surface-muted-stronger: subtle interactive
+   * surfaces for hover/active states on transparent or surface-matching
+   * elements (Light and Ghost buttons). They flip per mode so hovers don't
+   * flash bright on dark pages. Named with the "surface-" prefix to avoid
+   * colliding with consumer themes that use --color-muted as a foreground.
    */
-  --color-muted:             var(--color-neutral-800);
-  --color-muted-stronger:    var(--color-neutral-700);
+  --color-surface-muted:           var(--color-neutral-800);
+  --color-surface-muted-stronger:  var(--color-neutral-700);
 
   --color-input:             var(--color-neutral-950);
   --color-ring:              var(--color-brand-400);
