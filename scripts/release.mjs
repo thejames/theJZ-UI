@@ -43,22 +43,38 @@ function todayParts() {
   };
 }
 
-function computeNext(current, today) {
-  // Match the new semver-encoded calver format only. Anything else (the old
-  // YYYY.MMDD[a-z] strings, or arbitrary semver like 0.0.1) is treated as
-  // not-today and starts a fresh patch=1.
-  const m = String(current || "").match(/^(\d+)\.(\d+)\.(\d+)$/);
-  if (m && Number(m[1]) === today.year && Number(m[2]) === today.md) {
-    return `${today.year}.${today.md}.${Number(m[3]) + 1}`;
+function highestPatchToday(today) {
+  // Source of truth for "what's already been released today" is git tags,
+  // not package.json — the latter can drift (e.g. after npm publish bumps
+  // version manually) and produce collisions when this script tries to
+  // create a tag that already exists.
+  try {
+    const out = execSync(
+      `git tag --list "v${today.year}.${today.md}.*"`,
+      { encoding: "utf8" },
+    ).trim();
+    if (!out) return 0;
+    return out
+      .split("\n")
+      .map((tag) => {
+        const m = tag.match(/^v\d+\.\d+\.(\d+)$/);
+        return m ? Number(m[1]) : 0;
+      })
+      .reduce((a, b) => Math.max(a, b), 0);
+  } catch {
+    return 0;
   }
-  return `${today.year}.${today.md}.1`;
+}
+
+function computeNext(today) {
+  return `${today.year}.${today.md}.${highestPatchToday(today) + 1}`;
 }
 
 function main() {
   const pkg = JSON.parse(fs.readFileSync(PKG_PATH, "utf8"));
   const current = pkg.version;
   const today = todayParts();
-  const next = computeNext(current, today);
+  const next = computeNext(today);
 
   if (next === current) {
     console.error(`Already at ${current} — no bump produced.`);
