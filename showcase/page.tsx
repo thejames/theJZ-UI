@@ -13,7 +13,7 @@
  *       @import "@jameszambon/ui/theme.css";
  */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Alert,
   Badge,
@@ -26,14 +26,19 @@ import {
   CardHeader,
   CardTitle,
   Checkbox,
+  Code,
   FormErrorMessage,
   FormField,
   FormHelperText,
+  Heading,
   Input,
+  Kbd,
   Label,
   Radio,
   RadioGroup,
   Select,
+  Separator,
+  Spinner,
   Switch,
   Textarea,
   type BadgeProps,
@@ -160,24 +165,74 @@ const StarIcon = () => (
   </svg>
 );
 
+const SunIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className="size-4"
+  >
+    <circle cx="12" cy="12" r="4" />
+    <path d="M12 2v2" />
+    <path d="M12 20v2" />
+    <path d="m4.93 4.93 1.41 1.41" />
+    <path d="m17.66 17.66 1.41 1.41" />
+    <path d="M2 12h2" />
+    <path d="M20 12h2" />
+    <path d="m6.34 17.66-1.41 1.41" />
+    <path d="m19.07 4.93-1.41 1.41" />
+  </svg>
+);
+
+const MoonIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className="size-4"
+  >
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" />
+  </svg>
+);
+
 // ───────────────────────── page ─────────────────────────
 
 export default function DesignSystemPage() {
   const [showAlert, setShowAlert] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    return () => {
+      document.documentElement.classList.remove("dark");
+    };
+  }, [isDark]);
 
   return (
-    <main className="min-h-screen bg-neutral-100 font-sans text-neutral-950">
+    <main className="min-h-screen bg-background font-sans text-foreground transition-colors">
       <header className="mx-auto max-w-6xl px-8 pt-16 pb-8">
         <div className="flex items-center gap-3">
-          <h1 className="text-5xl font-bold">@jameszambon/ui</h1>
+          <Heading level={1} size="5xl">@jameszambon/ui</Heading>
           <Badge variant="accent" soft>v2026.0508</Badge>
         </div>
-        <p className="mt-2 max-w-2xl text-lg text-neutral-600">
+        <p className="mt-2 max-w-2xl text-lg text-foreground-muted">
           Design system reference for JZ Productions. Bootstrap structure, brand colors, Tailwind v4.
         </p>
       </header>
 
-      <nav className="sticky top-0 z-10 border-b border-neutral-200 bg-neutral-50/80 backdrop-blur">
+      <nav className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto max-w-6xl flex flex-wrap items-center gap-x-6 gap-y-2 px-8 py-4 text-sm font-medium">
           <a href="#foundation" className="hover:text-brand-700 transition-colors">Foundation</a>
           <a href="#actions"    className="hover:text-brand-700 transition-colors">Actions</a>
@@ -185,18 +240,27 @@ export default function DesignSystemPage() {
           <a href="#toggles"    className="hover:text-brand-700 transition-colors">Toggles</a>
           <a href="#feedback"   className="hover:text-brand-700 transition-colors">Feedback</a>
           <a href="#structure"  className="hover:text-brand-700 transition-colors">Structure</a>
+          <button
+            type="button"
+            onClick={() => setIsDark(!isDark)}
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            className="ml-auto inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground-muted hover:bg-muted hover:text-foreground transition-colors"
+          >
+            {isDark ? <SunIcon /> : <MoonIcon />}
+            {isDark ? "Light" : "Dark"}
+          </button>
         </div>
       </nav>
 
       {/* ===== FOUNDATION ===== */}
-      <section id="foundation" className="mx-auto max-w-6xl scroll-mt-20 space-y-8 px-8 py-16 border-t border-neutral-200">
+      <section id="foundation" className="mx-auto max-w-6xl scroll-mt-20 space-y-8 px-8 py-16">
         <header>
-          <h2 className="text-3xl font-bold">Foundation</h2>
-          <p className="mt-1 text-neutral-600">Color scales and the type scale.</p>
+          <Heading level={2} size="3xl">Foundation</Heading>
+          <p className="mt-1 text-foreground-muted">Color scales and the type scale.</p>
         </header>
 
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Brand color scale</h3>
+          <Heading level={3} size="lg">Brand color scale</Heading>
           <div className="grid grid-cols-11 gap-px overflow-hidden rounded-md">
             {BRAND_SCALE.map((s) => (
               <div key={s.shade} className={`${s.bg} ${s.text} flex h-20 flex-col justify-end p-2`}>
@@ -208,7 +272,7 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Accent color scale</h3>
+          <Heading level={3} size="lg">Accent color scale</Heading>
           <div className="grid grid-cols-11 gap-px overflow-hidden rounded-md">
             {ACCENT_SCALE.map((s) => (
               <div key={s.shade} className={`${s.bg} ${s.text} flex h-20 flex-col justify-end p-2`}>
@@ -220,7 +284,7 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Neutral color scale</h3>
+          <Heading level={3} size="lg">Neutral color scale</Heading>
           <div className="grid grid-cols-11 gap-px overflow-hidden rounded-md">
             {NEUTRAL_SCALE.map((s) => (
               <div key={s.shade} className={`${s.bg} ${s.text} flex h-20 flex-col justify-end p-2`}>
@@ -232,34 +296,103 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Typography</h3>
-          <div className="rounded-md border border-neutral-200 bg-neutral-50 divide-y divide-neutral-200">
+          <Heading level={3} size="lg">Typography</Heading>
+          <div className="rounded-md border border-border bg-surface divide-y divide-border">
             {TYPE_SCALE.map((t) => (
               <div key={t.name} className="flex items-baseline gap-6 px-4 py-3">
-                <div className="w-24 shrink-0 font-mono text-xs text-neutral-500">{t.name}</div>
+                <div className="w-24 shrink-0 font-mono text-xs text-foreground-subtle">{t.name}</div>
                 <div className={`${t.className} truncate font-medium leading-tight`}>The quick brown fox</div>
               </div>
             ))}
           </div>
         </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Primitives</Heading>
+
+          <div className="space-y-4 rounded-md border border-border bg-surface p-6">
+            <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">Heading levels</div>
+            {([
+              { level: 1, size: "5xl" },
+              { level: 2, size: "4xl" },
+              { level: 3, size: "3xl" },
+              { level: 4, size: "2xl" },
+              { level: 5, size: "xl" },
+              { level: 6, size: "base" },
+            ] as const).map(({ level, size }) => (
+              <div key={level} className="flex items-baseline gap-6">
+                <div className="w-24 shrink-0 font-mono text-xs text-foreground-subtle">h{level} / {size}</div>
+                <Heading level={level}>The quick brown fox</Heading>
+              </div>
+            ))}
+          </div>
+
+          <div className="space-y-4 rounded-md border border-border bg-surface p-6">
+            <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">Separator</div>
+            <div className="space-y-3">
+              <p className="text-sm text-foreground-muted">Above the divider.</p>
+              <Separator />
+              <p className="text-sm text-foreground-muted">Below the divider.</p>
+            </div>
+            <div className="flex h-12 items-center gap-4">
+              <span className="text-sm text-foreground-muted">Left</span>
+              <Separator orientation="vertical" />
+              <span className="text-sm text-foreground-muted">Right</span>
+            </div>
+          </div>
+
+          <div className="space-y-3 rounded-md border border-border bg-surface p-6">
+            <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">Inline Code &amp; Kbd</div>
+            <p className="text-foreground-muted">
+              Edit <Code>app/layout.tsx</Code> to load Inter via <Code>next/font</Code>.
+            </p>
+            <p className="text-foreground-muted">
+              Press <Kbd>Cmd</Kbd> <Kbd>K</Kbd> to open the command palette.
+            </p>
+          </div>
+
+          <div className="space-y-4 rounded-md border border-border bg-background p-6">
+            <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">Spinner</div>
+            <div className="grid grid-cols-3 gap-6">
+              {(["sm", "md", "lg"] as const).map((s) => (
+                <div key={s} className="flex flex-col items-center gap-2 text-foreground-muted">
+                  <Spinner size={s} />
+                  <div className="font-mono text-xs text-foreground-subtle">{s}</div>
+                </div>
+              ))}
+            </div>
+            <Card>
+              <CardHeader>
+                <CardTitle>Loading render queue</CardTitle>
+                <CardDescription>Fetching jobs from the worker pool.</CardDescription>
+              </CardHeader>
+              <CardBody className="flex items-center gap-3 text-foreground-muted">
+                <Spinner size="md" />
+                <span>Just a moment&hellip;</span>
+              </CardBody>
+            </Card>
+          </div>
+        </div>
       </section>
 
+      <Separator className="mx-auto max-w-6xl" />
+
       {/* ===== ACTIONS ===== */}
-      <section id="actions" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16 border-t border-neutral-200">
+      <section id="actions" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
         <header>
-          <h2 className="text-3xl font-bold">Actions</h2>
-          <p className="mt-1 text-neutral-600">Button and ButtonGroup.</p>
+          <Heading level={2} size="3xl">Actions</Heading>
+          <p className="mt-1 text-foreground-muted">Button and ButtonGroup.</p>
         </header>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Buttons — variants × sizes</h3>
-          <div className="grid grid-cols-[180px_repeat(3,minmax(0,1fr))] items-center gap-x-4 gap-y-3 rounded-md border border-neutral-200 bg-neutral-50 p-6">
+          <Heading level={3} size="lg">Buttons — variants × sizes</Heading>
+          <div className="grid grid-cols-[180px_repeat(3,minmax(0,1fr))] items-center gap-x-4 gap-y-3 rounded-md border border-border bg-surface p-6">
             <div />
             {BUTTON_SIZES.map((s) => (
-              <div key={s} className="text-xs font-semibold uppercase tracking-wider text-neutral-500">{s}</div>
+              <div key={s} className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">{s}</div>
             ))}
             {BUTTON_VARIANTS.flatMap((v) => [
-              <div key={`${v}-l`} className="font-mono text-xs text-neutral-700">{v}</div>,
+              <div key={`${v}-l`} className="font-mono text-xs text-foreground-muted">{v}</div>,
               ...BUTTON_SIZES.map((s) => (
                 <div key={`${v}-${s}`}>
                   <Button variant={v} size={s}>{v}</Button>
@@ -270,8 +403,8 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">States</h3>
-          <div className="flex flex-wrap items-center gap-3 rounded-md border border-neutral-200 bg-neutral-50 p-6">
+          <Heading level={3} size="lg">States</Heading>
+          <div className="flex flex-wrap items-center gap-3 rounded-md border border-border bg-surface p-6">
             <Button>Default</Button>
             <Button disabled>Disabled</Button>
             <Button loading>Loading</Button>
@@ -283,8 +416,8 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">ButtonGroup</h3>
-          <div className="space-y-4 rounded-md border border-neutral-200 bg-neutral-50 p-6">
+          <Heading level={3} size="lg">ButtonGroup</Heading>
+          <div className="space-y-4 rounded-md border border-border bg-surface p-6">
             <ButtonGroup aria-label="Text formatting">
               <Button variant="outline-secondary">Bold</Button>
               <Button variant="outline-secondary">Italic</Button>
@@ -310,16 +443,18 @@ export default function DesignSystemPage() {
         </div>
       </section>
 
+      <Separator className="mx-auto max-w-6xl" />
+
       {/* ===== FORMS ===== */}
-      <section id="forms" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16 border-t border-neutral-200">
+      <section id="forms" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
         <header>
-          <h2 className="text-3xl font-bold">Forms</h2>
-          <p className="mt-1 text-neutral-600">Label, Input, Textarea, Select, FormField, helper / error text.</p>
+          <Heading level={2} size="3xl">Forms</Heading>
+          <p className="mt-1 text-foreground-muted">Label, Input, Textarea, Select, FormField, helper / error text.</p>
         </header>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Contact form</h3>
-          <form action="#" className="mx-auto w-full max-w-md space-y-4 rounded-md border border-neutral-200 bg-neutral-50 p-6">
+          <Heading level={3} size="lg">Contact form</Heading>
+          <form action="#" className="mx-auto w-full max-w-md space-y-4 rounded-md border border-border bg-surface p-6">
             <FormField>
               <Label htmlFor="ds-contact-name" required>Name</Label>
               <Input id="ds-contact-name" name="name" placeholder="Jane Doe" />
@@ -346,8 +481,8 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Error state</h3>
-          <form action="#" className="mx-auto w-full max-w-md space-y-4 rounded-md border border-neutral-200 bg-neutral-50 p-6">
+          <Heading level={3} size="lg">Error state</Heading>
+          <form action="#" className="mx-auto w-full max-w-md space-y-4 rounded-md border border-border bg-surface p-6">
             <FormField>
               <Label htmlFor="ds-err-name" required>Name</Label>
               <Input id="ds-err-name" name="name" defaultValue="Jane Doe" />
@@ -366,11 +501,11 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Sizes</h3>
-          <div className="grid grid-cols-3 gap-6 rounded-md border border-neutral-200 bg-neutral-50 p-6">
+          <Heading level={3} size="lg">Sizes</Heading>
+          <div className="grid grid-cols-3 gap-6 rounded-md border border-border bg-surface p-6">
             {BUTTON_SIZES.map((s) => (
               <div key={s} className="space-y-3">
-                <div className="text-xs font-semibold uppercase tracking-wider text-neutral-500">{s}</div>
+                <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">{s}</div>
                 <Input size={s} placeholder={`Input ${s}`} />
                 <Select size={s} defaultValue="">
                   <option value="" disabled>Select option</option>
@@ -384,8 +519,8 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Disabled</h3>
-          <div className="grid grid-cols-3 gap-6 rounded-md border border-neutral-200 bg-neutral-50 p-6">
+          <Heading level={3} size="lg">Disabled</Heading>
+          <div className="grid grid-cols-3 gap-6 rounded-md border border-border bg-surface p-6">
             <Input disabled defaultValue="Disabled input" />
             <Select disabled defaultValue="">
               <option value="" disabled>Disabled select</option>
@@ -395,17 +530,19 @@ export default function DesignSystemPage() {
         </div>
       </section>
 
+      <Separator className="mx-auto max-w-6xl" />
+
       {/* ===== TOGGLES ===== */}
-      <section id="toggles" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16 border-t border-neutral-200">
+      <section id="toggles" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
         <header>
-          <h2 className="text-3xl font-bold">Toggles</h2>
-          <p className="mt-1 text-neutral-600">Checkbox, RadioGroup / Radio, Switch.</p>
+          <Heading level={2} size="3xl">Toggles</Heading>
+          <p className="mt-1 text-foreground-muted">Checkbox, RadioGroup / Radio, Switch.</p>
         </header>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Notification preferences</h3>
-          <div className="rounded-md border border-neutral-200 bg-neutral-50 p-6">
-            <ul className="divide-y divide-neutral-200">
+          <Heading level={3} size="lg">Notification preferences</Heading>
+          <div className="rounded-md border border-border bg-background p-6">
+            <ul className="divide-y divide-border">
               {NOTIFICATIONS.map((n) => (
                 <li key={n.id} className="flex items-start gap-4 py-4 first:pt-0 last:pb-0">
                   <Switch id={n.id} name={n.id} defaultChecked={n.defaultOn} />
@@ -420,18 +557,18 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Plan</h3>
-          <RadioGroup defaultValue="pro" name="ds-plan" aria-label="Subscription plan" className="rounded-md border border-neutral-200 bg-neutral-50 p-2">
+          <Heading level={3} size="lg">Plan</Heading>
+          <RadioGroup defaultValue="pro" name="ds-plan" aria-label="Subscription plan" className="rounded-md border border-border p-2">
             {PLANS.map((p) => (
               <Label
                 key={p.value}
                 htmlFor={`ds-plan-${p.value}`}
-                className="mb-0 flex cursor-pointer items-start gap-3 rounded-md p-3 transition-colors hover:bg-neutral-100"
+                className="mb-0 flex cursor-pointer items-start gap-3 rounded-md p-3 transition-colors hover:bg-muted"
               >
                 <Radio id={`ds-plan-${p.value}`} value={p.value} className="mt-0.5" />
                 <div className="flex-1 font-normal">
-                  <div className="font-medium text-neutral-950">{p.title}</div>
-                  <div className="text-sm text-neutral-600">{p.help}</div>
+                  <div className="font-medium text-foreground">{p.title}</div>
+                  <div className="text-sm text-foreground-muted">{p.help}</div>
                 </div>
               </Label>
             ))}
@@ -439,8 +576,8 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Permissions</h3>
-          <fieldset className="rounded-md border border-neutral-200 bg-neutral-50 p-6">
+          <Heading level={3} size="lg">Permissions</Heading>
+          <fieldset className="rounded-md border border-border bg-background p-6">
             <legend className="sr-only">Permissions</legend>
             <div className="flex flex-col gap-3">
               {PERMISSIONS.map((p) => (
@@ -454,7 +591,7 @@ export default function DesignSystemPage() {
                   ) : (
                     <Checkbox id={p.id} name={p.id} defaultChecked={p.defaultChecked} />
                   )}
-                  <span className="text-neutral-950">{p.title}</span>
+                  <span className="text-foreground">{p.title}</span>
                 </Label>
               ))}
             </div>
@@ -462,11 +599,11 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Sizes</h3>
+          <Heading level={3} size="lg">Sizes</Heading>
           <div className="grid grid-cols-3 gap-6">
             {BUTTON_SIZES.map((s) => (
-              <div key={s} className="space-y-4 rounded-md border border-neutral-200 bg-neutral-50 p-6">
-                <div className="text-xs font-semibold uppercase tracking-wider text-neutral-500">{s}</div>
+              <div key={s} className="space-y-4 rounded-md border border-border bg-surface p-6">
+                <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">{s}</div>
                 <div className="flex items-center gap-3">
                   <Checkbox id={`ds-cb-${s}`} size={s} defaultChecked />
                   <Label htmlFor={`ds-cb-${s}`} className="mb-0 font-normal">Checkbox</Label>
@@ -487,10 +624,10 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">States</h3>
+          <Heading level={3} size="lg">States</Heading>
           <div className="grid grid-cols-2 gap-6">
-            <div className="space-y-3 rounded-md border border-neutral-200 bg-neutral-50 p-6">
-              <div className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Disabled</div>
+            <div className="space-y-3 rounded-md border border-border bg-surface p-6">
+              <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">Disabled</div>
               <div className="flex items-center gap-3">
                 <Checkbox id="ds-dis-cb" disabled defaultChecked />
                 <Label htmlFor="ds-dis-cb" className="mb-0 font-normal">Checkbox</Label>
@@ -506,8 +643,8 @@ export default function DesignSystemPage() {
                 <Label htmlFor="ds-dis-sw" className="mb-0 font-normal">Switch</Label>
               </div>
             </div>
-            <div className="space-y-3 rounded-md border border-neutral-200 bg-neutral-50 p-6">
-              <div className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Invalid</div>
+            <div className="space-y-3 rounded-md border border-border bg-surface p-6">
+              <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">Invalid</div>
               <div className="flex items-center gap-3">
                 <Checkbox id="ds-inv-cb" invalid defaultChecked />
                 <Label htmlFor="ds-inv-cb" className="mb-0 font-normal">Checkbox</Label>
@@ -527,15 +664,17 @@ export default function DesignSystemPage() {
         </div>
       </section>
 
+      <Separator className="mx-auto max-w-6xl" />
+
       {/* ===== FEEDBACK ===== */}
-      <section id="feedback" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16 border-t border-neutral-200">
+      <section id="feedback" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
         <header>
-          <h2 className="text-3xl font-bold">Feedback</h2>
-          <p className="mt-1 text-neutral-600">Alert and Badge.</p>
+          <Heading level={2} size="3xl">Feedback</Heading>
+          <p className="mt-1 text-foreground-muted">Alert and Badge.</p>
         </header>
 
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Alerts</h3>
+          <Heading level={3} size="lg">Alerts</Heading>
           <Alert variant="info" title="Heads up">
             We&rsquo;re running scheduled maintenance from 02:00&ndash;03:00 UTC tonight.
           </Alert>
@@ -546,7 +685,7 @@ export default function DesignSystemPage() {
             You&rsquo;ve used 80% of your monthly render quota.
           </Alert>
           <Alert variant="danger" title="Build failed">
-            <code className="font-mono text-xs">src/app/page.tsx</code>
+            <Code>src/app/page.tsx</Code>
             : Type &lsquo;string&rsquo; is not assignable to type &lsquo;number&rsquo;.
           </Alert>
           <Alert variant="info" icon={<StarIcon />} title="New feature">
@@ -565,8 +704,8 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Badges — solid</h3>
-          <div className="flex flex-wrap items-center gap-2 rounded-md border border-neutral-200 bg-neutral-50 p-4">
+          <Heading level={3} size="lg">Badges — solid</Heading>
+          <div className="flex flex-wrap items-center gap-2 rounded-md border border-border bg-surface p-4">
             {BADGE_VARIANTS.map((v) => (
               <Badge key={v} variant={v}>{v}</Badge>
             ))}
@@ -574,8 +713,8 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Badges — soft</h3>
-          <div className="flex flex-wrap items-center gap-2 rounded-md border border-neutral-200 bg-neutral-50 p-4">
+          <Heading level={3} size="lg">Badges — soft</Heading>
+          <div className="flex flex-wrap items-center gap-2 rounded-md border border-border bg-surface p-4">
             {BADGE_VARIANTS.map((v) => (
               <Badge key={v} variant={v} soft>{v}</Badge>
             ))}
@@ -583,8 +722,8 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-3">
-          <h3 className="text-lg font-semibold">Badges in context</h3>
-          <div className="space-y-4 rounded-md border border-neutral-200 bg-neutral-50 p-6">
+          <Heading level={3} size="lg">Badges in context</Heading>
+          <div className="space-y-4 rounded-md border border-border bg-background p-6">
             <h4 className="flex items-center gap-2 text-xl font-semibold">
               Render queue
               <Badge variant="accent" size="sm">New</Badge>
@@ -597,34 +736,38 @@ export default function DesignSystemPage() {
               </Button>
             </div>
 
-            <ul className="divide-y divide-neutral-200 rounded-md border border-neutral-200 bg-neutral-50">
-              {FILES.map((f) => (
-                <li key={f.name} className="flex items-center justify-between gap-3 p-4">
-                  <span>{f.name}</span>
-                  <Badge variant={f.variant} soft size="sm">{f.status}</Badge>
-                </li>
-              ))}
-            </ul>
+            <Card>
+              <ul className="divide-y divide-border-subtle">
+                {FILES.map((f) => (
+                  <li key={f.name} className="flex items-center justify-between gap-3 p-4">
+                    <span>{f.name}</span>
+                    <Badge variant={f.variant} soft size="sm">{f.status}</Badge>
+                  </li>
+                ))}
+              </ul>
+            </Card>
           </div>
         </div>
       </section>
 
+      <Separator className="mx-auto max-w-6xl" />
+
       {/* ===== STRUCTURE ===== */}
-      <section id="structure" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16 border-t border-neutral-200">
+      <section id="structure" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
         <header>
-          <h2 className="text-3xl font-bold">Structure</h2>
-          <p className="mt-1 text-neutral-600">Card family.</p>
+          <Heading level={2} size="3xl">Structure</Heading>
+          <p className="mt-1 text-foreground-muted">Card family.</p>
         </header>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Basic</h3>
+          <Heading level={3} size="lg">Basic</Heading>
           <Card className="mx-auto max-w-2xl">
             <CardHeader>
               <CardTitle>Render pipeline</CardTitle>
               <CardDescription>Background processing for video and image assets.</CardDescription>
             </CardHeader>
             <CardBody>
-              <p className="text-neutral-700">
+              <p className="text-foreground-muted">
                 Jobs are queued in priority order and executed across the worker pool. Each render produces a manifest
                 with hashes for every output artifact, which the rest of the pipeline uses for cache invalidation. Failed
                 jobs retry with exponential backoff up to three times before surfacing in the dead-letter queue.
@@ -634,14 +777,14 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">With actions</h3>
+          <Heading level={3} size="lg">With actions</Heading>
           <Card className="mx-auto max-w-2xl">
             <CardHeader>
               <CardTitle>Delete project</CardTitle>
               <CardDescription>Once deleted, this project and all its assets cannot be recovered.</CardDescription>
             </CardHeader>
             <CardBody>
-              <p className="text-neutral-700">
+              <p className="text-foreground-muted">
                 Type the project name to confirm. Active renders will be cancelled, webhooks will stop firing, and team
                 members will lose access immediately.
               </p>
@@ -654,10 +797,10 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Body only</h3>
+          <Heading level={3} size="lg">Body only</Heading>
           <Card className="mx-auto max-w-2xl">
             <CardBody>
-              <p className="text-neutral-700">
+              <p className="text-foreground-muted">
                 A Card with just a Body is the simplest shape &mdash; useful for callouts, empty states, or any rectangular
                 content surface that needs the brand border + background but no structured header.
               </p>
@@ -666,13 +809,13 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Stats grid</h3>
+          <Heading level={3} size="lg">Stats grid</Heading>
           <div className="grid grid-cols-3 gap-4">
             {STATS.map((s) => (
               <Card key={s.label}>
                 <CardBody>
-                  <div className="text-3xl font-bold tabular-nums text-neutral-950">{s.value}</div>
-                  <div className="mt-1 text-sm text-neutral-600">{s.label}</div>
+                  <div className="text-3xl font-bold tabular-nums text-foreground">{s.value}</div>
+                  <div className="mt-1 text-sm text-foreground-muted">{s.label}</div>
                 </CardBody>
               </Card>
             ))}
@@ -680,7 +823,7 @@ export default function DesignSystemPage() {
         </div>
 
         <div className="space-y-4">
-          <h3 className="text-lg font-semibold">Settings panel</h3>
+          <Heading level={3} size="lg">Settings panel</Heading>
           <Card className="mx-auto max-w-2xl">
             <CardHeader>
               <CardTitle>Account preferences</CardTitle>
@@ -701,7 +844,7 @@ export default function DesignSystemPage() {
                 <Switch id="ds-settings-marketing" name="marketing" defaultChecked />
                 <div className="flex-1">
                   <Label htmlFor="ds-settings-marketing" className="mb-0.5">Product updates</Label>
-                  <p className="text-sm text-neutral-600">
+                  <p className="text-sm text-foreground-muted">
                     Occasional emails about new features and changelog highlights.
                   </p>
                 </div>
@@ -710,7 +853,7 @@ export default function DesignSystemPage() {
                 <Switch id="ds-settings-weekly" name="weekly-digest" />
                 <div className="flex-1">
                   <Label htmlFor="ds-settings-weekly" className="mb-0.5">Weekly digest</Label>
-                  <p className="text-sm text-neutral-600">A Monday-morning summary of your team&rsquo;s activity.</p>
+                  <p className="text-sm text-foreground-muted">A Monday-morning summary of your team&rsquo;s activity.</p>
                 </div>
               </div>
             </CardBody>
