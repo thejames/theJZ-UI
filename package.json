@@ -1,7 +1,6 @@
 {
   "name": "@jameszambon/ui",
-  "version": "2026.0509a",
-  "private": true,
+  "version": "0.0.1",
   "description": "Private design system for jameszambon Next.js apps.",
   "repository": {
     "type": "git",
@@ -22,7 +21,11 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "prepublishOnly": "pnpm build",
     "build": "tsup && pnpm copy:css",
     "copy:css": "node -e \"require('fs').copyFileSync('src/theme.css','dist/theme.css')\"",
     "typecheck": "tsc --noEmit",
