@@ -4,31 +4,34 @@ Private design system for jameszambon Next.js apps. Ships React components and a
 
 ## Install
 
-Distributed via git (no registry yet). From a consuming Next.js app:
+Published on npm. From a consuming Next.js app:
 
 ```bash
-pnpm add git+ssh://git@github.com:thejames/theJZ-UI.git
+pnpm add @jameszambon/ui
 ```
 
-To pin to a specific release, append a tag:
+To pin to a specific version:
 
 ```bash
-pnpm add git+ssh://git@github.com:thejames/theJZ-UI.git#v2026.0508
+pnpm add @jameszambon/ui@2026.509.1
 ```
 
 ## Versioning
 
-Date-based, one version per push:
+Semver-encoded calver: `YEAR.MONTHDAY.PATCH` where `MONTHDAY` is `month*100 + day` (no leading zeros) and `PATCH` is the release counter for that day, starting at 1. Valid semver, date-readable.
 
-- `YYYY.MMDD` — first release of a given day (e.g. `2026.0508`)
-- `YYYY.MMDDa`, `YYYY.MMDDb`, … — second, third, ... releases on the same day
+- `2026.508.1` — first release on May 8, 2026
+- `2026.508.2` — second release on the same day
+- `2026.1008.1` — first release on Oct 8
 
-Each release is tagged in git as `vYYYY.MMDD[suffix]`. To cut a release before pushing:
+Each release is tagged in git as `v<version>` and matches the version published to npm. One source of truth.
 
 ```bash
-pnpm release           # bumps package.json, commits, tags
-git push --follow-tags
+pnpm release                              # bumps package.json, commits, tags
+git push --follow-tags && npm publish     # push tag, then publish to npm
 ```
+
+`prepublishOnly` runs `pnpm build` before any npm publish, so `dist/` is always fresh on the registry.
 
 ## Setup
 
