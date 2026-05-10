@@ -98,7 +98,7 @@ var buttonVariants = (0, import_class_variance_authority.cva)(
         "outline-warning": "border border-warning text-warning-foreground hover:bg-warning hover:text-neutral-950 active:bg-yellow-600 focus-visible:ring-yellow-400/40",
         "outline-info": "border border-info text-info-foreground hover:bg-info hover:text-neutral-950 active:bg-cyan-600 focus-visible:ring-cyan-400/40",
         ghost: "text-foreground-muted hover:bg-surface-muted active:bg-surface-muted-stronger focus-visible:ring-foreground-muted/40",
-        link: "text-brand-700 underline-offset-4 hover:underline hover:text-brand-800 focus-visible:ring-ring/40 px-0 py-0 h-auto"
+        link: "text-brand-700 dark:text-brand-300 underline-offset-4 hover:underline hover:text-brand-800 dark:hover:text-brand-200 focus-visible:ring-ring/40 px-0 py-0 h-auto"
       },
       size: {
         sm: "h-8 px-3 py-1 text-sm rounded-sm",

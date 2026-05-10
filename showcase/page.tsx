@@ -237,12 +237,12 @@ export default function DesignSystemPage() {
 
       <nav className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto max-w-6xl flex flex-wrap items-center gap-x-6 gap-y-2 px-8 py-4 text-sm font-medium">
-          <a href="#foundation" className="hover:text-brand-700 transition-colors">Foundation</a>
-          <a href="#actions"    className="hover:text-brand-700 transition-colors">Actions</a>
-          <a href="#forms"      className="hover:text-brand-700 transition-colors">Forms</a>
-          <a href="#toggles"    className="hover:text-brand-700 transition-colors">Toggles</a>
-          <a href="#feedback"   className="hover:text-brand-700 transition-colors">Feedback</a>
-          <a href="#structure"  className="hover:text-brand-700 transition-colors">Structure</a>
+          <a href="#foundation" className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Foundation</a>
+          <a href="#actions"    className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Actions</a>
+          <a href="#forms"      className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Forms</a>
+          <a href="#toggles"    className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Toggles</a>
+          <a href="#feedback"   className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Feedback</a>
+          <a href="#structure"  className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Structure</a>
           <button
             type="button"
             onClick={() => setIsDark(!isDark)}

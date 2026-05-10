@@ -48,6 +48,7 @@ Add the following to the consuming app's global stylesheet, in this order:
 ```css
 @import "tailwindcss";
 @import "@jameszambon/ui/styles.css";   /* utility classes used by package components */
+@custom-variant dark (.dark &);          /* see "Dark mode" below — required for class-toggled dark: utilities in your own code */
 /* your @theme overrides here */
 @import "@jameszambon/ui/theme.css";    /* package design tokens — last so they win on collision */
 ```
@@ -57,6 +58,7 @@ Why the order matters:
 - `styles.css` is a pre-compiled bundle of every utility class the package's components reference (`bg-surface`, `dark:bg-surface-elevated`, etc.). It ships pre-compiled because Tailwind v4 in your project scans your `src/` for utilities but does NOT scan `node_modules` reliably — without this file, the package's component utilities never make it into your build.
 - The utility classes reference design tokens (`var(--color-surface)`, etc.).
 - `theme.css` defines those tokens. Imported AFTER your `@theme` block, the package's tokens override yours on collision — so the package looks like itself rather than picking up your app's overrides for tokens it depends on.
+- `@custom-variant dark (.dark &)` makes Tailwind's `dark:` variant fire when an ancestor has the `.dark` class. Without it, Tailwind v4 falls back to `prefers-color-scheme: dark` and the toggle in your app won't drive any `dark:` utility classes you write. The package's own bundled utilities have this baked in at compile time, but your code needs the declaration too.
 
 ### Inter font
 

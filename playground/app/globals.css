@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "../../src/theme.css";
 
+@custom-variant dark (.dark &);
+
 @source "../../src";
 @source "../../showcase";
 

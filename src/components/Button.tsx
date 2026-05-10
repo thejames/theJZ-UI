@@ -45,7 +45,7 @@ const buttonVariants = cva(
         ghost:
           "text-foreground-muted hover:bg-surface-muted active:bg-surface-muted-stronger focus-visible:ring-foreground-muted/40",
         link:
-          "text-brand-700 underline-offset-4 hover:underline hover:text-brand-800 focus-visible:ring-ring/40 px-0 py-0 h-auto",
+          "text-brand-700 dark:text-brand-300 underline-offset-4 hover:underline hover:text-brand-800 dark:hover:text-brand-200 focus-visible:ring-ring/40 px-0 py-0 h-auto",
       },
       size: {
         sm: "h-8 px-3 py-1 text-sm rounded-sm",
