@@ -1,0 +1,20 @@
+/*
+ * Tailwind input file for the pre-compiled utility CSS that ships in dist/.
+ *
+ * Why ship pre-compiled utilities: consuming Next.js apps have their own
+ * Tailwind v4 setup that scans their src/ but does NOT scan node_modules.
+ * The @source directive should solve this for node_modules paths, but in
+ * practice it doesn't pick up reliably across Next.js configurations. So
+ * we compile every utility our components reference into dist/styles.css
+ * and consumers @import it alongside theme.css.
+ *
+ * Layer ordering matches Tailwind's defaults so consumer overrides cascade
+ * correctly. We skip preflight intentionally — consumers already have
+ * their own CSS reset and we don't want to double-reset.
+ */
+
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "./theme.css";
+@source "./components/**/*.tsx";
