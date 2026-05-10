@@ -114,6 +114,12 @@ Generates utilities like `bg-primary`, `text-danger`, `border-success`.
 
 The rest (typography, radii, shadows, breakpoints) follows Tailwind v4 conventions; see `src/theme.css` for exact values.
 
+## Notes
+
+### Bundle size
+
+The package's `styles.css` includes Tailwind's standard `@layer properties` and `@layer theme` chrome (CSS custom property registrations and default token definitions). This means a few KB of overlap with the consumer's own `@import "tailwindcss"` output, since both emit similar registrations and default tokens. The overlap is benign (CSS rules are idempotent) but represents a small bundle-size optimization opportunity. If this becomes a measurable concern, the build pipeline can be extended with a post-processing step to strip duplicated chrome.
+
 ## Showcase
 
 See [`showcase/page.tsx`](showcase/page.tsx) for a single-page reference of every component in this package, rendered with the full design system applied.

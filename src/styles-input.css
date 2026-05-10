@@ -17,4 +17,15 @@
 @import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/utilities.css" layer(utilities);
 @import "./theme.css";
+
+/*
+ * Scope every `dark:` utility we emit under a `.dark` ancestor. Without this,
+ * Tailwind v4 emits dark: rules as unscoped selectors that always apply — a
+ * load-bearing accident, since the package's dark: utilities today happen to
+ * reference tokens (bg-surface-elevated, etc.) that auto-flip via theme.css's
+ * .dark block. Any future dark: utility on a non-flipping class would render
+ * in light mode too without this scoping.
+ */
+@custom-variant dark (.dark &);
+
 @source "./components/**/*.tsx";
