@@ -10,23 +10,44 @@
  *     - Header + Body + Footer → all transitions handled
  *   Footer alone is not a recommended layout: the top border hangs without
  *   anything above it.
+ *
+ * Elevation:
+ *   Card lift comes from shadows in light mode and a tone shift to
+ *   bg-surface-elevated in dark mode (shadows render but read weakly on
+ *   dark backgrounds; the bg shift is the primary signal). Default "sm".
+ *   Use elevation="none" for a flat container.
  */
-import {
-  forwardRef,
-  type HTMLAttributes,
-} from "react";
+import { forwardRef, type HTMLAttributes } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib/cn";
 
-export type CardProps = HTMLAttributes<HTMLDivElement>;
+const cardVariants = cva(
+  "rounded-lg border border-border transition-colors",
+  {
+    variants: {
+      elevation: {
+        none: "bg-surface",
+        sm: "bg-surface dark:bg-surface-elevated shadow-sm",
+        md: "bg-surface dark:bg-surface-elevated shadow-md",
+        lg: "bg-surface dark:bg-surface-elevated shadow-lg",
+        xl: "bg-surface dark:bg-surface-elevated shadow-xl",
+      },
+    },
+    defaultVariants: {
+      elevation: "sm",
+    },
+  },
+);
+
+export interface CardProps
+  extends HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof cardVariants> {}
 
 export const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ className, ...props }, ref) => (
+  ({ className, elevation, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn(
-        "rounded-lg border border-border bg-surface transition-colors",
-        className,
-      )}
+      className={cn(cardVariants({ elevation }), className)}
       {...props}
     />
   ),

@@ -37,12 +37,15 @@ import {
   Radio,
   RadioGroup,
   Select,
+  FormError,
   Separator,
   Spinner,
   Switch,
+  Text,
   Textarea,
   type BadgeProps,
   type ButtonProps,
+  type TextProps,
 } from "@jameszambon/ui";
 
 // ───────────────────────── static data ─────────────────────────
@@ -351,6 +354,18 @@ export default function DesignSystemPage() {
             </p>
           </div>
 
+          <div className="space-y-4 rounded-md border border-border bg-surface p-6">
+            <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">Text variants</div>
+            {(["body", "lead", "muted", "subtle", "small", "caption"] as const).map((v) => (
+              <div key={v} className="flex items-baseline gap-6">
+                <div className="w-24 shrink-0 font-mono text-xs text-foreground-subtle">{v}</div>
+                <Text variant={v as NonNullable<TextProps["variant"]>}>
+                  The quick brown fox jumps over the lazy dog.
+                </Text>
+              </div>
+            ))}
+          </div>
+
           <div className="space-y-4 rounded-md border border-border bg-background p-6">
             <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">Spinner</div>
             <div className="grid grid-cols-3 gap-6">
@@ -526,6 +541,30 @@ export default function DesignSystemPage() {
               <option value="" disabled>Disabled select</option>
             </Select>
             <Textarea disabled defaultValue="Disabled textarea" />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Form-level errors</Heading>
+          <div className="space-y-4 rounded-md border border-border bg-surface p-6">
+            <FormError>Could not submit form &mdash; network error.</FormError>
+            <FormError className="flex items-center gap-2">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+                className="size-4 shrink-0"
+              >
+                <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+              <span>Two of your fields are missing required information.</span>
+            </FormError>
           </div>
         </div>
       </section>
@@ -806,6 +845,19 @@ export default function DesignSystemPage() {
               </p>
             </CardBody>
           </Card>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Elevation</Heading>
+          <div className="grid grid-cols-5 gap-4">
+            {(["none", "sm", "md", "lg", "xl"] as const).map((e) => (
+              <Card key={e} elevation={e}>
+                <CardBody className="text-center font-mono text-sm text-foreground-muted">
+                  {e}
+                </CardBody>
+              </Card>
+            ))}
+          </div>
         </div>
 
         <div className="space-y-4">

@@ -59,6 +59,16 @@ declare const FormHelperText: react.ForwardRefExoticComponent<FormHelperTextProp
 type FormErrorMessageProps = HTMLAttributes<HTMLParagraphElement>;
 declare const FormErrorMessage: react.ForwardRefExoticComponent<FormErrorMessageProps & react.RefAttributes<HTMLParagraphElement>>;
 
+type FormErrorProps = HTMLAttributes<HTMLDivElement>;
+/**
+ * Form-level error display. Lives outside any FormField — used for
+ * submission failures, network errors, or cross-field validation results.
+ * Carries role="alert" so assistive tech announces the message; pair with
+ * FormErrorMessage (no role) for field-scoped errors associated via
+ * aria-describedby.
+ */
+declare const FormError: react.ForwardRefExoticComponent<FormErrorProps & react.RefAttributes<HTMLDivElement>>;
+
 interface CheckboxProps extends Omit<ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>, "children"> {
     size?: "sm" | "md" | "lg";
     invalid?: boolean;
@@ -99,7 +109,11 @@ interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
 }
 declare const Badge: react.ForwardRefExoticComponent<BadgeProps & react.RefAttributes<HTMLSpanElement>>;
 
-type CardProps = HTMLAttributes<HTMLDivElement>;
+declare const cardVariants: (props?: ({
+    elevation?: "sm" | "md" | "lg" | "none" | "xl" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface CardProps extends HTMLAttributes<HTMLDivElement>, VariantProps<typeof cardVariants> {
+}
 declare const Card: react.ForwardRefExoticComponent<CardProps & react.RefAttributes<HTMLDivElement>>;
 type CardHeaderProps = HTMLAttributes<HTMLDivElement>;
 declare const CardHeader: react.ForwardRefExoticComponent<CardHeaderProps & react.RefAttributes<HTMLDivElement>>;
@@ -148,4 +162,11 @@ interface SpinnerProps extends SVGAttributes<SVGSVGElement> {
 }
 declare const Spinner: react.ForwardRefExoticComponent<SpinnerProps & react.RefAttributes<SVGSVGElement>>;
 
-export { Alert, type AlertProps, Badge, type BadgeProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardBody, type CardBodyProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardHeader, type CardHeaderProps, type CardProps, CardTitle, type CardTitleProps, Checkbox, type CheckboxProps, Code, type CodeProps, FormErrorMessage, type FormErrorMessageProps, FormField, type FormFieldProps, FormHelperText, type FormHelperTextProps, Heading, type HeadingProps, Input, type InputProps, Kbd, type KbdProps, Label, type LabelProps, Radio, RadioGroup, type RadioGroupProps, type RadioProps, Select, type SelectProps, Separator, type SeparatorProps, Spinner, type SpinnerProps, Switch, type SwitchProps, Textarea, type TextareaProps };
+declare const textVariants: (props?: ({
+    variant?: "small" | "body" | "caption" | "muted" | "lead" | "subtle" | null | undefined;
+} & class_variance_authority_types.ClassProp) | undefined) => string;
+interface TextProps extends HTMLAttributes<HTMLParagraphElement>, VariantProps<typeof textVariants> {
+}
+declare const Text: react.ForwardRefExoticComponent<TextProps & react.RefAttributes<HTMLParagraphElement>>;
+
+export { Alert, type AlertProps, Badge, type BadgeProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardBody, type CardBodyProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardHeader, type CardHeaderProps, type CardProps, CardTitle, type CardTitleProps, Checkbox, type CheckboxProps, Code, type CodeProps, FormError, FormErrorMessage, type FormErrorMessageProps, type FormErrorProps, FormField, type FormFieldProps, FormHelperText, type FormHelperTextProps, Heading, type HeadingProps, Input, type InputProps, Kbd, type KbdProps, Label, type LabelProps, Radio, RadioGroup, type RadioGroupProps, type RadioProps, Select, type SelectProps, Separator, type SeparatorProps, Spinner, type SpinnerProps, Switch, type SwitchProps, Text, type TextProps, Textarea, type TextareaProps };

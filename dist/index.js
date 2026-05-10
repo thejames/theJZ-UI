@@ -330,13 +330,29 @@ var FormErrorMessage = forwardRef9(
 );
 FormErrorMessage.displayName = "FormErrorMessage";
 
+// src/components/FormError.tsx
+import { forwardRef as forwardRef10 } from "react";
+import { jsx as jsx10 } from "react/jsx-runtime";
+var FormError = forwardRef10(
+  ({ className, ...props }, ref) => /* @__PURE__ */ jsx10(
+    "div",
+    {
+      ref,
+      role: "alert",
+      className: cn("text-sm text-danger-foreground", className),
+      ...props
+    }
+  )
+);
+FormError.displayName = "FormError";
+
 // src/components/Checkbox.tsx
 import {
-  forwardRef as forwardRef10
+  forwardRef as forwardRef11
 } from "react";
 import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import { cva as cva5 } from "class-variance-authority";
-import { jsx as jsx10 } from "react/jsx-runtime";
+import { jsx as jsx11 } from "react/jsx-runtime";
 var checkboxVariants = cva5(
   "inline-flex items-center justify-center shrink-0 rounded-sm border-2 border-border bg-input data-[state=checked]:bg-brand-700 data-[state=checked]:border-brand-700 data-[state=indeterminate]:bg-brand-700 data-[state=indeterminate]:border-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer",
   {
@@ -357,7 +373,7 @@ var checkboxVariants = cva5(
     }
   }
 );
-var CheckIcon = () => /* @__PURE__ */ jsx10(
+var CheckIcon = () => /* @__PURE__ */ jsx11(
   "svg",
   {
     viewBox: "0 0 24 24",
@@ -368,10 +384,10 @@ var CheckIcon = () => /* @__PURE__ */ jsx10(
     strokeLinejoin: "round",
     "aria-hidden": "true",
     className: "size-3/4",
-    children: /* @__PURE__ */ jsx10("path", { d: "M5 12l5 5L20 7" })
+    children: /* @__PURE__ */ jsx11("path", { d: "M5 12l5 5L20 7" })
   }
 );
-var IndeterminateIcon = () => /* @__PURE__ */ jsx10(
+var IndeterminateIcon = () => /* @__PURE__ */ jsx11(
   "svg",
   {
     viewBox: "0 0 24 24",
@@ -381,29 +397,29 @@ var IndeterminateIcon = () => /* @__PURE__ */ jsx10(
     strokeLinecap: "round",
     "aria-hidden": "true",
     className: "size-3/4",
-    children: /* @__PURE__ */ jsx10("path", { d: "M6 12h12" })
+    children: /* @__PURE__ */ jsx11("path", { d: "M6 12h12" })
   }
 );
-var Checkbox = forwardRef10(({ className, size, invalid, ...props }, ref) => /* @__PURE__ */ jsx10(
+var Checkbox = forwardRef11(({ className, size, invalid, ...props }, ref) => /* @__PURE__ */ jsx11(
   CheckboxPrimitive.Root,
   {
     ref,
     "aria-invalid": invalid || void 0,
     className: cn(checkboxVariants({ size, invalid }), className),
     ...props,
-    children: /* @__PURE__ */ jsx10(CheckboxPrimitive.Indicator, { className: "text-neutral-50 flex items-center justify-center", children: props.checked === "indeterminate" ? /* @__PURE__ */ jsx10(IndeterminateIcon, {}) : /* @__PURE__ */ jsx10(CheckIcon, {}) })
+    children: /* @__PURE__ */ jsx11(CheckboxPrimitive.Indicator, { className: "text-neutral-50 flex items-center justify-center", children: props.checked === "indeterminate" ? /* @__PURE__ */ jsx11(IndeterminateIcon, {}) : /* @__PURE__ */ jsx11(CheckIcon, {}) })
   }
 ));
 Checkbox.displayName = "Checkbox";
 
 // src/components/RadioGroup.tsx
 import {
-  forwardRef as forwardRef11
+  forwardRef as forwardRef12
 } from "react";
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 import { cva as cva6 } from "class-variance-authority";
-import { jsx as jsx11 } from "react/jsx-runtime";
-var RadioGroup = forwardRef11(({ className, orientation = "vertical", ...props }, ref) => /* @__PURE__ */ jsx11(
+import { jsx as jsx12 } from "react/jsx-runtime";
+var RadioGroup = forwardRef12(({ className, orientation = "vertical", ...props }, ref) => /* @__PURE__ */ jsx12(
   RadioGroupPrimitive.Root,
   {
     ref,
@@ -436,14 +452,14 @@ var radioVariants = cva6(
     }
   }
 );
-var Radio = forwardRef11(({ className, size, invalid, ...props }, ref) => /* @__PURE__ */ jsx11(
+var Radio = forwardRef12(({ className, size, invalid, ...props }, ref) => /* @__PURE__ */ jsx12(
   RadioGroupPrimitive.Item,
   {
     ref,
     "aria-invalid": invalid || void 0,
     className: cn(radioVariants({ size, invalid }), className),
     ...props,
-    children: /* @__PURE__ */ jsx11(RadioGroupPrimitive.Indicator, { className: "flex items-center justify-center", children: /* @__PURE__ */ jsx11(
+    children: /* @__PURE__ */ jsx12(RadioGroupPrimitive.Indicator, { className: "flex items-center justify-center", children: /* @__PURE__ */ jsx12(
       "span",
       {
         className: cn(
@@ -458,11 +474,11 @@ Radio.displayName = "Radio";
 
 // src/components/Switch.tsx
 import {
-  forwardRef as forwardRef12
+  forwardRef as forwardRef13
 } from "react";
 import * as SwitchPrimitive from "@radix-ui/react-switch";
 import { cva as cva7 } from "class-variance-authority";
-import { jsx as jsx12 } from "react/jsx-runtime";
+import { jsx as jsx13 } from "react/jsx-runtime";
 var switchRootVariants = cva7(
   "inline-flex shrink-0 items-center rounded-full border-2 border-transparent bg-neutral-300 dark:bg-neutral-700 data-[state=checked]:bg-brand-700 dark:data-[state=checked]:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 focus-visible:ring-offset-1 focus-visible:ring-offset-background disabled:opacity-50 disabled:cursor-not-allowed transition-colors cursor-pointer",
   {
@@ -498,24 +514,24 @@ var switchThumbVariants = cva7(
     }
   }
 );
-var Switch = forwardRef12(({ className, size, invalid, ...props }, ref) => /* @__PURE__ */ jsx12(
+var Switch = forwardRef13(({ className, size, invalid, ...props }, ref) => /* @__PURE__ */ jsx13(
   SwitchPrimitive.Root,
   {
     ref,
     "aria-invalid": invalid || void 0,
     className: cn(switchRootVariants({ size, invalid }), className),
     ...props,
-    children: /* @__PURE__ */ jsx12(SwitchPrimitive.Thumb, { className: switchThumbVariants({ size }) })
+    children: /* @__PURE__ */ jsx13(SwitchPrimitive.Thumb, { className: switchThumbVariants({ size }) })
   }
 ));
 Switch.displayName = "Switch";
 
 // src/components/Alert.tsx
 import {
-  forwardRef as forwardRef13
+  forwardRef as forwardRef14
 } from "react";
 import { cva as cva8 } from "class-variance-authority";
-import { jsx as jsx13, jsxs as jsxs4 } from "react/jsx-runtime";
+import { jsx as jsx14, jsxs as jsxs4 } from "react/jsx-runtime";
 var alertVariants = cva8(
   "relative flex items-start gap-3 rounded-md border p-4 text-sm transition-colors",
   {
@@ -543,9 +559,9 @@ var InfoIcon = () => /* @__PURE__ */ jsxs4(
     strokeLinejoin: "round",
     "aria-hidden": "true",
     children: [
-      /* @__PURE__ */ jsx13("circle", { cx: "12", cy: "12", r: "10" }),
-      /* @__PURE__ */ jsx13("path", { d: "M12 16v-4" }),
-      /* @__PURE__ */ jsx13("path", { d: "M12 8h.01" })
+      /* @__PURE__ */ jsx14("circle", { cx: "12", cy: "12", r: "10" }),
+      /* @__PURE__ */ jsx14("path", { d: "M12 16v-4" }),
+      /* @__PURE__ */ jsx14("path", { d: "M12 8h.01" })
     ]
   }
 );
@@ -560,8 +576,8 @@ var SuccessIcon = () => /* @__PURE__ */ jsxs4(
     strokeLinejoin: "round",
     "aria-hidden": "true",
     children: [
-      /* @__PURE__ */ jsx13("path", { d: "M22 11.08V12a10 10 0 1 1-5.93-9.14" }),
-      /* @__PURE__ */ jsx13("path", { d: "m9 11 3 3L22 4" })
+      /* @__PURE__ */ jsx14("path", { d: "M22 11.08V12a10 10 0 1 1-5.93-9.14" }),
+      /* @__PURE__ */ jsx14("path", { d: "m9 11 3 3L22 4" })
     ]
   }
 );
@@ -576,9 +592,9 @@ var WarningIcon = () => /* @__PURE__ */ jsxs4(
     strokeLinejoin: "round",
     "aria-hidden": "true",
     children: [
-      /* @__PURE__ */ jsx13("path", { d: "M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" }),
-      /* @__PURE__ */ jsx13("path", { d: "M12 9v4" }),
-      /* @__PURE__ */ jsx13("path", { d: "M12 17h.01" })
+      /* @__PURE__ */ jsx14("path", { d: "M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" }),
+      /* @__PURE__ */ jsx14("path", { d: "M12 9v4" }),
+      /* @__PURE__ */ jsx14("path", { d: "M12 17h.01" })
     ]
   }
 );
@@ -593,9 +609,9 @@ var DangerIcon = () => /* @__PURE__ */ jsxs4(
     strokeLinejoin: "round",
     "aria-hidden": "true",
     children: [
-      /* @__PURE__ */ jsx13("circle", { cx: "12", cy: "12", r: "10" }),
-      /* @__PURE__ */ jsx13("path", { d: "m15 9-6 6" }),
-      /* @__PURE__ */ jsx13("path", { d: "m9 9 6 6" })
+      /* @__PURE__ */ jsx14("circle", { cx: "12", cy: "12", r: "10" }),
+      /* @__PURE__ */ jsx14("path", { d: "m15 9-6 6" }),
+      /* @__PURE__ */ jsx14("path", { d: "m9 9 6 6" })
     ]
   }
 );
@@ -610,25 +626,25 @@ var CloseIcon = () => /* @__PURE__ */ jsxs4(
     strokeLinejoin: "round",
     "aria-hidden": "true",
     children: [
-      /* @__PURE__ */ jsx13("path", { d: "M18 6 6 18" }),
-      /* @__PURE__ */ jsx13("path", { d: "m6 6 12 12" })
+      /* @__PURE__ */ jsx14("path", { d: "M18 6 6 18" }),
+      /* @__PURE__ */ jsx14("path", { d: "m6 6 12 12" })
     ]
   }
 );
 var defaultIconForVariant = (variant = "info") => {
   switch (variant) {
     case "success":
-      return /* @__PURE__ */ jsx13(SuccessIcon, {});
+      return /* @__PURE__ */ jsx14(SuccessIcon, {});
     case "warning":
-      return /* @__PURE__ */ jsx13(WarningIcon, {});
+      return /* @__PURE__ */ jsx14(WarningIcon, {});
     case "danger":
-      return /* @__PURE__ */ jsx13(DangerIcon, {});
+      return /* @__PURE__ */ jsx14(DangerIcon, {});
     case "info":
     default:
-      return /* @__PURE__ */ jsx13(InfoIcon, {});
+      return /* @__PURE__ */ jsx14(InfoIcon, {});
   }
 };
-var Alert = forwardRef13(
+var Alert = forwardRef14(
   ({ className, variant, title, icon, onClose, children, ...props }, ref) => /* @__PURE__ */ jsxs4(
     "div",
     {
@@ -637,7 +653,7 @@ var Alert = forwardRef13(
       className: cn(alertVariants({ variant }), className),
       ...props,
       children: [
-        icon !== false && /* @__PURE__ */ jsx13(
+        icon !== false && /* @__PURE__ */ jsx14(
           "span",
           {
             className: "shrink-0 mt-0.5 [&_svg]:size-5",
@@ -646,17 +662,17 @@ var Alert = forwardRef13(
           }
         ),
         /* @__PURE__ */ jsxs4("div", { className: "flex-1 min-w-0", children: [
-          title && /* @__PURE__ */ jsx13("div", { className: "font-semibold mb-1", children: title }),
+          title && /* @__PURE__ */ jsx14("div", { className: "font-semibold mb-1", children: title }),
           children
         ] }),
-        onClose && /* @__PURE__ */ jsx13(
+        onClose && /* @__PURE__ */ jsx14(
           "button",
           {
             type: "button",
             onClick: onClose,
             "aria-label": "Dismiss",
             className: "shrink-0 -mt-1 -mr-1 p-1 rounded-md opacity-70 hover:opacity-100 hover:bg-current/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-current/30 transition-opacity [&_svg]:size-4",
-            children: /* @__PURE__ */ jsx13(CloseIcon, {})
+            children: /* @__PURE__ */ jsx14(CloseIcon, {})
           }
         )
       ]
@@ -666,9 +682,9 @@ var Alert = forwardRef13(
 Alert.displayName = "Alert";
 
 // src/components/Badge.tsx
-import { forwardRef as forwardRef14 } from "react";
+import { forwardRef as forwardRef15 } from "react";
 import { cva as cva9 } from "class-variance-authority";
-import { jsx as jsx14 } from "react/jsx-runtime";
+import { jsx as jsx15 } from "react/jsx-runtime";
 var badgeVariants = cva9(
   "inline-flex items-center justify-center font-medium whitespace-nowrap rounded-md",
   {
@@ -714,8 +730,8 @@ var badgeVariants = cva9(
     }
   }
 );
-var Badge = forwardRef14(
-  ({ className, variant, size, soft, ...props }, ref) => /* @__PURE__ */ jsx14(
+var Badge = forwardRef15(
+  ({ className, variant, size, soft, ...props }, ref) => /* @__PURE__ */ jsx15(
     "span",
     {
       ref,
@@ -727,26 +743,39 @@ var Badge = forwardRef14(
 Badge.displayName = "Badge";
 
 // src/components/Card.tsx
-import {
-  forwardRef as forwardRef15
-} from "react";
-import { jsx as jsx15 } from "react/jsx-runtime";
-var Card = forwardRef15(
-  ({ className, ...props }, ref) => /* @__PURE__ */ jsx15(
+import { forwardRef as forwardRef16 } from "react";
+import { cva as cva10 } from "class-variance-authority";
+import { jsx as jsx16 } from "react/jsx-runtime";
+var cardVariants = cva10(
+  "rounded-lg border border-border transition-colors",
+  {
+    variants: {
+      elevation: {
+        none: "bg-surface",
+        sm: "bg-surface dark:bg-surface-elevated shadow-sm",
+        md: "bg-surface dark:bg-surface-elevated shadow-md",
+        lg: "bg-surface dark:bg-surface-elevated shadow-lg",
+        xl: "bg-surface dark:bg-surface-elevated shadow-xl"
+      }
+    },
+    defaultVariants: {
+      elevation: "sm"
+    }
+  }
+);
+var Card = forwardRef16(
+  ({ className, elevation, ...props }, ref) => /* @__PURE__ */ jsx16(
     "div",
     {
       ref,
-      className: cn(
-        "rounded-lg border border-border bg-surface transition-colors",
-        className
-      ),
+      className: cn(cardVariants({ elevation }), className),
       ...props
     }
   )
 );
 Card.displayName = "Card";
-var CardHeader = forwardRef15(
-  ({ className, ...props }, ref) => /* @__PURE__ */ jsx15(
+var CardHeader = forwardRef16(
+  ({ className, ...props }, ref) => /* @__PURE__ */ jsx16(
     "div",
     {
       ref,
@@ -756,8 +785,8 @@ var CardHeader = forwardRef15(
   )
 );
 CardHeader.displayName = "CardHeader";
-var CardTitle = forwardRef15(
-  ({ className, ...props }, ref) => /* @__PURE__ */ jsx15(
+var CardTitle = forwardRef16(
+  ({ className, ...props }, ref) => /* @__PURE__ */ jsx16(
     "h3",
     {
       ref,
@@ -770,7 +799,7 @@ var CardTitle = forwardRef15(
   )
 );
 CardTitle.displayName = "CardTitle";
-var CardDescription = forwardRef15(({ className, ...props }, ref) => /* @__PURE__ */ jsx15(
+var CardDescription = forwardRef16(({ className, ...props }, ref) => /* @__PURE__ */ jsx16(
   "p",
   {
     ref,
@@ -779,12 +808,12 @@ var CardDescription = forwardRef15(({ className, ...props }, ref) => /* @__PURE_
   }
 ));
 CardDescription.displayName = "CardDescription";
-var CardBody = forwardRef15(
-  ({ className, ...props }, ref) => /* @__PURE__ */ jsx15("div", { ref, className: cn("p-6", className), ...props })
+var CardBody = forwardRef16(
+  ({ className, ...props }, ref) => /* @__PURE__ */ jsx16("div", { ref, className: cn("p-6", className), ...props })
 );
 CardBody.displayName = "CardBody";
-var CardFooter = forwardRef15(
-  ({ className, ...props }, ref) => /* @__PURE__ */ jsx15(
+var CardFooter = forwardRef16(
+  ({ className, ...props }, ref) => /* @__PURE__ */ jsx16(
     "div",
     {
       ref,
@@ -799,9 +828,9 @@ var CardFooter = forwardRef15(
 CardFooter.displayName = "CardFooter";
 
 // src/components/Heading.tsx
-import React, { forwardRef as forwardRef16 } from "react";
-import { cva as cva10 } from "class-variance-authority";
-var headingVariants = cva10(
+import React, { forwardRef as forwardRef17 } from "react";
+import { cva as cva11 } from "class-variance-authority";
+var headingVariants = cva11(
   "font-semibold leading-tight tracking-tight text-foreground transition-colors",
   {
     variants: {
@@ -830,7 +859,7 @@ var DEFAULT_SIZE_BY_LEVEL = {
   5: "xl",
   6: "base"
 };
-var Heading = forwardRef16(
+var Heading = forwardRef17(
   ({ level = 2, size, className, children, ...props }, ref) => {
     const resolvedSize = size ?? DEFAULT_SIZE_BY_LEVEL[level];
     return React.createElement(
@@ -847,10 +876,10 @@ var Heading = forwardRef16(
 Heading.displayName = "Heading";
 
 // src/components/Separator.tsx
-import { forwardRef as forwardRef17 } from "react";
-import { cva as cva11 } from "class-variance-authority";
-import { jsx as jsx16 } from "react/jsx-runtime";
-var separatorVariants = cva11("bg-border shrink-0 transition-colors", {
+import { forwardRef as forwardRef18 } from "react";
+import { cva as cva12 } from "class-variance-authority";
+import { jsx as jsx17 } from "react/jsx-runtime";
+var separatorVariants = cva12("bg-border shrink-0 transition-colors", {
   variants: {
     orientation: {
       horizontal: "h-px w-full",
@@ -861,8 +890,8 @@ var separatorVariants = cva11("bg-border shrink-0 transition-colors", {
     orientation: "horizontal"
   }
 });
-var Separator = forwardRef17(
-  ({ orientation = "horizontal", decorative = true, className, ...props }, ref) => /* @__PURE__ */ jsx16(
+var Separator = forwardRef18(
+  ({ orientation = "horizontal", decorative = true, className, ...props }, ref) => /* @__PURE__ */ jsx17(
     "div",
     {
       ref,
@@ -876,10 +905,10 @@ var Separator = forwardRef17(
 Separator.displayName = "Separator";
 
 // src/components/Code.tsx
-import { forwardRef as forwardRef18 } from "react";
-import { jsx as jsx17 } from "react/jsx-runtime";
-var Code = forwardRef18(
-  ({ className, ...props }, ref) => /* @__PURE__ */ jsx17(
+import { forwardRef as forwardRef19 } from "react";
+import { jsx as jsx18 } from "react/jsx-runtime";
+var Code = forwardRef19(
+  ({ className, ...props }, ref) => /* @__PURE__ */ jsx18(
     "code",
     {
       ref,
@@ -894,10 +923,10 @@ var Code = forwardRef18(
 Code.displayName = "Code";
 
 // src/components/Kbd.tsx
-import { forwardRef as forwardRef19 } from "react";
-import { cva as cva12 } from "class-variance-authority";
-import { jsx as jsx18 } from "react/jsx-runtime";
-var kbdVariants = cva12(
+import { forwardRef as forwardRef20 } from "react";
+import { cva as cva13 } from "class-variance-authority";
+import { jsx as jsx19 } from "react/jsx-runtime";
+var kbdVariants = cva13(
   "inline-flex items-center justify-center font-mono text-foreground-muted bg-surface-elevated border border-border rounded-sm shadow-sm transition-colors",
   {
     variants: {
@@ -911,8 +940,8 @@ var kbdVariants = cva12(
     }
   }
 );
-var Kbd = forwardRef19(
-  ({ className, size, ...props }, ref) => /* @__PURE__ */ jsx18(
+var Kbd = forwardRef20(
+  ({ className, size, ...props }, ref) => /* @__PURE__ */ jsx19(
     "kbd",
     {
       ref,
@@ -924,10 +953,10 @@ var Kbd = forwardRef19(
 Kbd.displayName = "Kbd";
 
 // src/components/Spinner.tsx
-import { forwardRef as forwardRef20 } from "react";
-import { cva as cva13 } from "class-variance-authority";
-import { jsx as jsx19, jsxs as jsxs5 } from "react/jsx-runtime";
-var spinnerVariants = cva13("animate-spin text-current", {
+import { forwardRef as forwardRef21 } from "react";
+import { cva as cva14 } from "class-variance-authority";
+import { jsx as jsx20, jsxs as jsxs5 } from "react/jsx-runtime";
+var spinnerVariants = cva14("animate-spin text-current", {
   variants: {
     size: {
       sm: "size-4",
@@ -939,7 +968,7 @@ var spinnerVariants = cva13("animate-spin text-current", {
     size: "md"
   }
 });
-var Spinner2 = forwardRef20(
+var Spinner2 = forwardRef21(
   ({ className, size, label = "Loading", ...props }, ref) => /* @__PURE__ */ jsxs5(
     "svg",
     {
@@ -952,7 +981,7 @@ var Spinner2 = forwardRef20(
       className: cn(spinnerVariants({ size }), className),
       ...props,
       children: [
-        /* @__PURE__ */ jsx19(
+        /* @__PURE__ */ jsx20(
           "circle",
           {
             cx: "12",
@@ -963,7 +992,7 @@ var Spinner2 = forwardRef20(
             strokeWidth: "4"
           }
         ),
-        /* @__PURE__ */ jsx19(
+        /* @__PURE__ */ jsx20(
           "path",
           {
             d: "M12 2a10 10 0 0 1 10 10",
@@ -978,6 +1007,37 @@ var Spinner2 = forwardRef20(
   )
 );
 Spinner2.displayName = "Spinner";
+
+// src/components/Text.tsx
+import { forwardRef as forwardRef22 } from "react";
+import { cva as cva15 } from "class-variance-authority";
+import { jsx as jsx21 } from "react/jsx-runtime";
+var textVariants = cva15("", {
+  variants: {
+    variant: {
+      body: "text-base text-foreground leading-relaxed",
+      lead: "text-lg text-foreground-muted leading-relaxed",
+      muted: "text-base text-foreground-muted leading-relaxed",
+      subtle: "text-sm text-foreground-subtle leading-relaxed",
+      small: "text-sm text-foreground",
+      caption: "text-xs text-foreground-subtle"
+    }
+  },
+  defaultVariants: {
+    variant: "body"
+  }
+});
+var Text = forwardRef22(
+  ({ className, variant, ...props }, ref) => /* @__PURE__ */ jsx21(
+    "p",
+    {
+      ref,
+      className: cn(textVariants({ variant }), className),
+      ...props
+    }
+  )
+);
+Text.displayName = "Text";
 export {
   Alert,
   Badge,
@@ -991,6 +1051,7 @@ export {
   CardTitle,
   Checkbox,
   Code,
+  FormError,
   FormErrorMessage,
   FormField,
   FormHelperText,
@@ -1004,6 +1065,7 @@ export {
   Separator,
   Spinner2 as Spinner,
   Switch,
+  Text,
   Textarea
 };
 //# sourceMappingURL=index.js.map

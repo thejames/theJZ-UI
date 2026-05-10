@@ -17,6 +17,8 @@ export { FormHelperText } from "./components/FormHelperText";
 export type { FormHelperTextProps } from "./components/FormHelperText";
 export { FormErrorMessage } from "./components/FormErrorMessage";
 export type { FormErrorMessageProps } from "./components/FormErrorMessage";
+export { FormError } from "./components/FormError";
+export type { FormErrorProps } from "./components/FormError";
 
 export { Checkbox } from "./components/Checkbox";
 export type { CheckboxProps } from "./components/Checkbox";
@@ -57,3 +59,5 @@ export { Kbd } from "./components/Kbd";
 export type { KbdProps } from "./components/Kbd";
 export { Spinner } from "./components/Spinner";
 export type { SpinnerProps } from "./components/Spinner";
+export { Text } from "./components/Text";
+export type { TextProps } from "./components/Text";
