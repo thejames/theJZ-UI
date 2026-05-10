@@ -114,7 +114,13 @@ function main() {
     `git commit -m "chore: release ${calverTag} (npm ${npmVersion})"`,
     { stdio: "inherit" },
   );
-  execSync(`git tag ${calverTag}`, { stdio: "inherit" });
+  // Annotated tag (-a) so that `git push --follow-tags` will push it.
+  // Lightweight tags are filtered out by --follow-tags and would otherwise
+  // need a separate `git push origin <tag>`.
+  execSync(
+    `git tag -a ${calverTag} -m "Release ${calverTag} (npm ${npmVersion})"`,
+    { stdio: "inherit" },
+  );
 
   console.log(
     `\nReleased ${calverTag} (npm ${npmVersion}). Push with:\n  git push --follow-tags && npm publish\n`,
