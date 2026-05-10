@@ -30,6 +30,7 @@ import path from "node:path";
 
 const PKG_PATH = path.resolve("package.json");
 const README_PATH = path.resolve("README.md");
+const SHOWCASE_PATH = path.resolve("showcase/page.tsx");
 const VERSION_MAP_MARKER = "<!-- version-map-rows -->";
 
 function todayParts() {
@@ -85,6 +86,25 @@ function nextNpmVersion(currentVersion) {
   return `${m[1]}.${m[2]}.${Number(m[3]) + 1}`;
 }
 
+function updateShowcaseBadge(calverTag) {
+  const showcase = fs.readFileSync(SHOWCASE_PATH, "utf8");
+  // The version Badge in showcase/page.tsx renders the calver tag so anyone
+  // viewing the showcase (locally or copy-pasted into a consumer app) sees
+  // which package version they're looking at. Match the badge by its
+  // surrounding markup, not just the version string, to avoid replacing
+  // unrelated v-prefixed identifiers.
+  const re = /(<Badge variant="accent" soft>)v\d{4}\.\d{4}[a-z]?(<\/Badge>)/;
+  if (!re.test(showcase)) {
+    throw new Error(
+      `Could not find version Badge in ${SHOWCASE_PATH}. Cannot update.`,
+    );
+  }
+  fs.writeFileSync(
+    SHOWCASE_PATH,
+    showcase.replace(re, `$1${calverTag}$2`),
+  );
+}
+
 function appendReadmeRow(calverTag, npmVersion) {
   const readme = fs.readFileSync(README_PATH, "utf8");
   if (!readme.includes(VERSION_MAP_MARKER)) {
@@ -108,8 +128,12 @@ function main() {
   pkg.version = npmVersion;
   fs.writeFileSync(PKG_PATH, JSON.stringify(pkg, null, 2) + "\n");
   appendReadmeRow(calverTag, npmVersion);
+  updateShowcaseBadge(calverTag);
 
-  execSync(`git add ${PKG_PATH} ${README_PATH}`, { stdio: "inherit" });
+  execSync(
+    `git add ${PKG_PATH} ${README_PATH} ${SHOWCASE_PATH}`,
+    { stdio: "inherit" },
+  );
   execSync(
     `git commit -m "chore: release ${calverTag} (npm ${npmVersion})"`,
     { stdio: "inherit" },
