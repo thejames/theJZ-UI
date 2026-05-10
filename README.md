@@ -10,28 +10,34 @@ Published on npm. From a consuming Next.js app:
 pnpm add @jameszambon/ui
 ```
 
-To pin to a specific version:
+To pin to a specific version, use the npm version (see the [Version map](#version-map) for the calver tag → npm version correspondence):
 
 ```bash
-pnpm add @jameszambon/ui@2026.509.1
+pnpm add @jameszambon/ui@0.0.2
 ```
 
 ## Versioning
 
-Semver-encoded calver: `YEAR.MONTHDAY.PATCH` where `MONTHDAY` is `month*100 + day` (no leading zeros) and `PATCH` is the release counter for that day, starting at 1. Valid semver, date-readable.
+Two tracks in lockstep:
 
-- `2026.508.1` — first release on May 8, 2026
-- `2026.508.2` — second release on the same day
-- `2026.1008.1` — first release on Oct 8
+- **Git tag (human identity):** `vYYYY.MMDD[letter]`. First release of the day has no letter (`v2026.0510`); subsequent same-day releases append `a`, `b`, … (`v2026.0510a`).
+- **npm version (registry id):** `0.0.N`, patch-bumped each release.
 
-Each release is tagged in git as `v<version>` and matches the version published to npm. One source of truth.
+Why two tracks: npm's registry enforces semver server-side — leading zeros (`0510`) and alphanumeric mid-components (`0510a`) are rejected at publish time. The calver tag is what humans read; the npm version is what `pnpm add` resolves. The [Version map](#version-map) below records the correspondence.
 
 ```bash
-pnpm release                              # bumps package.json, commits, tags
-git push --follow-tags && npm publish     # push tag, then publish to npm
+pnpm release                              # bumps npm version, tags calver, updates this README
+git push --follow-tags && npm publish     # push the tag, then publish to npm
 ```
 
 `prepublishOnly` runs `pnpm build` before any npm publish, so `dist/` is always fresh on the registry.
+
+## Version map
+
+| Git tag | npm |
+|---|---|
+<!-- version-map-rows -->
+| `v2026.0510` | `0.0.2` |
 
 ## Setup
 
@@ -79,7 +85,7 @@ export default function RootLayout({ children }) {
 
 Components automatically respect the dark mode without any additional configuration. To enable it conditionally based on user/system preference, manage the class with your preferred approach (state hook, cookie, prefers-color-scheme media query, etc.).
 
-Note: as of v0.1.0, all components reference semantic tokens for surfaces, text, and borders. Status colors in Alerts and Badges (success/danger/warning/info) handle dark mode via `dark:` variants in component code rather than at the token level — this is intentional, since the soft-tinted backgrounds need different colors in each mode rather than just a foreground swap.
+Note: all components reference semantic tokens for surfaces, text, and borders. Status colors in Alerts and Badges (success/danger/warning/info) handle dark mode via `dark:` variants in component code rather than at the token level — this is intentional, since the soft-tinted backgrounds need different colors in each mode rather than just a foreground swap.
 
 ## Token reference
 

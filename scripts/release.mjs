@@ -1,95 +1,123 @@
-// Bumps package.json to the next semver-encoded calver version, commits the
-// change, and creates a matching git tag.
+// Bumps the npm placeholder semver, computes the next calver git tag,
+// appends a row to the README version map, commits, and tags.
 //
-// Versioning scheme:
-//   MAJOR.MINOR.PATCH where
-//     MAJOR = full year (e.g. 2026)
-//     MINOR = month * 100 + day, no leading zeros (e.g. May 9 → 509, Oct 8 → 1008)
-//     PATCH = release counter for that day, starts at 1
+// Versioning scheme — two tracks in lockstep:
 //
-//   Examples:
-//     2026.508.1   — first release on May 8, 2026
-//     2026.508.2   — second release on the same day
-//     2026.509.1   — first release on May 9
-//     2026.1008.1  — first release on Oct 8
+//   Git tag (human identity):  vYYYY.MMDD[letter]
+//     v2026.0510   — first release on May 10, 2026
+//     v2026.0510a  — second release the same day
+//     v2026.0510b  — third, etc.
 //
-// This format is valid semver (so npm publish accepts it) AND date-encoded
-// (so the version itself tells you when it was cut). The same string is
-// used for the npm version and the git tag, eliminating dual-track drift.
+//   npm version (registry id): 0.0.N (patch bump per release)
+//
+//   The README "Version map" table records the correspondence.
+//
+// Why dual-track: npm's registry enforces semver — leading zeros (0510) and
+// alphanumeric mid-components (0510a) are rejected at publish time. Calver
+// gives readable date identity in git; npm gets a registry-compatible
+// placeholder.
 //
 // Usage:
 //   pnpm release                              # bump + commit + tag
-//   git push --follow-tags && npm publish     # publish (push the tag, then npm)
+//   git push --follow-tags && npm publish     # push the tag, then publish
 //
-// Note: prepublishOnly in package.json ensures `pnpm build` runs before
-// any `npm publish`, so dist/ is always fresh on the registry.
-//
-// Migration from the old YYYY.MMDD[a-z] calver:
-//   v2026.0508  → v2026.508.1
-//   v2026.0508a → v2026.508.2
-//   v2026.0509a → v2026.509.2
+// prepublishOnly in package.json runs `pnpm build` before any npm publish,
+// so dist/ is always fresh on the registry.
 
 import { execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
 const PKG_PATH = path.resolve("package.json");
+const README_PATH = path.resolve("README.md");
+const VERSION_MAP_MARKER = "<!-- version-map-rows -->";
 
 function todayParts() {
   const d = new Date();
-  return {
-    year: d.getFullYear(),
-    md: (d.getMonth() + 1) * 100 + d.getDate(),
-  };
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return { year: d.getFullYear(), mmdd: `${mm}${dd}` };
 }
 
-function highestPatchToday(today) {
-  // Source of truth for "what's already been released today" is git tags,
-  // not package.json — the latter can drift (e.g. after npm publish bumps
-  // version manually) and produce collisions when this script tries to
-  // create a tag that already exists.
+function nextCalverTag(today) {
+  const prefix = `v${today.year}.${today.mmdd}`;
+  let tags = "";
   try {
-    const out = execSync(
-      `git tag --list "v${today.year}.${today.md}.*"`,
-      { encoding: "utf8" },
-    ).trim();
-    if (!out) return 0;
-    return out
-      .split("\n")
-      .map((tag) => {
-        const m = tag.match(/^v\d+\.\d+\.(\d+)$/);
-        return m ? Number(m[1]) : 0;
-      })
-      .reduce((a, b) => Math.max(a, b), 0);
+    tags = execSync(`git tag --list "${prefix}*"`, { encoding: "utf8" }).trim();
   } catch {
-    return 0;
+    tags = "";
   }
+  if (!tags) return prefix;
+
+  // -1 means only the suffixless tag exists (next gets "a"); otherwise the
+  // letter charcode of the highest used suffix (next is +1).
+  let maxCode = "a".charCodeAt(0) - 1;
+  let suffixlessExists = false;
+  for (const t of tags.split("\n")) {
+    if (t === prefix) {
+      suffixlessExists = true;
+      continue;
+    }
+    const m = t.match(/^v\d+\.\d+([a-z])$/);
+    if (m && m[1].charCodeAt(0) > maxCode) maxCode = m[1].charCodeAt(0);
+  }
+
+  if (!suffixlessExists && maxCode === "a".charCodeAt(0) - 1) {
+    // Tags matched the prefix but none were the bare prefix or [a-z]-suffixed.
+    // Don't try to be clever — bail.
+    throw new Error(
+      `Found tags matching ${prefix}* but none in expected format. Investigate.`,
+    );
+  }
+
+  const next = String.fromCharCode(maxCode + 1);
+  if (next > "z") {
+    throw new Error(
+      `Already at suffix 'z' for ${prefix}. Either it's a wild day or the script needs extension.`,
+    );
+  }
+  return `${prefix}${next}`;
 }
 
-function computeNext(today) {
-  return `${today.year}.${today.md}.${highestPatchToday(today) + 1}`;
+function nextNpmVersion(currentVersion) {
+  const m = currentVersion.match(/^(\d+)\.(\d+)\.(\d+)$/);
+  if (!m) throw new Error(`Cannot parse npm version: ${currentVersion}`);
+  return `${m[1]}.${m[2]}.${Number(m[3]) + 1}`;
+}
+
+function appendReadmeRow(calverTag, npmVersion) {
+  const readme = fs.readFileSync(README_PATH, "utf8");
+  if (!readme.includes(VERSION_MAP_MARKER)) {
+    throw new Error(
+      `README is missing the marker ${VERSION_MAP_MARKER}. Cannot update version map.`,
+    );
+  }
+  const row = `| \`${calverTag}\` | \`${npmVersion}\` |`;
+  fs.writeFileSync(
+    README_PATH,
+    readme.replace(VERSION_MAP_MARKER, `${VERSION_MAP_MARKER}\n${row}`),
+  );
 }
 
 function main() {
   const pkg = JSON.parse(fs.readFileSync(PKG_PATH, "utf8"));
-  const current = pkg.version;
   const today = todayParts();
-  const next = computeNext(today);
+  const calverTag = nextCalverTag(today);
+  const npmVersion = nextNpmVersion(pkg.version);
 
-  if (next === current) {
-    console.error(`Already at ${current} — no bump produced.`);
-    process.exit(1);
-  }
-
-  pkg.version = next;
+  pkg.version = npmVersion;
   fs.writeFileSync(PKG_PATH, JSON.stringify(pkg, null, 2) + "\n");
+  appendReadmeRow(calverTag, npmVersion);
 
-  execSync(`git add ${PKG_PATH}`, { stdio: "inherit" });
-  execSync(`git commit -m "chore: release ${next}"`, { stdio: "inherit" });
-  execSync(`git tag v${next}`, { stdio: "inherit" });
+  execSync(`git add ${PKG_PATH} ${README_PATH}`, { stdio: "inherit" });
+  execSync(
+    `git commit -m "chore: release ${calverTag} (npm ${npmVersion})"`,
+    { stdio: "inherit" },
+  );
+  execSync(`git tag ${calverTag}`, { stdio: "inherit" });
 
   console.log(
-    `\nReleased ${next}. Push with:\n  git push --follow-tags && npm publish\n`,
+    `\nReleased ${calverTag} (npm ${npmVersion}). Push with:\n  git push --follow-tags && npm publish\n`,
   );
 }
 
