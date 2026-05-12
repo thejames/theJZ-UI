@@ -43,6 +43,7 @@ __export(index_exports, {
   CardTitle: () => CardTitle,
   Checkbox: () => Checkbox,
   Code: () => Code,
+  DateInput: () => DateInput,
   FormError: () => FormError,
   FormErrorMessage: () => FormErrorMessage,
   FormField: () => FormField,
@@ -58,7 +59,8 @@ __export(index_exports, {
   Spinner: () => Spinner2,
   Switch: () => Switch,
   Text: () => Text,
-  Textarea: () => Textarea
+  Textarea: () => Textarea,
+  TimeInput: () => TimeInput
 });
 module.exports = __toCommonJS(index_exports);
 
@@ -1092,6 +1094,485 @@ var Text = (0, import_react22.forwardRef)(
   )
 );
 Text.displayName = "Text";
+
+// src/components/DateInput.tsx
+var import_react23 = require("react");
+var import_react_day_picker = require("react-day-picker");
+var import_jsx_runtime22 = require("react/jsx-runtime");
+var isControlled = (p) => p.value !== void 0;
+function DateInput(props) {
+  const {
+    name,
+    defaultValue = "",
+    value,
+    onChange,
+    id,
+    required,
+    min,
+    max,
+    className,
+    placeholder,
+    disabled,
+    size = "md",
+    invalid
+  } = props;
+  const controlled = isControlled(props);
+  const [internal, setInternal] = (0, import_react23.useState)(
+    controlled ? "" : defaultValue
+  );
+  const current = controlled ? value ?? "" : internal;
+  const [useCustom, setUseCustom] = (0, import_react23.useState)(false);
+  const [open, setOpen] = (0, import_react23.useState)(false);
+  const wrapRef = (0, import_react23.useRef)(null);
+  (0, import_react23.useEffect)(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(pointer: fine)").matches) setUseCustom(true);
+  }, []);
+  (0, import_react23.useEffect)(() => {
+    if (!open) return;
+    const onDocClick = (e) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, [open]);
+  const commit = (next) => {
+    if (!controlled) setInternal(next);
+    onChange?.(next);
+  };
+  if (!useCustom) {
+    return /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+      Input,
+      {
+        type: "date",
+        id,
+        name,
+        required,
+        min,
+        max,
+        disabled,
+        placeholder,
+        className,
+        size,
+        invalid,
+        value: controlled ? value ?? "" : void 0,
+        defaultValue: controlled ? void 0 : defaultValue,
+        onChange: (e) => commit(e.target.value)
+      }
+    );
+  }
+  const selectedDate = parseYmd(current);
+  const minDate = parseYmd(min);
+  const maxDate = parseYmd(max);
+  const disabledMatchers = [];
+  if (minDate) disabledMatchers.push({ before: minDate });
+  if (maxDate) disabledMatchers.push({ after: maxDate });
+  const triggerPadding = { sm: "pr-8", md: "pr-9", lg: "pr-10" }[size];
+  const iconRight = { sm: "right-2", md: "right-3", lg: "right-3" }[size];
+  return /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("span", { ref: wrapRef, className: "relative inline-block w-full", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+      Input,
+      {
+        type: "text",
+        id,
+        required,
+        disabled,
+        placeholder: placeholder ?? "yyyy-mm-dd",
+        readOnly: true,
+        autoComplete: "off",
+        size,
+        invalid,
+        className: cn(triggerPadding, "cursor-pointer", className),
+        value: current,
+        onClick: () => !disabled && setOpen((o) => !o)
+      }
+    ),
+    name && /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("input", { type: "hidden", name, value: current }),
+    /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+      "span",
+      {
+        "aria-hidden": "true",
+        className: cn(
+          "pointer-events-none absolute top-1/2 -translate-y-1/2 inline-flex text-foreground-subtle",
+          iconRight
+        ),
+        children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+          "svg",
+          {
+            xmlns: "http://www.w3.org/2000/svg",
+            width: "16",
+            height: "16",
+            viewBox: "0 0 16 16",
+            fill: "currentColor",
+            children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("path", { d: "M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" })
+          }
+        )
+      }
+    ),
+    open && /* @__PURE__ */ (0, import_jsx_runtime22.jsxs)("div", { className: "jz-datepicker-popover absolute left-0 top-full z-50 mt-1 rounded-md border border-border bg-surface dark:bg-surface-elevated p-2 shadow-md", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+        import_react_day_picker.DayPicker,
+        {
+          mode: "single",
+          selected: selectedDate,
+          onSelect: (d) => {
+            commit(formatYmd(d));
+            setOpen(false);
+          },
+          disabled: disabledMatchers.length > 0 ? disabledMatchers : void 0,
+          defaultMonth: selectedDate ?? minDate ?? /* @__PURE__ */ new Date(),
+          showOutsideDays: true
+        }
+      ),
+      current && /* @__PURE__ */ (0, import_jsx_runtime22.jsx)("div", { className: "flex justify-end pt-1", children: /* @__PURE__ */ (0, import_jsx_runtime22.jsx)(
+        Button,
+        {
+          type: "button",
+          variant: "link",
+          size: "sm",
+          className: "text-foreground-muted hover:text-foreground",
+          onClick: () => {
+            commit("");
+            setOpen(false);
+          },
+          children: "Clear"
+        }
+      ) })
+    ] })
+  ] });
+}
+function parseYmd(s) {
+  if (!s) return void 0;
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  if (!m) return void 0;
+  return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+}
+function formatYmd(d) {
+  if (!d) return "";
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+// src/components/TimeInput.tsx
+var import_react24 = require("react");
+var import_jsx_runtime23 = require("react/jsx-runtime");
+var isControlled2 = (p) => p.value !== void 0;
+function TimeInput(props) {
+  const {
+    name,
+    defaultValue = "",
+    value,
+    onChange,
+    id,
+    required,
+    min,
+    max,
+    step = 5,
+    display = "24h",
+    className,
+    placeholder,
+    disabled,
+    size = "md",
+    invalid
+  } = props;
+  const controlled = isControlled2(props);
+  const [internal, setInternal] = (0, import_react24.useState)(
+    controlled ? "" : defaultValue
+  );
+  const current = controlled ? value ?? "" : internal;
+  const [useCustom, setUseCustom] = (0, import_react24.useState)(false);
+  const [open, setOpen] = (0, import_react24.useState)(false);
+  const wrapRef = (0, import_react24.useRef)(null);
+  (0, import_react24.useEffect)(() => {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(pointer: fine)").matches) setUseCustom(true);
+  }, []);
+  (0, import_react24.useEffect)(() => {
+    if (!open) return;
+    const onDocClick = (e) => {
+      if (wrapRef.current && !wrapRef.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, [open]);
+  const triggerText = (0, import_react24.useMemo)(
+    () => current ? formatDisplay(current, display) : "",
+    [current, display]
+  );
+  const commit = (next) => {
+    if (!controlled) setInternal(next);
+    onChange?.(next);
+  };
+  if (!useCustom) {
+    return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+      Input,
+      {
+        type: "time",
+        id,
+        name,
+        required,
+        min,
+        max,
+        step: step * 60,
+        disabled,
+        placeholder,
+        className,
+        size,
+        invalid,
+        value: controlled ? value ?? "" : void 0,
+        defaultValue: controlled ? void 0 : defaultValue,
+        onChange: (e) => commit(e.target.value)
+      }
+    );
+  }
+  const parsed = parseHm(current);
+  const minMins = parseHm(min);
+  const maxMins = parseHm(max);
+  const triggerPadding = { sm: "pr-8", md: "pr-9", lg: "pr-10" }[size];
+  const iconRight = { sm: "right-2", md: "right-3", lg: "right-3" }[size];
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("span", { ref: wrapRef, className: "relative inline-block w-full", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+      Input,
+      {
+        type: "text",
+        id,
+        required,
+        disabled,
+        placeholder: placeholder ?? (display === "12h" ? "h:mm am" : "hh:mm"),
+        readOnly: true,
+        autoComplete: "off",
+        size,
+        invalid,
+        className: cn(triggerPadding, "cursor-pointer", className),
+        value: triggerText,
+        onClick: () => !disabled && setOpen((o) => !o)
+      }
+    ),
+    name && /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("input", { type: "hidden", name, value: current }),
+    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+      "span",
+      {
+        "aria-hidden": "true",
+        className: cn(
+          "pointer-events-none absolute top-1/2 -translate-y-1/2 inline-flex text-foreground-subtle",
+          iconRight
+        ),
+        children: /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)(
+          "svg",
+          {
+            xmlns: "http://www.w3.org/2000/svg",
+            width: "16",
+            height: "16",
+            viewBox: "0 0 16 16",
+            fill: "currentColor",
+            children: [
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("path", { d: "M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" }),
+              /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("path", { d: "M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z" })
+            ]
+          }
+        )
+      }
+    ),
+    open && /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "jz-timepicker-popover absolute left-0 top-full z-50 mt-1 rounded-md border border-border bg-surface dark:bg-surface-elevated p-3 shadow-md", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+        TimeColumns,
+        {
+          hour: parsed?.h ?? null,
+          minute: parsed?.m ?? null,
+          display,
+          step,
+          minMins: minMins ? minMins.h * 60 + minMins.m : null,
+          maxMins: maxMins ? maxMins.h * 60 + maxMins.m : null,
+          onPick: (h, m) => {
+            commit(formatHm(h, m));
+          }
+        }
+      ),
+      current && /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "flex justify-end pt-1 border-t border-border-subtle mt-1", children: /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+        Button,
+        {
+          type: "button",
+          variant: "link",
+          size: "sm",
+          className: "text-foreground-muted hover:text-foreground",
+          onClick: () => {
+            commit("");
+            setOpen(false);
+          },
+          children: "Clear"
+        }
+      ) })
+    ] })
+  ] });
+}
+function TimeColumns({
+  hour,
+  minute,
+  display,
+  step,
+  minMins,
+  maxMins,
+  onPick
+}) {
+  const minutes = (0, import_react24.useMemo)(() => {
+    const out = [];
+    for (let m = 0; m < 60; m += step) out.push(m);
+    return out;
+  }, [step]);
+  const is12 = display === "12h";
+  const hours = (0, import_react24.useMemo)(
+    () => is12 ? [12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11] : range(0, 24),
+    [is12]
+  );
+  const currentPeriod = hour == null ? "am" : hour < 12 ? "am" : "pm";
+  const displayedHour = hour == null ? null : is12 ? to12(hour) : hour;
+  const pickHour = (h12or24) => {
+    const h = is12 ? from12(h12or24, currentPeriod) : h12or24;
+    const m = minute ?? 0;
+    if (isDisabled(h, m, minMins, maxMins)) return;
+    onPick(h, m);
+  };
+  const pickMinute = (m) => {
+    const h = hour ?? (is12 ? from12(12, "am") : 0);
+    if (isDisabled(h, m, minMins, maxMins)) return;
+    onPick(h, m);
+  };
+  const pickPeriod = (p) => {
+    const h12 = displayedHour ?? 12;
+    const h = from12(h12, p);
+    const m = minute ?? 0;
+    if (isDisabled(h, m, minMins, maxMins)) return;
+    onPick(h, m);
+  };
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "flex gap-3", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Column, { label: "Hr", children: hours.map((h) => {
+      const wireH = is12 ? from12(h, currentPeriod) : h;
+      const disabled = isDisabled(
+        wireH,
+        minute ?? 0,
+        minMins,
+        maxMins
+      );
+      return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+        TimeCell,
+        {
+          selected: displayedHour === h,
+          disabled,
+          onClick: () => pickHour(h),
+          children: is12 ? String(h) : pad(h)
+        },
+        `h-${h}`
+      );
+    }) }),
+    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Column, { label: "Min", children: minutes.map((m) => {
+      const h = hour ?? (is12 ? from12(12, "am") : 0);
+      const disabled = isDisabled(h, m, minMins, maxMins);
+      return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+        TimeCell,
+        {
+          selected: minute === m,
+          disabled,
+          onClick: () => pickMinute(m),
+          children: pad(m)
+        },
+        `m-${m}`
+      );
+    }) }),
+    is12 && /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(Column, { label: "", children: ["am", "pm"].map((p) => {
+      const h = from12(displayedHour ?? 12, p);
+      const disabled = isDisabled(h, minute ?? 0, minMins, maxMins);
+      return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+        TimeCell,
+        {
+          selected: currentPeriod === p && hour != null,
+          disabled,
+          onClick: () => pickPeriod(p),
+          children: p.toUpperCase()
+        },
+        p
+      );
+    }) })
+  ] });
+}
+function Column({
+  label,
+  children
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsxs)("div", { className: "flex flex-col", children: [
+    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "text-[0.65rem] uppercase tracking-wide text-foreground-subtle text-center pb-1.5 min-h-[1rem]", children: label }),
+    /* @__PURE__ */ (0, import_jsx_runtime23.jsx)("div", { className: "flex flex-col gap-1 max-h-56 overflow-y-auto pr-1.5", children })
+  ] });
+}
+function TimeCell({
+  selected,
+  disabled,
+  onClick,
+  children
+}) {
+  return /* @__PURE__ */ (0, import_jsx_runtime23.jsx)(
+    "button",
+    {
+      type: "button",
+      disabled,
+      onClick,
+      className: cn(
+        "w-12 px-3 py-1.5 rounded-md text-sm tabular-nums text-center transition-colors",
+        "hover:bg-surface-muted",
+        selected && "bg-brand-700 text-white hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-500",
+        disabled && "opacity-40 cursor-not-allowed hover:bg-transparent"
+      ),
+      children
+    }
+  );
+}
+function parseHm(s) {
+  if (!s) return void 0;
+  const match = /^(\d{2}):(\d{2})$/.exec(s);
+  if (!match) return void 0;
+  const h = Number(match[1]);
+  const m = Number(match[2]);
+  if (h > 23 || m > 59) return void 0;
+  return { h, m };
+}
+function formatHm(h, m) {
+  return `${pad(h)}:${pad(m)}`;
+}
+function formatDisplay(hm, display) {
+  const p = parseHm(hm);
+  if (!p) return "";
+  if (display === "24h") return formatHm(p.h, p.m);
+  const period = p.h < 12 ? "AM" : "PM";
+  const h12 = to12(p.h);
+  return `${h12}:${pad(p.m)} ${period}`;
+}
+function pad(n) {
+  return String(n).padStart(2, "0");
+}
+function to12(h24) {
+  const h = h24 % 12;
+  return h === 0 ? 12 : h;
+}
+function from12(h12, period) {
+  const base = h12 % 12;
+  return period === "pm" ? base + 12 : base;
+}
+function range(start, end) {
+  const out = [];
+  for (let i = start; i < end; i++) out.push(i);
+  return out;
+}
+function isDisabled(h, m, minMins, maxMins) {
+  const total = h * 60 + m;
+  if (minMins != null && total < minMins) return true;
+  if (maxMins != null && total > maxMins) return true;
+  return false;
+}
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Alert,
@@ -1106,6 +1587,7 @@ Text.displayName = "Text";
   CardTitle,
   Checkbox,
   Code,
+  DateInput,
   FormError,
   FormErrorMessage,
   FormField,
@@ -1121,6 +1603,7 @@ Text.displayName = "Text";
   Spinner,
   Switch,
   Text,
-  Textarea
+  Textarea,
+  TimeInput
 });
 //# sourceMappingURL=index.cjs.map

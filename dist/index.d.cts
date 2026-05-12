@@ -5,6 +5,7 @@ import { VariantProps } from 'class-variance-authority';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
 import * as SwitchPrimitive from '@radix-ui/react-switch';
+import * as react_jsx_runtime from 'react/jsx-runtime';
 
 declare const buttonVariants: (props?: ({
     variant?: "primary" | "secondary" | "accent" | "success" | "danger" | "warning" | "info" | "light" | "dark" | "outline-primary" | "outline-secondary" | "outline-accent" | "outline-success" | "outline-danger" | "outline-warning" | "outline-info" | "ghost" | "link" | null | undefined;
@@ -169,4 +170,42 @@ interface TextProps extends HTMLAttributes<HTMLParagraphElement>, VariantProps<t
 }
 declare const Text: react.ForwardRefExoticComponent<TextProps & react.RefAttributes<HTMLParagraphElement>>;
 
-export { Alert, type AlertProps, Badge, type BadgeProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardBody, type CardBodyProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardHeader, type CardHeaderProps, type CardProps, CardTitle, type CardTitleProps, Checkbox, type CheckboxProps, Code, type CodeProps, FormError, FormErrorMessage, type FormErrorMessageProps, type FormErrorProps, FormField, type FormFieldProps, FormHelperText, type FormHelperTextProps, Heading, type HeadingProps, Input, type InputProps, Kbd, type KbdProps, Label, type LabelProps, Radio, RadioGroup, type RadioGroupProps, type RadioProps, Select, type SelectProps, Separator, type SeparatorProps, Spinner, type SpinnerProps, Switch, type SwitchProps, Text, type TextProps, Textarea, type TextareaProps };
+interface DateInputProps {
+    name?: string;
+    defaultValue?: string;
+    value?: string;
+    onChange?: (next: string) => void;
+    id?: string;
+    required?: boolean;
+    min?: string;
+    max?: string;
+    className?: string;
+    placeholder?: string;
+    disabled?: boolean;
+    size?: "sm" | "md" | "lg";
+    invalid?: boolean;
+}
+declare function DateInput(props: DateInputProps): react_jsx_runtime.JSX.Element;
+
+interface TimeInputProps {
+    name?: string;
+    defaultValue?: string;
+    value?: string;
+    onChange?: (next: string) => void;
+    id?: string;
+    required?: boolean;
+    min?: string;
+    max?: string;
+    /** Minute step for the popover columns. Default 5. Native input honors this too. */
+    step?: number;
+    /** Visible format. Wire value is always 24h "HH:MM". Default "24h". */
+    display?: "12h" | "24h";
+    className?: string;
+    placeholder?: string;
+    disabled?: boolean;
+    size?: "sm" | "md" | "lg";
+    invalid?: boolean;
+}
+declare function TimeInput(props: TimeInputProps): react_jsx_runtime.JSX.Element;
+
+export { Alert, type AlertProps, Badge, type BadgeProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardBody, type CardBodyProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardHeader, type CardHeaderProps, type CardProps, CardTitle, type CardTitleProps, Checkbox, type CheckboxProps, Code, type CodeProps, DateInput, type DateInputProps, FormError, FormErrorMessage, type FormErrorMessageProps, type FormErrorProps, FormField, type FormFieldProps, FormHelperText, type FormHelperTextProps, Heading, type HeadingProps, Input, type InputProps, Kbd, type KbdProps, Label, type LabelProps, Radio, RadioGroup, type RadioGroupProps, type RadioProps, Select, type SelectProps, Separator, type SeparatorProps, Spinner, type SpinnerProps, Switch, type SwitchProps, Text, type TextProps, Textarea, type TextareaProps, TimeInput, type TimeInputProps };

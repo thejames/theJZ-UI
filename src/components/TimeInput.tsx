@@ -81,6 +81,11 @@ export function TimeInput(props: TimeInputProps) {
     return () => document.removeEventListener("mousedown", onDocClick);
   }, [open]);
 
+  const triggerText = useMemo(
+    () => (current ? formatDisplay(current, display) : ""),
+    [current, display],
+  );
+
   const commit = (next: string) => {
     if (!controlled) setInternal(next);
     onChange?.(next);
@@ -114,11 +119,6 @@ export function TimeInput(props: TimeInputProps) {
 
   const triggerPadding = { sm: "pr-8", md: "pr-9", lg: "pr-10" }[size];
   const iconRight = { sm: "right-2", md: "right-3", lg: "right-3" }[size];
-
-  const triggerText = useMemo(
-    () => (current ? formatDisplay(current, display) : ""),
-    [current, display],
-  );
 
   return (
     <span ref={wrapRef} className="relative inline-block w-full">
@@ -156,7 +156,7 @@ export function TimeInput(props: TimeInputProps) {
         </svg>
       </span>
       {open && (
-        <div className="jz-timepicker-popover absolute left-0 top-full z-50 mt-1 rounded-md border border-border bg-surface dark:bg-surface-elevated p-2 shadow-md">
+        <div className="jz-timepicker-popover absolute left-0 top-full z-50 mt-1 rounded-md border border-border bg-surface dark:bg-surface-elevated p-3 shadow-md">
           <TimeColumns
             hour={parsed?.h ?? null}
             minute={parsed?.m ?? null}
@@ -248,7 +248,7 @@ function TimeColumns({
   };
 
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-3">
       <Column label="Hr">
         {hours.map((h) => {
           const wireH = is12 ? from12(h, currentPeriod) : h;
@@ -317,10 +317,10 @@ function Column({
 }) {
   return (
     <div className="flex flex-col">
-      <div className="text-[0.65rem] uppercase tracking-wide text-foreground-subtle text-center pb-1 min-h-[1rem]">
+      <div className="text-[0.65rem] uppercase tracking-wide text-foreground-subtle text-center pb-1.5 min-h-[1rem]">
         {label}
       </div>
-      <div className="flex flex-col gap-0.5 max-h-56 overflow-y-auto pr-1">
+      <div className="flex flex-col gap-1 max-h-56 overflow-y-auto pr-1.5">
         {children}
       </div>
     </div>
@@ -344,7 +344,7 @@ function TimeCell({
       disabled={disabled}
       onClick={onClick}
       className={cn(
-        "w-10 px-2 py-1 rounded-md text-sm tabular-nums text-center transition-colors",
+        "w-12 px-3 py-1.5 rounded-md text-sm tabular-nums text-center transition-colors",
         "hover:bg-surface-muted",
         selected &&
           "bg-brand-700 text-white hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-500",
