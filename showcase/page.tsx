@@ -319,6 +319,164 @@ const MoonIcon = () => (
   </svg>
 );
 
+const MenuIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className="size-5"
+  >
+    <line x1="4" y1="6" x2="20" y2="6" />
+    <line x1="4" y1="12" x2="20" y2="12" />
+    <line x1="4" y1="18" x2="20" y2="18" />
+  </svg>
+);
+
+// ───────────────────────── sidebar nav ─────────────────────────
+
+type NavGroup = {
+  id: string;
+  label: string;
+  links: { href: string; label: string }[];
+};
+
+const NAV_GROUPS: NavGroup[] = [
+  {
+    id: "foundation",
+    label: "Foundation",
+    links: [{ href: "#foundation", label: "Colors & typography" }],
+  },
+  {
+    id: "inputs",
+    label: "Inputs",
+    links: [
+      { href: "#actions", label: "Actions" },
+      { href: "#forms", label: "Forms" },
+      { href: "#toggles", label: "Toggles" },
+    ],
+  },
+  {
+    id: "feedback",
+    label: "Feedback",
+    links: [
+      { href: "#feedback", label: "Alerts & badges" },
+      { href: "#progress", label: "Progress & loading" },
+    ],
+  },
+  {
+    id: "layout",
+    label: "Layout",
+    links: [
+      { href: "#structure", label: "Structure" },
+      { href: "#composition", label: "Composition" },
+    ],
+  },
+  {
+    id: "data",
+    label: "Data display",
+    links: [
+      { href: "#data", label: "Tables & pagination" },
+      { href: "#disclosure", label: "Disclosure" },
+    ],
+  },
+  {
+    id: "overlays",
+    label: "Overlays",
+    links: [
+      { href: "#overlays", label: "Dialog / Tooltip / Popover" },
+      { href: "#menus", label: "Menus & toasts" },
+    ],
+  },
+  {
+    id: "navigation",
+    label: "Navigation",
+    links: [{ href: "#navigation", label: "Nav & Navbar" }],
+  },
+  {
+    id: "extras",
+    label: "Extras",
+    links: [
+      { href: "#extras", label: "Toggle / Hover / Context" },
+      { href: "#bs-extras", label: "Bootstrap extras" },
+      { href: "#power-ups", label: "Power-ups" },
+    ],
+  },
+];
+
+const ALL_GROUP_IDS = NAV_GROUPS.map((g) => g.id);
+
+function SidebarNav({
+  isDark,
+  onToggleDark,
+  onNavigate,
+}: {
+  isDark: boolean;
+  onToggleDark: () => void;
+  onNavigate?: () => void;
+}) {
+  return (
+    <div className="flex h-full flex-col">
+      <div className="border-b border-border px-6 py-5">
+        <div className="flex items-center gap-2">
+          <Heading level={1} size="lg">@jameszambon/ui</Heading>
+        </div>
+        <Badge variant="accent" soft className="mt-2">v2026.0512b</Badge>
+      </div>
+
+      <ScrollArea className="flex-1">
+        <Accordion
+          type="multiple"
+          defaultValue={ALL_GROUP_IDS}
+          className="px-3 py-4"
+        >
+          {NAV_GROUPS.map((group) => (
+            <AccordionItem
+              key={group.id}
+              value={group.id}
+              className="border-b-0"
+            >
+              <AccordionTrigger className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-foreground-muted hover:no-underline">
+                {group.label}
+              </AccordionTrigger>
+              <AccordionContent className="pb-2">
+                <ul className="flex flex-col">
+                  {group.links.map((link) => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        onClick={onNavigate}
+                        className="block rounded-md px-3 py-1.5 text-sm text-foreground-muted hover:bg-surface-muted hover:text-foreground transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </ScrollArea>
+
+      <div className="border-t border-border px-4 py-3">
+        <button
+          type="button"
+          onClick={onToggleDark}
+          aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          className="inline-flex w-full items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground-muted hover:bg-surface-muted hover:text-foreground transition-colors"
+        >
+          {isDark ? <SunIcon /> : <MoonIcon />}
+          {isDark ? "Light mode" : "Dark mode"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ───────────────────────── page ─────────────────────────
 
 export default function DesignSystemPage() {
@@ -328,6 +486,7 @@ export default function DesignSystemPage() {
   const [smallPagerPage, setSmallPagerPage] = useState(2);
   const [comboValue, setComboValue] = useState("ts");
   const [calendarDate, setCalendarDate] = useState<Date | undefined>(new Date());
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   useEffect(() => {
     if (isDark) {
@@ -341,46 +500,42 @@ export default function DesignSystemPage() {
   }, [isDark]);
 
   return (
-    <main className="min-h-screen bg-background font-sans text-foreground transition-colors">
-      <header className="mx-auto max-w-6xl px-8 pt-16 pb-8">
-        <div className="flex items-center gap-3">
-          <Heading level={1} size="5xl">@jameszambon/ui</Heading>
-          <Badge variant="accent" soft>v2026.0512b</Badge>
-        </div>
-        <p className="mt-2 max-w-2xl text-lg text-foreground-muted">
-          Design system reference for JZ Productions. Bootstrap structure, brand colors, Tailwind v4.
-        </p>
+    <div className="flex min-h-screen bg-background font-sans text-foreground transition-colors">
+      {/* Mobile top bar — visible below lg */}
+      <header className="fixed inset-x-0 top-0 z-20 flex items-center gap-3 border-b border-border bg-background/95 px-4 py-3 backdrop-blur lg:hidden">
+        <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="sm" aria-label="Open navigation">
+              <MenuIcon />
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-72 p-0">
+            <SheetHeader className="sr-only">
+              <SheetTitle>Navigation</SheetTitle>
+            </SheetHeader>
+            <SidebarNav
+              isDark={isDark}
+              onToggleDark={() => setIsDark(!isDark)}
+              onNavigate={() => setMobileNavOpen(false)}
+            />
+          </SheetContent>
+        </Sheet>
+        <Heading level={1} size="base">@jameszambon/ui</Heading>
+        <Badge variant="accent" soft className="ml-auto">v2026.0512b</Badge>
       </header>
 
-      <nav className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto max-w-6xl flex flex-wrap items-center gap-x-6 gap-y-2 px-8 py-4 text-sm font-medium">
-          <a href="#foundation" className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Foundation</a>
-          <a href="#actions"    className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Actions</a>
-          <a href="#forms"      className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Forms</a>
-          <a href="#toggles"    className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Toggles</a>
-          <a href="#feedback"   className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Feedback</a>
-          <a href="#structure"  className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Structure</a>
-          <a href="#data"       className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Data</a>
-          <a href="#progress"   className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Progress</a>
-          <a href="#overlays"   className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Overlays</a>
-          <a href="#disclosure" className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Disclosure</a>
-          <a href="#menus"      className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Menus</a>
-          <a href="#composition" className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Composition</a>
-          <a href="#navigation" className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Navigation</a>
-          <a href="#extras"     className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Extras</a>
-          <a href="#bs-extras"  className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">More</a>
-          <a href="#power-ups"  className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Power-ups</a>
-          <button
-            type="button"
-            onClick={() => setIsDark(!isDark)}
-            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
-            className="ml-auto inline-flex items-center gap-2 rounded-md border border-border bg-surface px-3 py-1.5 text-xs font-medium text-foreground-muted hover:bg-surface-muted hover:text-foreground transition-colors"
-          >
-            {isDark ? <SunIcon /> : <MoonIcon />}
-            {isDark ? "Light" : "Dark"}
-          </button>
-        </div>
-      </nav>
+      {/* Desktop sidebar — sticky left rail */}
+      <aside className="sticky top-0 hidden h-screen w-72 shrink-0 border-r border-border bg-surface lg:block">
+        <SidebarNav isDark={isDark} onToggleDark={() => setIsDark(!isDark)} />
+      </aside>
+
+      <main className="min-w-0 flex-1 pt-14 lg:pt-0">
+        <header className="mx-auto max-w-6xl px-8 pt-16 pb-8">
+          <Heading level={2} size="4xl">Component reference</Heading>
+          <p className="mt-2 max-w-2xl text-lg text-foreground-muted">
+            Design system reference for JZ Productions. Bootstrap structure, brand colors, Tailwind v4.
+          </p>
+        </header>
 
       {/* ===== FOUNDATION ===== */}
       <section id="foundation" className="mx-auto max-w-6xl scroll-mt-20 space-y-8 px-8 py-16">
@@ -2216,7 +2371,8 @@ export default function DesignSystemPage() {
           </Collapsible>
         </div>
       </section>
-    </main>
+      </main>
+    </div>
   );
 }
 
