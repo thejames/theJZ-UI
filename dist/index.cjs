@@ -36,6 +36,7 @@ __export(index_exports, {
   AccordionItem: () => AccordionItem,
   AccordionTrigger: () => AccordionTrigger,
   Alert: () => Alert,
+  AspectRatio: () => AspectRatio,
   Avatar: () => Avatar,
   AvatarFallback: () => AvatarFallback,
   AvatarGroup: () => AvatarGroup,
@@ -51,6 +52,7 @@ __export(index_exports, {
   BreadcrumbSeparator: () => BreadcrumbSeparator,
   Button: () => Button,
   ButtonGroup: () => ButtonGroup,
+  Calendar: () => Calendar,
   Card: () => Card,
   CardBody: () => CardBody,
   CardDescription: () => CardDescription,
@@ -65,7 +67,19 @@ __export(index_exports, {
   Checkbox: () => Checkbox,
   Cite: () => Cite,
   Code: () => Code,
+  Collapsible: () => Collapsible,
+  CollapsibleContent: () => CollapsibleContent,
+  CollapsibleTrigger: () => CollapsibleTrigger,
   ColorInput: () => ColorInput,
+  Combobox: () => Combobox,
+  Command: () => Command,
+  CommandEmpty: () => CommandEmpty,
+  CommandGroup: () => CommandGroup,
+  CommandInput: () => CommandInput,
+  CommandItem: () => CommandItem,
+  CommandList: () => CommandList,
+  CommandSeparator: () => CommandSeparator,
+  CommandShortcut: () => CommandShortcut,
   ContextMenu: () => ContextMenu,
   ContextMenuCheckboxItem: () => ContextMenuCheckboxItem,
   ContextMenuContent: () => ContextMenuContent,
@@ -151,6 +165,8 @@ __export(index_exports, {
   Progress: () => Progress,
   Radio: () => Radio,
   RadioGroup: () => RadioGroup,
+  ScrollArea: () => ScrollArea,
+  ScrollBar: () => ScrollBar,
   Select: () => Select,
   Separator: () => Separator,
   Sheet: () => Sheet,
@@ -4096,6 +4112,310 @@ var FigureCaption = (0, import_react52.forwardRef)(
   )
 );
 FigureCaption.displayName = "FigureCaption";
+
+// src/components/Command.tsx
+var import_react53 = require("react");
+var import_cmdk = require("cmdk");
+var import_jsx_runtime52 = require("react/jsx-runtime");
+var Command = (0, import_react53.forwardRef)(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+  import_cmdk.Command,
+  {
+    ref,
+    className: cn(
+      "flex h-full w-full flex-col overflow-hidden rounded-md bg-surface dark:bg-surface-elevated text-foreground",
+      className
+    ),
+    ...props
+  }
+));
+Command.displayName = import_cmdk.Command.displayName;
+var SearchIcon = () => /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)(
+  "svg",
+  {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true",
+    className: "shrink-0 opacity-50",
+    children: [
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("circle", { cx: "11", cy: "11", r: "8" }),
+      /* @__PURE__ */ (0, import_jsx_runtime52.jsx)("path", { d: "m21 21-4.3-4.3" })
+    ]
+  }
+);
+var CommandInput = (0, import_react53.forwardRef)(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime52.jsxs)("div", { className: "flex items-center gap-2 border-b border-border px-3", "cmdk-input-wrapper": "", children: [
+  /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(SearchIcon, {}),
+  /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+    import_cmdk.Command.Input,
+    {
+      ref,
+      className: cn(
+        "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-foreground-subtle disabled:cursor-not-allowed disabled:opacity-50",
+        className
+      ),
+      ...props
+    }
+  )
+] }));
+CommandInput.displayName = import_cmdk.Command.Input.displayName;
+var CommandList = (0, import_react53.forwardRef)(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+  import_cmdk.Command.List,
+  {
+    ref,
+    className: cn("max-h-[300px] overflow-y-auto overflow-x-hidden", className),
+    ...props
+  }
+));
+CommandList.displayName = import_cmdk.Command.List.displayName;
+var CommandEmpty = (0, import_react53.forwardRef)(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+  import_cmdk.Command.Empty,
+  {
+    ref,
+    className: cn("py-6 text-center text-sm text-foreground-muted", className),
+    ...props
+  }
+));
+CommandEmpty.displayName = import_cmdk.Command.Empty.displayName;
+var CommandGroup = (0, import_react53.forwardRef)(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+  import_cmdk.Command.Group,
+  {
+    ref,
+    className: cn(
+      "overflow-hidden p-1 text-foreground",
+      "[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-semibold [&_[cmdk-group-heading]]:uppercase [&_[cmdk-group-heading]]:tracking-wide [&_[cmdk-group-heading]]:text-foreground-subtle",
+      className
+    ),
+    ...props
+  }
+));
+CommandGroup.displayName = import_cmdk.Command.Group.displayName;
+var CommandSeparator = (0, import_react53.forwardRef)(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+  import_cmdk.Command.Separator,
+  {
+    ref,
+    className: cn("-mx-1 my-1 h-px bg-border", className),
+    ...props
+  }
+));
+CommandSeparator.displayName = import_cmdk.Command.Separator.displayName;
+var CommandItem = (0, import_react53.forwardRef)(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+  import_cmdk.Command.Item,
+  {
+    ref,
+    className: cn(
+      "relative flex cursor-default select-none items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-none",
+      "data-[selected=true]:bg-surface-muted data-[selected=true]:text-foreground",
+      "data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50",
+      "[&_svg]:size-4 [&_svg]:shrink-0",
+      className
+    ),
+    ...props
+  }
+));
+CommandItem.displayName = import_cmdk.Command.Item.displayName;
+var CommandShortcut = ({
+  className,
+  ...props
+}) => /* @__PURE__ */ (0, import_jsx_runtime52.jsx)(
+  "span",
+  {
+    className: cn(
+      "ml-auto text-xs tracking-widest text-foreground-subtle",
+      className
+    ),
+    ...props
+  }
+);
+CommandShortcut.displayName = "CommandShortcut";
+
+// src/components/Combobox.tsx
+var import_react54 = require("react");
+var import_jsx_runtime53 = require("react/jsx-runtime");
+var triggerSize = {
+  sm: "h-8 px-3 text-sm rounded-sm",
+  md: "h-10 px-3 text-base rounded-md",
+  lg: "h-12 px-4 text-lg rounded-lg"
+};
+var ChevronDown3 = () => /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+  "svg",
+  {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true",
+    className: "ml-2 shrink-0 opacity-60",
+    children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("path", { d: "m6 9 6 6 6-6" })
+  }
+);
+var CheckIcon4 = () => /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+  "svg",
+  {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: "16",
+    height: "16",
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "2.5",
+    strokeLinecap: "round",
+    strokeLinejoin: "round",
+    "aria-hidden": "true",
+    children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("path", { d: "M20 6 9 17l-5-5" })
+  }
+);
+var Combobox = (0, import_react54.forwardRef)(
+  ({
+    options,
+    value,
+    defaultValue,
+    onValueChange,
+    placeholder = "Select...",
+    searchPlaceholder = "Search...",
+    emptyMessage = "No results.",
+    width,
+    className,
+    disabled,
+    invalid,
+    size = "md",
+    name,
+    id
+  }, ref) => {
+    const isControlled3 = value !== void 0;
+    const [internal, setInternal] = (0, import_react54.useState)(defaultValue ?? "");
+    const current = isControlled3 ? value ?? "" : internal;
+    const [open, setOpen] = (0, import_react54.useState)(false);
+    const selected = options.find((o) => o.value === current);
+    const commit = (next) => {
+      if (!isControlled3) setInternal(next);
+      onValueChange?.(next);
+      setOpen(false);
+    };
+    return /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(Popover, { open, onOpenChange: setOpen, children: [
+      /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(PopoverTrigger, { asChild: true, children: /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(
+        "button",
+        {
+          ref,
+          id,
+          type: "button",
+          role: "combobox",
+          "aria-expanded": open,
+          "aria-invalid": invalid || void 0,
+          disabled,
+          className: cn(
+            "inline-flex w-full items-center justify-between bg-input text-foreground border border-border transition-colors",
+            "focus:outline-none focus:border-ring focus:ring-2 focus:ring-ring/30",
+            "disabled:bg-border-subtle disabled:opacity-60 disabled:cursor-not-allowed",
+            invalid && "border-danger focus:border-danger focus:ring-danger/30",
+            triggerSize[size],
+            !selected && "text-foreground-subtle",
+            className
+          ),
+          style: typeof width === "number" ? { width } : width ? { width } : void 0,
+          children: [
+            /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("span", { className: "truncate", children: selected ? selected.label : placeholder }),
+            /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(ChevronDown3, {})
+          ]
+        }
+      ) }),
+      name && /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("input", { type: "hidden", name, value: current }),
+      /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(
+        PopoverContent,
+        {
+          className: "w-[--radix-popover-trigger-width] min-w-[12rem] p-0",
+          align: "start",
+          sideOffset: 4,
+          children: /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(Command, { children: [
+            /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(CommandInput, { placeholder: searchPlaceholder }),
+            /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(CommandList, { children: [
+              /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(CommandEmpty, { children: emptyMessage }),
+              /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(CommandGroup, { children: options.map((opt) => /* @__PURE__ */ (0, import_jsx_runtime53.jsxs)(
+                CommandItem,
+                {
+                  value: opt.label,
+                  disabled: opt.disabled,
+                  onSelect: () => commit(opt.value),
+                  children: [
+                    opt.icon,
+                    /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("span", { className: "flex-1 truncate", children: opt.label }),
+                    opt.hint && /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("span", { className: "text-xs text-foreground-subtle", children: opt.hint }),
+                    opt.value === current && /* @__PURE__ */ (0, import_jsx_runtime53.jsx)("span", { className: "text-brand-700 dark:text-brand-300", children: /* @__PURE__ */ (0, import_jsx_runtime53.jsx)(CheckIcon4, {}) })
+                  ]
+                },
+                opt.value
+              )) })
+            ] })
+          ] })
+        }
+      )
+    ] });
+  }
+);
+Combobox.displayName = "Combobox";
+
+// src/components/Calendar.tsx
+var import_react_day_picker2 = require("react-day-picker");
+var import_jsx_runtime54 = require("react/jsx-runtime");
+function Calendar({ className, ...props }) {
+  return /* @__PURE__ */ (0, import_jsx_runtime54.jsx)("div", { className: cn("jz-datepicker-popover", className), children: /* @__PURE__ */ (0, import_jsx_runtime54.jsx)(import_react_day_picker2.DayPicker, { ...props }) });
+}
+Calendar.displayName = "Calendar";
+
+// src/components/AspectRatio.tsx
+var AspectRatioPrimitive = __toESM(require("@radix-ui/react-aspect-ratio"), 1);
+var AspectRatio = AspectRatioPrimitive.Root;
+
+// src/components/ScrollArea.tsx
+var import_react55 = require("react");
+var ScrollAreaPrimitive = __toESM(require("@radix-ui/react-scroll-area"), 1);
+var import_jsx_runtime55 = require("react/jsx-runtime");
+var ScrollArea = (0, import_react55.forwardRef)(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime55.jsxs)(
+  ScrollAreaPrimitive.Root,
+  {
+    ref,
+    className: cn("relative overflow-hidden", className),
+    ...props,
+    children: [
+      /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(ScrollAreaPrimitive.Viewport, { className: "h-full w-full rounded-[inherit]", children }),
+      /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(ScrollBar, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(ScrollAreaPrimitive.Corner, {})
+    ]
+  }
+));
+ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
+var ScrollBar = (0, import_react55.forwardRef)(({ className, orientation = "vertical", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(
+  ScrollAreaPrimitive.ScrollAreaScrollbar,
+  {
+    ref,
+    orientation,
+    className: cn(
+      "flex touch-none select-none transition-colors",
+      orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent p-px",
+      orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent p-px",
+      className
+    ),
+    ...props,
+    children: /* @__PURE__ */ (0, import_jsx_runtime55.jsx)(ScrollAreaPrimitive.ScrollAreaThumb, { className: "relative flex-1 rounded-full bg-surface-muted-stronger" })
+  }
+));
+ScrollBar.displayName = ScrollAreaPrimitive.ScrollAreaScrollbar.displayName;
+
+// src/components/Collapsible.tsx
+var CollapsiblePrimitive = __toESM(require("@radix-ui/react-collapsible"), 1);
+var Collapsible = CollapsiblePrimitive.Root;
+var CollapsibleTrigger = CollapsiblePrimitive.Trigger;
+var CollapsibleContent = CollapsiblePrimitive.Content;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   Accordion,
@@ -4103,6 +4423,7 @@ FigureCaption.displayName = "FigureCaption";
   AccordionItem,
   AccordionTrigger,
   Alert,
+  AspectRatio,
   Avatar,
   AvatarFallback,
   AvatarGroup,
@@ -4118,6 +4439,7 @@ FigureCaption.displayName = "FigureCaption";
   BreadcrumbSeparator,
   Button,
   ButtonGroup,
+  Calendar,
   Card,
   CardBody,
   CardDescription,
@@ -4132,7 +4454,19 @@ FigureCaption.displayName = "FigureCaption";
   Checkbox,
   Cite,
   Code,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
   ColorInput,
+  Combobox,
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+  CommandSeparator,
+  CommandShortcut,
   ContextMenu,
   ContextMenuCheckboxItem,
   ContextMenuContent,
@@ -4218,6 +4552,8 @@ FigureCaption.displayName = "FigureCaption";
   Progress,
   Radio,
   RadioGroup,
+  ScrollArea,
+  ScrollBar,
   Select,
   Separator,
   Sheet,

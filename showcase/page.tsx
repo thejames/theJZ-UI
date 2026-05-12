@@ -20,6 +20,7 @@ import {
   AccordionItem,
   AccordionTrigger,
   Alert,
+  AspectRatio,
   Avatar,
   AvatarFallback,
   AvatarGroup,
@@ -42,6 +43,11 @@ import {
   CarouselNext,
   CarouselPrevious,
   Cite,
+  Calendar,
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+  Combobox,
   CardBody,
   CardDescription,
   CardFooter,
@@ -113,6 +119,7 @@ import {
   RadioGroup,
   Select,
   FormError,
+  ScrollArea,
   Separator,
   Sheet,
   SheetContent,
@@ -319,6 +326,8 @@ export default function DesignSystemPage() {
   const [isDark, setIsDark] = useState(false);
   const [pagerPage, setPagerPage] = useState(7);
   const [smallPagerPage, setSmallPagerPage] = useState(2);
+  const [comboValue, setComboValue] = useState("ts");
+  const [calendarDate, setCalendarDate] = useState<Date | undefined>(new Date());
 
   useEffect(() => {
     if (isDark) {
@@ -360,6 +369,7 @@ export default function DesignSystemPage() {
           <a href="#navigation" className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Navigation</a>
           <a href="#extras"     className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Extras</a>
           <a href="#bs-extras"  className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">More</a>
+          <a href="#power-ups"  className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Power-ups</a>
           <button
             type="button"
             onClick={() => setIsDark(!isDark)}
@@ -2091,6 +2101,119 @@ export default function DesignSystemPage() {
               A caption sits below the image in muted footnote style.
             </FigureCaption>
           </Figure>
+        </div>
+      </section>
+
+      <Separator className="mx-auto max-w-6xl" />
+
+      {/* ===== POWER-UPS (Combobox, Calendar, AspectRatio, ScrollArea, Collapsible) ===== */}
+      <section id="power-ups" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
+        <header>
+          <Heading level={2} size="3xl">Power-ups</Heading>
+          <p className="mt-1 text-foreground-muted">Searchable select, standalone calendar, fixed-ratio media, themed scrollbars, single-section disclosure.</p>
+        </header>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Combobox</Heading>
+          <div className="grid gap-4 md:max-w-md">
+            <FormField>
+              <Label htmlFor="ds-combo-lang">Primary language</Label>
+              <Combobox
+                id="ds-combo-lang"
+                value={comboValue}
+                onValueChange={setComboValue}
+                placeholder="Pick a language..."
+                searchPlaceholder="Search languages..."
+                options={[
+                  { value: "ts", label: "TypeScript", hint: ".ts" },
+                  { value: "js", label: "JavaScript", hint: ".js" },
+                  { value: "py", label: "Python", hint: ".py" },
+                  { value: "rs", label: "Rust", hint: ".rs" },
+                  { value: "go", label: "Go", hint: ".go" },
+                  { value: "rb", label: "Ruby", hint: ".rb" },
+                  { value: "swift", label: "Swift", hint: ".swift" },
+                  { value: "kotlin", label: "Kotlin", hint: ".kt" },
+                  { value: "elixir", label: "Elixir", hint: ".ex" },
+                  { value: "haskell", label: "Haskell", hint: ".hs", disabled: true },
+                ]}
+              />
+              <FormHelperText>Selected: <Code>{comboValue || "(none)"}</Code></FormHelperText>
+            </FormField>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Calendar (standalone)</Heading>
+          <div className="inline-block rounded-md border border-border bg-surface dark:bg-surface-elevated p-3">
+            <Calendar
+              mode="single"
+              selected={calendarDate}
+              onSelect={setCalendarDate}
+            />
+          </div>
+          <p className="text-sm text-foreground-muted">
+            Selected: <Code>{calendarDate ? calendarDate.toLocaleDateString() : "(none)"}</Code>
+          </p>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">AspectRatio</Heading>
+          <div className="grid gap-4 md:grid-cols-3 md:max-w-3xl">
+            <div className="space-y-2">
+              <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-md bg-brand-700">
+                <div className="flex h-full w-full items-center justify-center text-neutral-50 font-mono text-sm">16:9</div>
+              </AspectRatio>
+              <p className="text-xs text-foreground-subtle text-center">Video</p>
+            </div>
+            <div className="space-y-2">
+              <AspectRatio ratio={1} className="overflow-hidden rounded-md bg-accent-500">
+                <div className="flex h-full w-full items-center justify-center text-neutral-950 font-mono text-sm">1:1</div>
+              </AspectRatio>
+              <p className="text-xs text-foreground-subtle text-center">Square</p>
+            </div>
+            <div className="space-y-2">
+              <AspectRatio ratio={4 / 3} className="overflow-hidden rounded-md bg-neutral-700">
+                <div className="flex h-full w-full items-center justify-center text-neutral-50 font-mono text-sm">4:3</div>
+              </AspectRatio>
+              <p className="text-xs text-foreground-subtle text-center">Photo</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">ScrollArea</Heading>
+          <ScrollArea className="h-64 w-full max-w-md rounded-md border border-border bg-surface dark:bg-surface-elevated">
+            <div className="p-4 space-y-2">
+              <p className="font-semibold text-foreground">Tags</p>
+              {Array.from({ length: 40 }).map((_, idx) => (
+                <p key={idx} className="text-sm text-foreground-muted">
+                  Tag #{idx + 1} — render-pipeline-asset-{(idx * 17 + 113).toString(36)}
+                </p>
+              ))}
+            </div>
+          </ScrollArea>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Collapsible</Heading>
+          <Collapsible className="rounded-md border border-border bg-surface dark:bg-surface-elevated p-4 max-w-md">
+            <div className="flex items-center justify-between">
+              <p className="font-semibold text-foreground">Advanced options</p>
+              <CollapsibleTrigger asChild>
+                <Button variant="ghost" size="sm">Toggle</Button>
+              </CollapsibleTrigger>
+            </div>
+            <CollapsibleContent className="mt-3 space-y-2">
+              <p className="text-sm text-foreground-muted">
+                Configure worker concurrency, retry policy, and dead-letter queue routing.
+                Defaults are fine for most projects.
+              </p>
+              <FormField>
+                <Label htmlFor="ds-collapse-conc">Worker concurrency</Label>
+                <Input id="ds-collapse-conc" type="number" defaultValue={8} />
+              </FormField>
+            </CollapsibleContent>
+          </Collapsible>
         </div>
       </section>
     </main>

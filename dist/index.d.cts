@@ -19,6 +19,10 @@ import * as ContextMenuPrimitive from '@radix-ui/react-context-menu';
 import * as TogglePrimitive from '@radix-ui/react-toggle';
 import * as ToggleGroupPrimitive from '@radix-ui/react-toggle-group';
 import useEmblaCarousel, { UseEmblaCarouselType } from 'embla-carousel-react';
+import { DayPickerProps } from 'react-day-picker';
+import * as AspectRatioPrimitive from '@radix-ui/react-aspect-ratio';
+import * as ScrollAreaPrimitive from '@radix-ui/react-scroll-area';
+import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 
 declare const buttonVariants: (props?: ({
     variant?: "primary" | "secondary" | "accent" | "success" | "danger" | "warning" | "info" | "light" | "dark" | "outline-primary" | "outline-secondary" | "outline-accent" | "outline-success" | "outline-danger" | "outline-warning" | "outline-info" | "ghost" | "link" | null | undefined;
@@ -661,4 +665,129 @@ declare const Figure: react.ForwardRefExoticComponent<FigureProps & react.RefAtt
 type FigureCaptionProps = HTMLAttributes<HTMLElement>;
 declare const FigureCaption: react.ForwardRefExoticComponent<FigureCaptionProps & react.RefAttributes<HTMLElement>>;
 
-export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Alert, type AlertProps, Avatar, AvatarFallback, type AvatarFallbackProps, AvatarGroup, type AvatarGroupProps, AvatarImage, type AvatarImageProps, type AvatarProps, Badge, type BadgeProps, Blockquote, type BlockquoteProps, Breadcrumb, BreadcrumbEllipsis, type BreadcrumbEllipsisProps, BreadcrumbItem, type BreadcrumbItemProps, BreadcrumbLink, type BreadcrumbLinkProps, BreadcrumbList, type BreadcrumbListProps, BreadcrumbPage, type BreadcrumbPageProps, type BreadcrumbProps, BreadcrumbSeparator, type BreadcrumbSeparatorProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Card, CardBody, type CardBodyProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardHeader, type CardHeaderProps, type CardProps, CardTitle, type CardTitleProps, Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselProps, Checkbox, type CheckboxProps, Cite, type CiteProps, Code, type CodeProps, ColorInput, type ColorInputProps, ContextMenu, ContextMenuCheckboxItem, ContextMenuContent, ContextMenuGroup, ContextMenuItem, ContextMenuLabel, ContextMenuPortal, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger, Datalist, DatalistOption, type DatalistOptionProps, type DatalistProps, DateInput, type DateInputProps, Dialog, DialogClose, DialogContent, type DialogContentProps, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Figure, FigureCaption, type FigureCaptionProps, type FigureProps, FileInput, type FileInputProps, FormError, FormErrorMessage, type FormErrorMessageProps, type FormErrorProps, FormField, type FormFieldProps, FormHelperText, type FormHelperTextProps, Heading, type HeadingProps, HoverCard, HoverCardContent, HoverCardTrigger, Input, InputGroup, InputGroupAddon, type InputGroupAddonProps, InputGroupButton, type InputGroupButtonProps, type InputGroupProps, type InputProps, Kbd, type KbdProps, Label, type LabelProps, ListGroup, ListGroupItem, type ListGroupItemProps, type ListGroupProps, Nav, NavItem, type NavItemProps, NavLink, type NavLinkProps, type NavProps, Navbar, NavbarActions, NavbarBrand, type NavbarBrandProps, NavbarContent, type NavbarProps, Pagination, PaginationButton, type PaginationButtonProps, PaginationEllipsis, PaginationItem, type PaginationItemProps, PaginationLink, type PaginationLinkProps, PaginationList, type PaginationListProps, PaginationNext, PaginationPrev, type PaginationProps, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, Progress, type ProgressProps, Radio, RadioGroup, type RadioGroupProps, type RadioProps, Select, type SelectProps, Separator, type SeparatorProps, Sheet, SheetClose, SheetContent, type SheetContentProps, SheetDescription, SheetFooter, SheetHeader, SheetOverlay, SheetPortal, SheetTitle, SheetTrigger, SimplePagination, type SimplePaginationProps, Skeleton, type SkeletonProps, Slider, type SliderProps, Spinner, type SpinnerProps, Switch, type SwitchProps, Table, TableBody, TableCaption, type TableCaptionProps, TableCell, type TableCellProps, TableFooter, TableHead, type TableHeadProps, TableHeader, type TableProps, TableRow, type TableRowProps, type TableSectionProps, Tabs, TabsContent, TabsList, TabsTrigger, Text, type TextProps, Textarea, type TextareaProps, TimeInput, type TimeInputProps, Toast, ToastAction, ToastClose, ToastDescription, type ToastInput, type ToastProps, ToastProvider, type ToastProviderProps, ToastTitle, type ToastVariant, ToastViewport, Toggle, ToggleGroup, ToggleGroupItem, type ToggleGroupItemProps, type ToggleGroupProps, type ToggleProps, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, buildPageList, useToast };
+declare const Command: react.ForwardRefExoticComponent<Omit<{
+    children?: React.ReactNode;
+} & Pick<Pick<react.DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & {
+    ref?: React.Ref<HTMLDivElement>;
+} & {
+    asChild?: boolean;
+}, "asChild" | "key" | keyof HTMLAttributes<HTMLDivElement>> & {
+    label?: string;
+    shouldFilter?: boolean;
+    filter?: (value: string, search: string, keywords?: string[]) => number;
+    defaultValue?: string;
+    value?: string;
+    onValueChange?: (value: string) => void;
+    loop?: boolean;
+    disablePointerSelection?: boolean;
+    vimBindings?: boolean;
+} & react.RefAttributes<HTMLDivElement>, "ref"> & react.RefAttributes<HTMLDivElement>>;
+declare const CommandInput: react.ForwardRefExoticComponent<Omit<Omit<Pick<Pick<react.DetailedHTMLProps<react.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, keyof react.InputHTMLAttributes<HTMLInputElement> | "key"> & {
+    ref?: React.Ref<HTMLInputElement>;
+} & {
+    asChild?: boolean;
+}, "asChild" | keyof react.InputHTMLAttributes<HTMLInputElement> | "key">, "type" | "value" | "onChange"> & {
+    value?: string;
+    onValueChange?: (search: string) => void;
+} & react.RefAttributes<HTMLInputElement>, "ref"> & react.RefAttributes<HTMLInputElement>>;
+declare const CommandList: react.ForwardRefExoticComponent<Omit<{
+    children?: React.ReactNode;
+} & Pick<Pick<react.DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & {
+    ref?: React.Ref<HTMLDivElement>;
+} & {
+    asChild?: boolean;
+}, "asChild" | "key" | keyof HTMLAttributes<HTMLDivElement>> & {
+    label?: string;
+} & react.RefAttributes<HTMLDivElement>, "ref"> & react.RefAttributes<HTMLDivElement>>;
+declare const CommandEmpty: react.ForwardRefExoticComponent<Omit<{
+    children?: React.ReactNode;
+} & Pick<Pick<react.DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & {
+    ref?: React.Ref<HTMLDivElement>;
+} & {
+    asChild?: boolean;
+}, "asChild" | "key" | keyof HTMLAttributes<HTMLDivElement>> & react.RefAttributes<HTMLDivElement>, "ref"> & react.RefAttributes<HTMLDivElement>>;
+declare const CommandGroup: react.ForwardRefExoticComponent<Omit<{
+    children?: React.ReactNode;
+} & Omit<Pick<Pick<react.DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & {
+    ref?: React.Ref<HTMLDivElement>;
+} & {
+    asChild?: boolean;
+}, "asChild" | "key" | keyof HTMLAttributes<HTMLDivElement>>, "value" | "heading"> & {
+    heading?: React.ReactNode;
+    value?: string;
+    forceMount?: boolean;
+} & react.RefAttributes<HTMLDivElement>, "ref"> & react.RefAttributes<HTMLDivElement>>;
+declare const CommandSeparator: react.ForwardRefExoticComponent<Omit<Pick<Pick<react.DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & {
+    ref?: React.Ref<HTMLDivElement>;
+} & {
+    asChild?: boolean;
+}, "asChild" | "key" | keyof HTMLAttributes<HTMLDivElement>> & {
+    alwaysRender?: boolean;
+} & react.RefAttributes<HTMLDivElement>, "ref"> & react.RefAttributes<HTMLDivElement>>;
+declare const CommandItem: react.ForwardRefExoticComponent<Omit<{
+    children?: React.ReactNode;
+} & Omit<Pick<Pick<react.DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "key" | keyof HTMLAttributes<HTMLDivElement>> & {
+    ref?: React.Ref<HTMLDivElement>;
+} & {
+    asChild?: boolean;
+}, "asChild" | "key" | keyof HTMLAttributes<HTMLDivElement>>, "disabled" | "value" | "onSelect"> & {
+    disabled?: boolean;
+    onSelect?: (value: string) => void;
+    value?: string;
+    keywords?: string[];
+    forceMount?: boolean;
+} & react.RefAttributes<HTMLDivElement>, "ref"> & react.RefAttributes<HTMLDivElement>>;
+declare const CommandShortcut: {
+    ({ className, ...props }: HTMLAttributes<HTMLSpanElement>): react_jsx_runtime.JSX.Element;
+    displayName: string;
+};
+
+interface ComboboxOption {
+    value: string;
+    label: string;
+    /** Optional secondary text shown muted next to the label. */
+    hint?: ReactNode;
+    /** Optional leading icon. */
+    icon?: ReactNode;
+    disabled?: boolean;
+}
+interface ComboboxProps {
+    options: ComboboxOption[];
+    value?: string;
+    defaultValue?: string;
+    onValueChange?: (value: string) => void;
+    /** Placeholder for the trigger button when no value is selected. */
+    placeholder?: string;
+    /** Placeholder for the search input inside the popover. */
+    searchPlaceholder?: string;
+    /** Message when no option matches the current query. Default "No results." */
+    emptyMessage?: ReactNode;
+    /** Trigger button width. Set to "trigger" to match Popover content to trigger. */
+    width?: string | number;
+    className?: string;
+    disabled?: boolean;
+    invalid?: boolean;
+    size?: "sm" | "md" | "lg";
+    name?: string;
+    id?: string;
+}
+declare const Combobox: react.ForwardRefExoticComponent<ComboboxProps & react.RefAttributes<HTMLButtonElement>>;
+
+type CalendarProps = DayPickerProps & {
+    className?: string;
+};
+declare function Calendar({ className, ...props }: CalendarProps): react_jsx_runtime.JSX.Element;
+declare namespace Calendar {
+    var displayName: string;
+}
+
+declare const AspectRatio: react.ForwardRefExoticComponent<AspectRatioPrimitive.AspectRatioProps & react.RefAttributes<HTMLDivElement>>;
+
+declare const ScrollArea: react.ForwardRefExoticComponent<Omit<ScrollAreaPrimitive.ScrollAreaProps & react.RefAttributes<HTMLDivElement>, "ref"> & react.RefAttributes<HTMLDivElement>>;
+declare const ScrollBar: react.ForwardRefExoticComponent<Omit<ScrollAreaPrimitive.ScrollAreaScrollbarProps & react.RefAttributes<HTMLDivElement>, "ref"> & react.RefAttributes<HTMLDivElement>>;
+
+declare const Collapsible: react.ForwardRefExoticComponent<CollapsiblePrimitive.CollapsibleProps & react.RefAttributes<HTMLDivElement>>;
+declare const CollapsibleTrigger: react.ForwardRefExoticComponent<CollapsiblePrimitive.CollapsibleTriggerProps & react.RefAttributes<HTMLButtonElement>>;
+declare const CollapsibleContent: react.ForwardRefExoticComponent<CollapsiblePrimitive.CollapsibleContentProps & react.RefAttributes<HTMLDivElement>>;
+
+export { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Alert, type AlertProps, AspectRatio, Avatar, AvatarFallback, type AvatarFallbackProps, AvatarGroup, type AvatarGroupProps, AvatarImage, type AvatarImageProps, type AvatarProps, Badge, type BadgeProps, Blockquote, type BlockquoteProps, Breadcrumb, BreadcrumbEllipsis, type BreadcrumbEllipsisProps, BreadcrumbItem, type BreadcrumbItemProps, BreadcrumbLink, type BreadcrumbLinkProps, BreadcrumbList, type BreadcrumbListProps, BreadcrumbPage, type BreadcrumbPageProps, type BreadcrumbProps, BreadcrumbSeparator, type BreadcrumbSeparatorProps, Button, ButtonGroup, type ButtonGroupProps, type ButtonProps, Calendar, type CalendarProps, Card, CardBody, type CardBodyProps, CardDescription, type CardDescriptionProps, CardFooter, type CardFooterProps, CardHeader, type CardHeaderProps, type CardProps, CardTitle, type CardTitleProps, Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselProps, Checkbox, type CheckboxProps, Cite, type CiteProps, Code, type CodeProps, Collapsible, CollapsibleContent, CollapsibleTrigger, ColorInput, type ColorInputProps, Combobox, type ComboboxOption, type ComboboxProps, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, CommandShortcut, ContextMenu, ContextMenuCheckboxItem, ContextMenuContent, ContextMenuGroup, ContextMenuItem, ContextMenuLabel, ContextMenuPortal, ContextMenuRadioGroup, ContextMenuRadioItem, ContextMenuSeparator, ContextMenuShortcut, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuTrigger, Datalist, DatalistOption, type DatalistOptionProps, type DatalistProps, DateInput, type DateInputProps, Dialog, DialogClose, DialogContent, type DialogContentProps, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuPortal, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger, Figure, FigureCaption, type FigureCaptionProps, type FigureProps, FileInput, type FileInputProps, FormError, FormErrorMessage, type FormErrorMessageProps, type FormErrorProps, FormField, type FormFieldProps, FormHelperText, type FormHelperTextProps, Heading, type HeadingProps, HoverCard, HoverCardContent, HoverCardTrigger, Input, InputGroup, InputGroupAddon, type InputGroupAddonProps, InputGroupButton, type InputGroupButtonProps, type InputGroupProps, type InputProps, Kbd, type KbdProps, Label, type LabelProps, ListGroup, ListGroupItem, type ListGroupItemProps, type ListGroupProps, Nav, NavItem, type NavItemProps, NavLink, type NavLinkProps, type NavProps, Navbar, NavbarActions, NavbarBrand, type NavbarBrandProps, NavbarContent, type NavbarProps, Pagination, PaginationButton, type PaginationButtonProps, PaginationEllipsis, PaginationItem, type PaginationItemProps, PaginationLink, type PaginationLinkProps, PaginationList, type PaginationListProps, PaginationNext, PaginationPrev, type PaginationProps, Popover, PopoverAnchor, PopoverClose, PopoverContent, PopoverTrigger, Progress, type ProgressProps, Radio, RadioGroup, type RadioGroupProps, type RadioProps, ScrollArea, ScrollBar, Select, type SelectProps, Separator, type SeparatorProps, Sheet, SheetClose, SheetContent, type SheetContentProps, SheetDescription, SheetFooter, SheetHeader, SheetOverlay, SheetPortal, SheetTitle, SheetTrigger, SimplePagination, type SimplePaginationProps, Skeleton, type SkeletonProps, Slider, type SliderProps, Spinner, type SpinnerProps, Switch, type SwitchProps, Table, TableBody, TableCaption, type TableCaptionProps, TableCell, type TableCellProps, TableFooter, TableHead, type TableHeadProps, TableHeader, type TableProps, TableRow, type TableRowProps, type TableSectionProps, Tabs, TabsContent, TabsList, TabsTrigger, Text, type TextProps, Textarea, type TextareaProps, TimeInput, type TimeInputProps, Toast, ToastAction, ToastClose, ToastDescription, type ToastInput, type ToastProps, ToastProvider, type ToastProviderProps, ToastTitle, type ToastVariant, ToastViewport, Toggle, ToggleGroup, ToggleGroupItem, type ToggleGroupItemProps, type ToggleGroupProps, type ToggleProps, Tooltip, TooltipContent, TooltipProvider, TooltipTrigger, buildPageList, useToast };

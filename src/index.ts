@@ -317,6 +317,33 @@ export type { BlockquoteProps, CiteProps } from "./components/Blockquote";
 
 export { Figure, FigureCaption } from "./components/Figure";
 export type { FigureProps, FigureCaptionProps } from "./components/Figure";
+
+export {
+  Command,
+  CommandInput,
+  CommandList,
+  CommandEmpty,
+  CommandGroup,
+  CommandSeparator,
+  CommandItem,
+  CommandShortcut,
+} from "./components/Command";
+
+export { Combobox } from "./components/Combobox";
+export type { ComboboxProps, ComboboxOption } from "./components/Combobox";
+
+export { Calendar } from "./components/Calendar";
+export type { CalendarProps } from "./components/Calendar";
+
+export { AspectRatio } from "./components/AspectRatio";
+
+export { ScrollArea, ScrollBar } from "./components/ScrollArea";
+
+export {
+  Collapsible,
+  CollapsibleTrigger,
+  CollapsibleContent,
+} from "./components/Collapsible";
 export type {
   BreadcrumbProps,
   BreadcrumbListProps,
