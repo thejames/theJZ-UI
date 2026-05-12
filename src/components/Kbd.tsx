@@ -1,3 +1,11 @@
+/**
+ * Kbd — renders a single keyboard key, e.g., `<Kbd>⌘</Kbd> + <Kbd>K</Kbd>`.
+ *
+ * Renders a `<kbd>` element styled to look like a physical key. For
+ * multi-key chords, render multiple `<Kbd>`s with separator text rather than
+ * a single one containing "Cmd+K" — keeps each key visually discrete and
+ * stays semantically correct.
+ */
 import { forwardRef, type HTMLAttributes } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "../lib/cn";

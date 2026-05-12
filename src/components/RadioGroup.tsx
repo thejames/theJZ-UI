@@ -1,3 +1,20 @@
+/**
+ * RadioGroup + Radio — Radix-backed single-choice radio set.
+ *
+ * Compose: one `<RadioGroup>` per logical question; one `<Radio value="…">`
+ * per option. `orientation="horizontal"` lays out inline; default is stacked.
+ *
+ *   <RadioGroup value={plan} onValueChange={setPlan}>
+ *     <label className="flex items-center gap-2">
+ *       <Radio value="free" /> Free
+ *     </label>
+ *     <label className="flex items-center gap-2">
+ *       <Radio value="pro" /> Pro
+ *     </label>
+ *   </RadioGroup>
+ *
+ * Pass `invalid` to either component for danger styling + `aria-invalid`.
+ */
 import {
   forwardRef,
   type ComponentPropsWithoutRef,

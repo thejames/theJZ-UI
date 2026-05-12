@@ -1,3 +1,11 @@
+/**
+ * Textarea — multi-line text input. Sizes: sm, md, lg control min-height and
+ * padding; users can resize vertically (`resize-y`). Pass `invalid` for the
+ * danger border + `aria-invalid`.
+ *
+ * If you need character counts or auto-grow, wrap this in your own composed
+ * component — those are app-level concerns kept out of the primitive.
+ */
 import { forwardRef, type TextareaHTMLAttributes } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "../lib/cn";

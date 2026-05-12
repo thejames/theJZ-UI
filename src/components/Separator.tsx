@@ -1,3 +1,13 @@
+/**
+ * Separator — 1px divider line. Defaults to horizontal full-width.
+ *
+ * `decorative={true}` (default) emits `role="none"` so screen readers skip it
+ * — use this for purely visual dividers. Pass `decorative={false}` when the
+ * divider conveys structure (e.g., separating two unrelated lists of links).
+ *
+ * For vertical separators, the parent must have a height (`flex` row + `h-…`
+ * on a wrapper, or `self-stretch`).
+ */
 import { forwardRef, type HTMLAttributes } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "../lib/cn";

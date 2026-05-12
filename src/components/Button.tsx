@@ -1,5 +1,16 @@
 "use client";
 
+/**
+ * Button — primary interactive control with Bootstrap-aligned variants.
+ *
+ * Variants: primary, secondary, accent, success, danger, warning, info,
+ * light, dark, outline-* (per status), ghost, link. Sizes: sm, md, lg.
+ *
+ * `asChild` renders the Button's classes onto a child via Radix Slot — useful
+ * for `<Button asChild><Link href="…">…</Link></Button>`. `loading` shows an
+ * inline spinner, sets `aria-busy`, and suppresses clicks; ignored when
+ * `asChild` is true (Slot only accepts a single child).
+ */
 import { forwardRef, type ButtonHTMLAttributes } from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";

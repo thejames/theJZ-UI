@@ -1,3 +1,14 @@
+/**
+ * Heading — semantic heading with visual size decoupled from level.
+ *
+ * `level` picks the HTML tag (`h1`..`h6`) — drive this from document outline,
+ * not appearance. `size` overrides the visual size if you want, e.g., a
+ * page-section `h2` rendered at `xl` instead of the default `4xl`. When `size`
+ * is omitted, each level maps to a sensible default (h1 → 5xl, h6 → base).
+ *
+ *   <Heading level={1}>Settings</Heading>
+ *   <Heading level={3} size="lg">Profile</Heading>
+ */
 import React, { forwardRef, type HTMLAttributes } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../lib/cn";

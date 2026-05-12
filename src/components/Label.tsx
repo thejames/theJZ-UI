@@ -1,3 +1,11 @@
+/**
+ * Label — form field label with optional required-asterisk indicator.
+ *
+ * Use `htmlFor` to associate with an input by id. Pass `required` to append a
+ * red asterisk (marked `aria-hidden`; required semantics belong on the input
+ * itself via the `required` attribute). For composed fields prefer
+ * `<FormField label="…">` which renders this for you.
+ */
 import { forwardRef, type LabelHTMLAttributes } from "react";
 import { cn } from "../lib/cn";
 

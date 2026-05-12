@@ -1,3 +1,14 @@
+/**
+ * Checkbox — Radix-backed checkbox supporting checked / unchecked /
+ * indeterminate. Sizes: sm, md, lg. Pass `invalid` for the danger styling
+ * and `aria-invalid`.
+ *
+ * Set `checked="indeterminate"` (the literal string) for the tri-state
+ * mixed-selection appearance — useful for "select all" headers.
+ *
+ * Uncontrolled: pass `defaultChecked`. Controlled: pass `checked` +
+ * `onCheckedChange`.
+ */
 import {
   forwardRef,
   type ComponentPropsWithoutRef,

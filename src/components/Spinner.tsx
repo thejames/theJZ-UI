@@ -1,3 +1,13 @@
+/**
+ * Spinner — indeterminate loading indicator. Sizes: sm, md, lg.
+ *
+ * Renders an `aria-label`-ed `role="status"` SVG (default label "Loading") so
+ * screen readers announce activity. Inherits text color via `text-current` —
+ * set the parent's `text-*` to tint it (Buttons set this up automatically).
+ *
+ * For inline button-loading, `Button` ships its own spinner via `loading` —
+ * use this component when you need a standalone spinner.
+ */
 import { forwardRef, type SVGAttributes } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "../lib/cn";

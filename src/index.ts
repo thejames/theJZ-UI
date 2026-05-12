@@ -135,6 +135,15 @@ export {
   BreadcrumbSeparator,
   BreadcrumbEllipsis,
 } from "./components/Breadcrumb";
+export type {
+  BreadcrumbProps,
+  BreadcrumbListProps,
+  BreadcrumbItemProps,
+  BreadcrumbLinkProps,
+  BreadcrumbPageProps,
+  BreadcrumbSeparatorProps,
+  BreadcrumbEllipsisProps,
+} from "./components/Breadcrumb";
 
 export {
   Dialog,
@@ -344,12 +353,3 @@ export {
   CollapsibleTrigger,
   CollapsibleContent,
 } from "./components/Collapsible";
-export type {
-  BreadcrumbProps,
-  BreadcrumbListProps,
-  BreadcrumbItemProps,
-  BreadcrumbLinkProps,
-  BreadcrumbPageProps,
-  BreadcrumbSeparatorProps,
-  BreadcrumbEllipsisProps,
-} from "./components/Breadcrumb";

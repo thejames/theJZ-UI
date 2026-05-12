@@ -1,3 +1,12 @@
+/**
+ * Input — themed text input. Sizes: sm, md, lg. Pass `invalid` to apply the
+ * danger border + ring and set `aria-invalid`.
+ *
+ * The native HTML `size` attribute is shadowed by the variant `size`; if you
+ * need the HTML width attribute, set it via `style` or wrap in a width util.
+ * For specialized types prefer the dedicated components: `DateInput`,
+ * `TimeInput`, `FileInput`, `ColorInput`.
+ */
 import { forwardRef, type InputHTMLAttributes } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "../lib/cn";

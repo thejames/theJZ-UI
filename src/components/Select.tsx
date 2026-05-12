@@ -1,3 +1,13 @@
+/**
+ * Select — themed native `<select>` with a custom chevron.
+ *
+ * Native (not Radix) — uses the platform dropdown UI which gives free mobile
+ * support, accessibility, and form submission. Sizes match Input. For a
+ * searchable / option-rich picker, use `Combobox` instead.
+ *
+ * Pass `<option>` children directly:
+ *   <Select><option value="a">A</option></Select>
+ */
 import { forwardRef, type SelectHTMLAttributes } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "../lib/cn";

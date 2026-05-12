@@ -1,3 +1,11 @@
+/**
+ * Switch — Radix-backed toggle. Use for binary settings that take effect
+ * immediately ("Dark mode", "Notifications"). For "save → submit" semantics
+ * prefer `Checkbox`.
+ *
+ * Sizes: sm, md, lg. Pass `invalid` for the danger styling + `aria-invalid`.
+ * Controlled: `checked` + `onCheckedChange`. Uncontrolled: `defaultChecked`.
+ */
 import {
   forwardRef,
   type ComponentPropsWithoutRef,

@@ -1,3 +1,14 @@
+/**
+ * Alert — persistent inline status message. Variants: info, success, warning,
+ * danger. For transient pop-up notifications use `Toast` instead.
+ *
+ * Auto-supplies a status icon per variant; pass `icon={false}` to suppress or
+ * `icon={<MyIcon />}` to override. Provide `onClose` to render a dismiss
+ * button — alerts are display-only otherwise and do not self-dismiss.
+ *
+ * Renders `role="alert"`; screen readers will announce content on mount, so
+ * mount alerts conditionally rather than rendering a hidden one ahead of time.
+ */
 import {
   forwardRef,
   type HTMLAttributes,

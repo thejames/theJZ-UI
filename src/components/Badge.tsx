@@ -1,3 +1,15 @@
+/**
+ * Badge — compact label/pill for status, counts, or category tags.
+ *
+ * Variants: primary, secondary, accent, success, danger, warning, info.
+ * Sizes: sm, md. `soft={true}` switches to a tinted background + matching
+ * dark-mode pair — quieter, good for inline list items; default (filled) is
+ * higher contrast and reads more like a chip.
+ *
+ *   <Badge variant="success" soft>Active</Badge>
+ *
+ * Renders a `<span>`; wrap in a link/button if it should be interactive.
+ */
 import { forwardRef, type HTMLAttributes } from "react";
 import { cva } from "class-variance-authority";
 import { cn } from "../lib/cn";
