@@ -1,0 +1,95 @@
+"use client";
+
+/**
+ * Accordion — vertical disclosure backed by Radix Accordion.
+ *
+ * Pass `type="single"` (collapse one at a time) or `type="multiple"`. Compose:
+ *   <Accordion type="single" collapsible>
+ *     <AccordionItem value="a">
+ *       <AccordionTrigger>Question</AccordionTrigger>
+ *       <AccordionContent>Answer</AccordionContent>
+ *     </AccordionItem>
+ *   </Accordion>
+ *
+ * The trigger renders a chevron that rotates open/closed. Content uses Radix's
+ * built-in CSS variable `--radix-accordion-content-height` for a height
+ * transition — keyframes are defined globally in theme.css.
+ */
+import {
+  forwardRef,
+  type ComponentPropsWithoutRef,
+  type ElementRef,
+} from "react";
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { cn } from "../lib/cn";
+
+export const Accordion = AccordionPrimitive.Root;
+
+export const AccordionItem = forwardRef<
+  ElementRef<typeof AccordionPrimitive.Item>,
+  ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+>(({ className, ...props }, ref) => (
+  <AccordionPrimitive.Item
+    ref={ref}
+    className={cn("border-b border-border", className)}
+    {...props}
+  />
+));
+AccordionItem.displayName = "AccordionItem";
+
+const ChevronDown = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className="shrink-0 transition-transform duration-200"
+  >
+    <path d="m6 9 6 6 6-6" />
+  </svg>
+);
+
+export const AccordionTrigger = forwardRef<
+  ElementRef<typeof AccordionPrimitive.Trigger>,
+  ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Header className="flex">
+    <AccordionPrimitive.Trigger
+      ref={ref}
+      className={cn(
+        "flex flex-1 items-center justify-between gap-4 py-4 text-left font-medium text-foreground",
+        "transition-all hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 rounded-sm",
+        "[&[data-state=open]>svg]:rotate-180",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+      <ChevronDown />
+    </AccordionPrimitive.Trigger>
+  </AccordionPrimitive.Header>
+));
+AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+
+export const AccordionContent = forwardRef<
+  ElementRef<typeof AccordionPrimitive.Content>,
+  ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+>(({ className, children, ...props }, ref) => (
+  <AccordionPrimitive.Content
+    ref={ref}
+    className={cn(
+      "jz-accordion-content overflow-hidden text-sm text-foreground-muted",
+      className,
+    )}
+    {...props}
+  >
+    <div className="pb-4 pt-0">{children}</div>
+  </AccordionPrimitive.Content>
+));
+AccordionContent.displayName = AccordionPrimitive.Content.displayName;

@@ -305,3 +305,100 @@
   border-color: var(--color-brand-500);
   color: var(--color-neutral-950);
 }
+
+/* ============================================================
+ * Progress (indeterminate) + Skeleton — keyframes
+ * ============================================================ */
+
+@keyframes jz-progress-indeterminate {
+  0%   { left: -40%; }
+  50%  { left: 30%; }
+  100% { left: 100%; }
+}
+
+@keyframes jz-skeleton-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ============================================================
+ * Radix overlays — open/close transitions
+ * Applied to dialog/popover/tooltip via stable class names so we
+ * don't depend on tailwindcss-animate.
+ * ============================================================ */
+
+@keyframes jz-overlay-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes jz-overlay-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+/* Animate via the standalone `scale` property so Tailwind v4's
+ * `translate: -50% -50%` (used to center DialogContent) is not clobbered. */
+@keyframes jz-content-in {
+  from { opacity: 0; scale: 0.96; }
+  to   { opacity: 1; scale: 1; }
+}
+@keyframes jz-content-out {
+  from { opacity: 1; scale: 1; }
+  to   { opacity: 0; scale: 0.96; }
+}
+@keyframes jz-popover-in {
+  from { opacity: 0; scale: 0.97; }
+  to   { opacity: 1; scale: 1; }
+}
+@keyframes jz-popover-out {
+  from { opacity: 1; scale: 1; }
+  to   { opacity: 0; scale: 0.97; }
+}
+
+.jz-dialog-overlay[data-state="open"]   { animation: jz-overlay-in 150ms ease-out; }
+.jz-dialog-overlay[data-state="closed"] { animation: jz-overlay-out 100ms ease-in; }
+.jz-dialog-content[data-state="open"]   { animation: jz-content-in 180ms ease-out; }
+.jz-dialog-content[data-state="closed"] { animation: jz-content-out 120ms ease-in; }
+
+.jz-popover-content[data-state="open"]  { animation: jz-popover-in 140ms ease-out; transform-origin: var(--radix-popover-content-transform-origin); }
+.jz-popover-content[data-state="closed"]{ animation: jz-popover-out 100ms ease-in;  transform-origin: var(--radix-popover-content-transform-origin); }
+
+.jz-tooltip-content[data-state="delayed-open"] { animation: jz-popover-in 120ms ease-out; transform-origin: var(--radix-tooltip-content-transform-origin); }
+.jz-tooltip-content[data-state="closed"]       { animation: jz-popover-out 80ms ease-in;  transform-origin: var(--radix-tooltip-content-transform-origin); }
+
+/* ============================================================
+ * Accordion — height-based open/close transition.
+ * Radix exposes --radix-accordion-content-height; animate it.
+ * ============================================================ */
+
+@keyframes jz-accordion-down {
+  from { height: 0; }
+  to   { height: var(--radix-accordion-content-height); }
+}
+@keyframes jz-accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to   { height: 0; }
+}
+.jz-accordion-content[data-state="open"]   { animation: jz-accordion-down 200ms ease-out; }
+.jz-accordion-content[data-state="closed"] { animation: jz-accordion-up   200ms ease-in;  }
+
+/* ============================================================
+ * Sheet (Offcanvas) — slide-in transitions per side.
+ * ============================================================ */
+
+@keyframes jz-sheet-in-right  { from { transform: translateX(100%);  } to { transform: translateX(0); } }
+@keyframes jz-sheet-out-right { from { transform: translateX(0);     } to { transform: translateX(100%); } }
+@keyframes jz-sheet-in-left   { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+@keyframes jz-sheet-out-left  { from { transform: translateX(0);     } to { transform: translateX(-100%); } }
+@keyframes jz-sheet-in-top    { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+@keyframes jz-sheet-out-top   { from { transform: translateY(0);     } to { transform: translateY(-100%); } }
+@keyframes jz-sheet-in-bottom { from { transform: translateY(100%);  } to { transform: translateY(0); } }
+@keyframes jz-sheet-out-bottom{ from { transform: translateY(0);     } to { transform: translateY(100%); } }
+
+.jz-sheet-content[data-side="right"][data-state="open"]   { animation: jz-sheet-in-right  220ms cubic-bezier(0.32, 0.72, 0, 1); }
+.jz-sheet-content[data-side="right"][data-state="closed"] { animation: jz-sheet-out-right 180ms ease-in; }
+.jz-sheet-content[data-side="left"][data-state="open"]    { animation: jz-sheet-in-left   220ms cubic-bezier(0.32, 0.72, 0, 1); }
+.jz-sheet-content[data-side="left"][data-state="closed"]  { animation: jz-sheet-out-left  180ms ease-in; }
+.jz-sheet-content[data-side="top"][data-state="open"]     { animation: jz-sheet-in-top    220ms cubic-bezier(0.32, 0.72, 0, 1); }
+.jz-sheet-content[data-side="top"][data-state="closed"]   { animation: jz-sheet-out-top   180ms ease-in; }
+.jz-sheet-content[data-side="bottom"][data-state="open"]  { animation: jz-sheet-in-bottom 220ms cubic-bezier(0.32, 0.72, 0, 1); }
+.jz-sheet-content[data-side="bottom"][data-state="closed"]{ animation: jz-sheet-out-bottom 180ms ease-in; }

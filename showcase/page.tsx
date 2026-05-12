@@ -15,11 +15,33 @@
 
 import { useEffect, useState } from "react";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Alert,
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarImage,
   Badge,
+  Blockquote,
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
   Button,
   ButtonGroup,
   Card,
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  Cite,
   CardBody,
   CardDescription,
   CardFooter,
@@ -27,22 +49,104 @@ import {
   CardTitle,
   Checkbox,
   Code,
+  ColorInput,
+  ContextMenu,
+  ContextMenuCheckboxItem,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuLabel,
+  ContextMenuSeparator,
+  ContextMenuShortcut,
+  ContextMenuTrigger,
+  Datalist,
+  DatalistOption,
   DateInput,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuTrigger,
+  Figure,
+  FigureCaption,
+  FileInput,
   TimeInput,
   FormErrorMessage,
   FormField,
   FormHelperText,
   Heading,
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
   Input,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
   Kbd,
   Label,
+  ListGroup,
+  ListGroupItem,
+  Nav,
+  NavItem,
+  NavLink,
+  Navbar,
+  NavbarActions,
+  NavbarBrand,
+  NavbarContent,
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverTrigger,
+  Progress,
   Radio,
   RadioGroup,
   Select,
   FormError,
   Separator,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SimplePagination,
+  Skeleton,
+  Slider,
   Spinner,
   Switch,
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  ToastProvider,
+  Toggle,
+  ToggleGroup,
+  ToggleGroupItem,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+  useToast,
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
   Text,
   Textarea,
   type BadgeProps,
@@ -213,6 +317,8 @@ const MoonIcon = () => (
 export default function DesignSystemPage() {
   const [showAlert, setShowAlert] = useState(true);
   const [isDark, setIsDark] = useState(false);
+  const [pagerPage, setPagerPage] = useState(7);
+  const [smallPagerPage, setSmallPagerPage] = useState(2);
 
   useEffect(() => {
     if (isDark) {
@@ -245,6 +351,15 @@ export default function DesignSystemPage() {
           <a href="#toggles"    className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Toggles</a>
           <a href="#feedback"   className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Feedback</a>
           <a href="#structure"  className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Structure</a>
+          <a href="#data"       className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Data</a>
+          <a href="#progress"   className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Progress</a>
+          <a href="#overlays"   className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Overlays</a>
+          <a href="#disclosure" className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Disclosure</a>
+          <a href="#menus"      className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Menus</a>
+          <a href="#composition" className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Composition</a>
+          <a href="#navigation" className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Navigation</a>
+          <a href="#extras"     className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">Extras</a>
+          <a href="#bs-extras"  className="hover:text-brand-700 dark:hover:text-brand-300 transition-colors">More</a>
           <button
             type="button"
             onClick={() => setIsDark(!isDark)}
@@ -1016,6 +1131,1109 @@ export default function DesignSystemPage() {
           </Card>
         </div>
       </section>
+
+      <Separator className="mx-auto max-w-6xl" />
+
+      {/* ===== DATA ===== */}
+      <section id="data" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
+        <header>
+          <Heading level={2} size="3xl">Data</Heading>
+          <p className="mt-1 text-foreground-muted">Tables, pagination, and breadcrumb nav.</p>
+        </header>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Breadcrumb</Heading>
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#">Projects</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#">Render pipeline</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Settings</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+
+          <Breadcrumb>
+            <BreadcrumbList>
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#">Home</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbEllipsis />
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink href="#">Render pipeline</BreadcrumbLink>
+              </BreadcrumbItem>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbPage>Settings</BreadcrumbPage>
+              </BreadcrumbItem>
+            </BreadcrumbList>
+          </Breadcrumb>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Table — default</Heading>
+          <Table>
+            <TableCaption>Recent render jobs queued by the worker pool.</TableCaption>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Job</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Started</TableHead>
+                <TableHead className="text-right">Duration</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-medium">render-pipeline-v3.mp4</TableCell>
+                <TableCell><Badge variant="success" soft>Ready</Badge></TableCell>
+                <TableCell className="text-foreground-muted">2 hours ago</TableCell>
+                <TableCell className="text-right tabular-nums">00:04:21</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">brand-reel-final.mov</TableCell>
+                <TableCell><Badge variant="warning" soft>Processing</Badge></TableCell>
+                <TableCell className="text-foreground-muted">14 min ago</TableCell>
+                <TableCell className="text-right tabular-nums">00:01:08</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">client-cut-draft.mp4</TableCell>
+                <TableCell><Badge variant="danger" soft>Failed</Badge></TableCell>
+                <TableCell className="text-foreground-muted">just now</TableCell>
+                <TableCell className="text-right tabular-nums">00:00:03</TableCell>
+              </TableRow>
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell colSpan={3}>Total</TableCell>
+                <TableCell className="text-right tabular-nums">00:05:32</TableCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Table — striped + hover</Heading>
+          <Table striped hover>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Project</TableHead>
+                <TableHead>Owner</TableHead>
+                <TableHead className="text-right">Assets</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell className="font-medium">Q3 brand refresh</TableCell>
+                <TableCell className="text-foreground-muted">James Z</TableCell>
+                <TableCell className="text-right tabular-nums">128</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Founder series cuts</TableCell>
+                <TableCell className="text-foreground-muted">James Z</TableCell>
+                <TableCell className="text-right tabular-nums">42</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Marketing reel v4</TableCell>
+                <TableCell className="text-foreground-muted">James Z</TableCell>
+                <TableCell className="text-right tabular-nums">17</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Sizzle 30s</TableCell>
+                <TableCell className="text-foreground-muted">James Z</TableCell>
+                <TableCell className="text-right tabular-nums">8</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Table — bordered, compact</Heading>
+          <Table bordered density="sm">
+            <TableHeader>
+              <TableRow>
+                <TableHead>Setting</TableHead>
+                <TableHead>Value</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>Worker concurrency</TableCell>
+                <TableCell className="font-mono text-xs">8</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Retry backoff</TableCell>
+                <TableCell className="font-mono text-xs">exponential</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Dead-letter queue</TableCell>
+                <TableCell className="font-mono text-xs">dlq-renders</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Pagination — many pages</Heading>
+          <SimplePagination
+            page={pagerPage}
+            pageCount={20}
+            onPageChange={setPagerPage}
+          />
+          <p className="text-center text-sm text-foreground-muted">Page {pagerPage} of 20</p>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Pagination — small, no chevrons</Heading>
+          <SimplePagination
+            page={smallPagerPage}
+            pageCount={5}
+            onPageChange={setSmallPagerPage}
+            size="sm"
+            hidePrevNext
+          />
+        </div>
+      </section>
+
+      <Separator className="mx-auto max-w-6xl" />
+
+      {/* ===== PROGRESS / LOADING / IDENTITY ===== */}
+      <section id="progress" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
+        <header>
+          <Heading level={2} size="3xl">Progress, Loading & Identity</Heading>
+          <p className="mt-1 text-foreground-muted">Progress bars, skeletons, and avatars.</p>
+        </header>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Progress — determinate</Heading>
+          <div className="space-y-3">
+            <Progress value={25} label="Render progress" />
+            <Progress value={62} variant="success" />
+            <Progress value={88} variant="accent" size="lg" />
+            <Progress value={40} variant="warning" size="sm" />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Progress — indeterminate</Heading>
+          <div className="space-y-3">
+            <Progress />
+            <Progress variant="accent" size="lg" />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Skeleton</Heading>
+          <Card className="mx-auto max-w-md">
+            <CardBody className="space-y-3">
+              <div className="flex items-center gap-3">
+                <Skeleton circle className="size-10" />
+                <div className="flex-1 space-y-2">
+                  <Skeleton className="h-3 w-1/2" />
+                  <Skeleton className="h-3 w-3/4" />
+                </div>
+              </div>
+              <Skeleton className="h-3 w-full" />
+              <Skeleton className="h-3 w-5/6" />
+              <Skeleton className="h-3 w-2/3" />
+            </CardBody>
+          </Card>
+          <Card className="mx-auto max-w-md">
+            <CardBody className="space-y-3">
+              <Skeleton animation="shimmer" className="h-3 w-full" />
+              <Skeleton animation="shimmer" className="h-3 w-5/6" />
+              <Skeleton animation="shimmer" className="h-3 w-2/3" />
+            </CardBody>
+          </Card>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Avatar — sizes</Heading>
+          <div className="flex items-center gap-3">
+            {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
+              <Avatar key={s} size={s}>
+                <AvatarFallback>JZ</AvatarFallback>
+              </Avatar>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Avatar — with image fallback</Heading>
+          <div className="flex items-center gap-3">
+            <Avatar>
+              <AvatarImage src="https://i.pravatar.cc/80?img=12" alt="Demo user" />
+              <AvatarFallback>DU</AvatarFallback>
+            </Avatar>
+            <Avatar>
+              <AvatarImage src="/nope.png" alt="" />
+              <AvatarFallback className="bg-brand-700 text-neutral-50">JZ</AvatarFallback>
+            </Avatar>
+            <Avatar shape="square">
+              <AvatarFallback className="bg-accent-500 text-neutral-950">CK</AvatarFallback>
+            </Avatar>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Avatar group</Heading>
+          <AvatarGroup>
+            <Avatar><AvatarFallback>JZ</AvatarFallback></Avatar>
+            <Avatar><AvatarFallback className="bg-brand-700 text-neutral-50">CK</AvatarFallback></Avatar>
+            <Avatar><AvatarFallback className="bg-accent-500 text-neutral-950">MR</AvatarFallback></Avatar>
+            <Avatar><AvatarFallback className="bg-neutral-700 text-neutral-50">+3</AvatarFallback></Avatar>
+          </AvatarGroup>
+        </div>
+      </section>
+
+      <Separator className="mx-auto max-w-6xl" />
+
+      {/* ===== OVERLAYS ===== */}
+      <TooltipProvider delayDuration={150}>
+        <section id="overlays" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
+          <header>
+            <Heading level={2} size="3xl">Overlays</Heading>
+            <p className="mt-1 text-foreground-muted">Dialog, Tooltip, and Popover.</p>
+          </header>
+
+          <div className="space-y-4">
+            <Heading level={3} size="lg">Dialog</Heading>
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="primary">Delete project</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Delete project?</DialogTitle>
+                  <DialogDescription>
+                    This permanently removes the project and all its assets. Active renders
+                    will be cancelled and team members will lose access immediately.
+                  </DialogDescription>
+                </DialogHeader>
+                <FormField>
+                  <Label htmlFor="ds-dialog-confirm">Type the project name to confirm</Label>
+                  <Input id="ds-dialog-confirm" placeholder="render-pipeline" />
+                </FormField>
+                <DialogFooter>
+                  <Button variant="outline-secondary">Cancel</Button>
+                  <Button variant="danger">Delete project</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
+
+          <div className="space-y-4">
+            <Heading level={3} size="lg">Tooltip</Heading>
+            <div className="flex flex-wrap items-center gap-3">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="outline-secondary" size="sm">Hover me</Button>
+                </TooltipTrigger>
+                <TooltipContent>Tooltips appear on hover or focus.</TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="sm">Top</Button>
+                </TooltipTrigger>
+                <TooltipContent side="top">Above the trigger</TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="sm">Right</Button>
+                </TooltipTrigger>
+                <TooltipContent side="right">Beside the trigger</TooltipContent>
+              </Tooltip>
+
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="sm">Bottom</Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">Under the trigger</TooltipContent>
+              </Tooltip>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <Heading level={3} size="lg">Popover</Heading>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline-primary">Edit display name</Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80">
+                <div className="space-y-3">
+                  <div>
+                    <p className="font-semibold text-foreground">Display name</p>
+                    <p className="text-xs text-foreground-muted">Shown next to your avatar across the app.</p>
+                  </div>
+                  <FormField>
+                    <Label htmlFor="ds-popover-name">Name</Label>
+                    <Input id="ds-popover-name" defaultValue="James Zambon" />
+                  </FormField>
+                  <div className="flex justify-end gap-2">
+                    <PopoverClose asChild>
+                      <Button variant="ghost" size="sm">Cancel</Button>
+                    </PopoverClose>
+                    <PopoverClose asChild>
+                      <Button size="sm">Save</Button>
+                    </PopoverClose>
+                  </div>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
+        </section>
+      </TooltipProvider>
+
+      <Separator className="mx-auto max-w-6xl" />
+
+      {/* ===== DISCLOSURE ===== */}
+      <section id="disclosure" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
+        <header>
+          <Heading level={2} size="3xl">Disclosure</Heading>
+          <p className="mt-1 text-foreground-muted">Tabs and Accordion for swapping panels.</p>
+        </header>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Tabs</Heading>
+          <Tabs defaultValue="general" className="max-w-2xl">
+            <TabsList>
+              <TabsTrigger value="general">General</TabsTrigger>
+              <TabsTrigger value="security">Security</TabsTrigger>
+              <TabsTrigger value="billing">Billing</TabsTrigger>
+              <TabsTrigger value="team">Team</TabsTrigger>
+            </TabsList>
+            <TabsContent value="general">
+              <Card>
+                <CardHeader>
+                  <CardTitle>General</CardTitle>
+                  <CardDescription>Display name, timezone, and language.</CardDescription>
+                </CardHeader>
+                <CardBody className="space-y-4">
+                  <FormField>
+                    <Label htmlFor="ds-tabs-name">Display name</Label>
+                    <Input id="ds-tabs-name" defaultValue="James Zambon" />
+                  </FormField>
+                  <FormField>
+                    <Label htmlFor="ds-tabs-tz">Timezone</Label>
+                    <Select id="ds-tabs-tz" defaultValue="america-new-york">
+                      <option value="america-new-york">America / New York</option>
+                      <option value="america-los-angeles">America / Los Angeles</option>
+                      <option value="europe-london">Europe / London</option>
+                    </Select>
+                  </FormField>
+                </CardBody>
+              </Card>
+            </TabsContent>
+            <TabsContent value="security">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Security</CardTitle>
+                  <CardDescription>Authentication and recovery options.</CardDescription>
+                </CardHeader>
+                <CardBody>
+                  <p className="text-sm text-foreground-muted">
+                    Two-factor authentication, hardware keys, and active sessions live here.
+                  </p>
+                </CardBody>
+              </Card>
+            </TabsContent>
+            <TabsContent value="billing">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Billing</CardTitle>
+                  <CardDescription>Plan, payment method, and invoices.</CardDescription>
+                </CardHeader>
+                <CardBody>
+                  <p className="text-sm text-foreground-muted">
+                    Currently on <strong>Pro</strong>. Next invoice: $24.00 on the 1st.
+                  </p>
+                </CardBody>
+              </Card>
+            </TabsContent>
+            <TabsContent value="team">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Team</CardTitle>
+                  <CardDescription>Members and invites.</CardDescription>
+                </CardHeader>
+                <CardBody>
+                  <p className="text-sm text-foreground-muted">3 members, 1 pending invite.</p>
+                </CardBody>
+              </Card>
+            </TabsContent>
+          </Tabs>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Accordion — single</Heading>
+          <Accordion type="single" collapsible className="max-w-2xl">
+            <AccordionItem value="renders">
+              <AccordionTrigger>How are renders prioritized?</AccordionTrigger>
+              <AccordionContent>
+                Jobs run in priority order across the worker pool. Manual edits jump to the front
+                of the queue; scheduled batches run at lower priority during off-peak hours.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="failures">
+              <AccordionTrigger>What happens when a render fails?</AccordionTrigger>
+              <AccordionContent>
+                Failed jobs retry with exponential backoff up to three times. Persistent failures
+                surface in the dead-letter queue and trigger a Slack alert.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="cache">
+              <AccordionTrigger>How does cache invalidation work?</AccordionTrigger>
+              <AccordionContent>
+                Each render emits a manifest with content hashes for every output. Downstream
+                consumers compare the manifest against the previous run to decide what to refresh.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Accordion — multiple</Heading>
+          <Accordion type="multiple" defaultValue={["one"]} className="max-w-2xl">
+            <AccordionItem value="one">
+              <AccordionTrigger>Is it accessible?</AccordionTrigger>
+              <AccordionContent>Yes — full keyboard support and ARIA via Radix primitives.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="two">
+              <AccordionTrigger>Is it styled?</AccordionTrigger>
+              <AccordionContent>Yes — matches the rest of the design system out of the box.</AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="three">
+              <AccordionTrigger>Is it animated?</AccordionTrigger>
+              <AccordionContent>Yes — height-based open/close transition via Radix CSS variables.</AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
+
+      <Separator className="mx-auto max-w-6xl" />
+
+      {/* ===== MENUS + TOASTS ===== */}
+      <ToastProvider>
+        <section id="menus" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
+          <header>
+            <Heading level={2} size="3xl">Menus & Notifications</Heading>
+            <p className="mt-1 text-foreground-muted">DropdownMenu and Toast.</p>
+          </header>
+
+          <div className="space-y-4">
+            <Heading level={3} size="lg">Dropdown menu</Heading>
+            <DropdownMenuDemo />
+          </div>
+
+          <div className="space-y-4">
+            <Heading level={3} size="lg">Toasts</Heading>
+            <ToastDemo />
+          </div>
+        </section>
+      </ToastProvider>
+
+      <Separator className="mx-auto max-w-6xl" />
+
+      {/* ===== COMPOSITION ===== */}
+      <section id="composition" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
+        <header>
+          <Heading level={2} size="3xl">Composition</Heading>
+          <p className="mt-1 text-foreground-muted">List group, input group, and slider.</p>
+        </header>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">List group</Heading>
+          <div className="grid gap-6 md:grid-cols-2">
+            <ListGroup className="max-w-md">
+              <ListGroupItem>render-pipeline-v3.mp4</ListGroupItem>
+              <ListGroupItem active>brand-reel-final.mov</ListGroupItem>
+              <ListGroupItem>client-cut-draft.mp4</ListGroupItem>
+              <ListGroupItem disabled>archived-2024-q4.mov</ListGroupItem>
+            </ListGroup>
+
+            <ListGroup className="max-w-md">
+              <ListGroupItem variant="success">Render complete</ListGroupItem>
+              <ListGroupItem variant="warning">Approaching quota</ListGroupItem>
+              <ListGroupItem variant="danger">Upload failed</ListGroupItem>
+              <ListGroupItem variant="info">Tip — hold ⌥ to pan</ListGroupItem>
+            </ListGroup>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">List group — flush inside a Card</Heading>
+          <Card className="max-w-md">
+            <CardHeader>
+              <CardTitle>Recent files</CardTitle>
+              <CardDescription>Last 4 uploads from this project.</CardDescription>
+            </CardHeader>
+            <ListGroup flush>
+              <ListGroupItem interactive className="flex items-center justify-between">
+                <span>render-pipeline-v3.mp4</span>
+                <Badge variant="success" soft size="sm">Ready</Badge>
+              </ListGroupItem>
+              <ListGroupItem interactive className="flex items-center justify-between">
+                <span>brand-reel-final.mov</span>
+                <Badge variant="warning" soft size="sm">Processing</Badge>
+              </ListGroupItem>
+              <ListGroupItem interactive className="flex items-center justify-between">
+                <span>client-cut-draft.mp4</span>
+                <Badge variant="danger" soft size="sm">Failed</Badge>
+              </ListGroupItem>
+              <ListGroupItem interactive className="flex items-center justify-between">
+                <span>sizzle-30s-v2.mp4</span>
+                <Badge variant="success" soft size="sm">Ready</Badge>
+              </ListGroupItem>
+            </ListGroup>
+          </Card>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Input group</Heading>
+          <div className="grid gap-4 md:max-w-xl">
+            <InputGroup>
+              <InputGroupAddon>$</InputGroupAddon>
+              <Input placeholder="0.00" />
+              <InputGroupAddon>USD</InputGroupAddon>
+            </InputGroup>
+
+            <InputGroup>
+              <InputGroupAddon>https://</InputGroupAddon>
+              <Input placeholder="example.com" defaultValue="jameszambon.com" />
+            </InputGroup>
+
+            <InputGroup>
+              <Input placeholder="Search files..." />
+              <InputGroupButton>Search</InputGroupButton>
+            </InputGroup>
+
+            <InputGroup size="sm">
+              <InputGroupAddon>@</InputGroupAddon>
+              <Input placeholder="handle" />
+            </InputGroup>
+
+            <InputGroup size="lg" invalid>
+              <InputGroupAddon>$</InputGroupAddon>
+              <Input placeholder="0.00" defaultValue="-5" />
+              <InputGroupAddon>USD</InputGroupAddon>
+            </InputGroup>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Slider</Heading>
+          <div className="grid gap-6 md:max-w-xl">
+            <div className="space-y-2">
+              <Label>Volume</Label>
+              <Slider defaultValue={[40]} max={100} step={1} />
+            </div>
+            <div className="space-y-2">
+              <Label>Price range</Label>
+              <Slider defaultValue={[20, 80]} max={100} step={5} variant="accent" />
+            </div>
+            <div className="space-y-2">
+              <Label>Opacity (large + success)</Label>
+              <Slider defaultValue={[65]} max={100} step={1} size="lg" variant="success" />
+            </div>
+            <div className="space-y-2">
+              <Label>Disabled</Label>
+              <Slider defaultValue={[50]} max={100} disabled />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Separator className="mx-auto max-w-6xl" />
+
+      {/* ===== NAVIGATION ===== */}
+      <section id="navigation" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
+        <header>
+          <Heading level={2} size="3xl">Navigation</Heading>
+          <p className="mt-1 text-foreground-muted">Navbar, Nav, and Sheet (offcanvas drawer).</p>
+        </header>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Navbar</Heading>
+          <div className="rounded-md border border-border overflow-hidden">
+            <Navbar borderless>
+              <NavbarBrand href="#">JZ Productions</NavbarBrand>
+              <NavbarContent>
+                <Nav variant="default">
+                  <NavItem><NavLink href="#" active>Home</NavLink></NavItem>
+                  <NavItem><NavLink href="#">Work</NavLink></NavItem>
+                  <NavItem><NavLink href="#">About</NavLink></NavItem>
+                  <NavItem><NavLink href="#" disabled>Press</NavLink></NavItem>
+                </Nav>
+              </NavbarContent>
+              <NavbarActions>
+                <Button variant="ghost" size="sm">Sign in</Button>
+                <Button size="sm">Get started</Button>
+              </NavbarActions>
+            </Navbar>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Nav — underline</Heading>
+          <Nav variant="underline">
+            <NavItem><NavLink href="#" active>Overview</NavLink></NavItem>
+            <NavItem><NavLink href="#">Members</NavLink></NavItem>
+            <NavItem><NavLink href="#">Billing</NavLink></NavItem>
+            <NavItem><NavLink href="#">Webhooks</NavLink></NavItem>
+            <NavItem><NavLink href="#" disabled>Audit log</NavLink></NavItem>
+          </Nav>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Nav — pills</Heading>
+          <Nav variant="pills">
+            <NavItem><NavLink href="#" active>All</NavLink></NavItem>
+            <NavItem><NavLink href="#">Ready</NavLink></NavItem>
+            <NavItem><NavLink href="#">Processing</NavLink></NavItem>
+            <NavItem><NavLink href="#">Failed</NavLink></NavItem>
+          </Nav>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Nav — vertical sidebar</Heading>
+          <div className="grid gap-6 md:grid-cols-[200px_1fr] md:max-w-2xl">
+            <Nav variant="default" vertical>
+              <NavItem><NavLink href="#" active>Overview</NavLink></NavItem>
+              <NavItem><NavLink href="#">Renders</NavLink></NavItem>
+              <NavItem><NavLink href="#">Assets</NavLink></NavItem>
+              <NavItem><NavLink href="#">Team</NavLink></NavItem>
+              <NavItem><NavLink href="#">Settings</NavLink></NavItem>
+            </Nav>
+            <Card>
+              <CardBody>
+                <p className="text-foreground-muted">Panel content sits next to the sidebar.</p>
+              </CardBody>
+            </Card>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Sheet (Offcanvas)</Heading>
+          <div className="flex flex-wrap items-center gap-2">
+            {(["right", "left", "top", "bottom"] as const).map((side) => (
+              <Sheet key={side}>
+                <SheetTrigger asChild>
+                  <Button variant="outline-secondary" size="sm">From {side}</Button>
+                </SheetTrigger>
+                <SheetContent side={side}>
+                  <SheetHeader>
+                    <SheetTitle>Filters</SheetTitle>
+                    <SheetDescription>Narrow the result set across the catalog.</SheetDescription>
+                  </SheetHeader>
+                  <div className="grid gap-4 py-4">
+                    <FormField>
+                      <Label htmlFor={`sheet-q-${side}`}>Search</Label>
+                      <Input id={`sheet-q-${side}`} placeholder="render-pipeline..." />
+                    </FormField>
+                    <FormField>
+                      <Label htmlFor={`sheet-tag-${side}`}>Tag</Label>
+                      <Select id={`sheet-tag-${side}`} defaultValue="">
+                        <option value="">Any</option>
+                        <option value="brand">Brand</option>
+                        <option value="reel">Reel</option>
+                        <option value="cut">Cut</option>
+                      </Select>
+                    </FormField>
+                    <div className="space-y-2">
+                      <Label>Duration (s)</Label>
+                      <Slider defaultValue={[15, 120]} max={300} step={5} />
+                    </div>
+                  </div>
+                  <SheetFooter>
+                    <Button variant="ghost">Reset</Button>
+                    <Button>Apply</Button>
+                  </SheetFooter>
+                </SheetContent>
+              </Sheet>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Separator className="mx-auto max-w-6xl" />
+
+      {/* ===== EXTRAS (HoverCard, ContextMenu, ToggleGroup) ===== */}
+      <section id="extras" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
+        <header>
+          <Heading level={2} size="3xl">Extras</Heading>
+          <p className="mt-1 text-foreground-muted">HoverCard, ContextMenu, and Toggle / ToggleGroup.</p>
+        </header>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">HoverCard</Heading>
+          <div className="flex flex-wrap items-center gap-2 text-sm">
+            <span className="text-foreground-muted">Hover over</span>
+            <HoverCard>
+              <HoverCardTrigger asChild>
+                <a href="#" className="text-brand-700 dark:text-brand-300 underline underline-offset-2 hover:no-underline">@jameszambon</a>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-72">
+                <div className="flex gap-3">
+                  <Avatar size="lg">
+                    <AvatarFallback className="bg-brand-700 text-neutral-50">JZ</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="font-semibold text-foreground">James Zambon</p>
+                    <p className="text-xs text-foreground-muted">Renders, brand work, founder cuts.</p>
+                    <p className="mt-2 text-xs text-foreground-subtle">Joined March 2018</p>
+                  </div>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
+            <span className="text-foreground-muted">to preview the profile.</span>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Context menu (right-click)</Heading>
+          <ContextMenu>
+            <ContextMenuTrigger asChild>
+              <div className="flex h-32 max-w-md items-center justify-center rounded-md border-2 border-dashed border-border text-sm text-foreground-muted">
+                Right-click anywhere in this box
+              </div>
+            </ContextMenuTrigger>
+            <ContextMenuContent className="w-56">
+              <ContextMenuLabel>File</ContextMenuLabel>
+              <ContextMenuSeparator />
+              <ContextMenuItem>
+                Open
+                <ContextMenuShortcut>⌘O</ContextMenuShortcut>
+              </ContextMenuItem>
+              <ContextMenuItem>
+                Rename
+                <ContextMenuShortcut>F2</ContextMenuShortcut>
+              </ContextMenuItem>
+              <ContextMenuItem>
+                Duplicate
+                <ContextMenuShortcut>⌘D</ContextMenuShortcut>
+              </ContextMenuItem>
+              <ContextMenuSeparator />
+              <ContextMenuCheckboxItem checked>Show hidden files</ContextMenuCheckboxItem>
+              <ContextMenuSeparator />
+              <ContextMenuItem className="text-danger focus:text-danger">
+                Delete
+                <ContextMenuShortcut>⌫</ContextMenuShortcut>
+              </ContextMenuItem>
+            </ContextMenuContent>
+          </ContextMenu>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Toggle (standalone)</Heading>
+          <div className="flex items-center gap-2">
+            <Toggle aria-label="Toggle bold"><strong>B</strong></Toggle>
+            <Toggle aria-label="Toggle italic"><em>I</em></Toggle>
+            <Toggle aria-label="Toggle underline"><u>U</u></Toggle>
+            <Toggle variant="outline" aria-label="Toggle strike"><s>S</s></Toggle>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">ToggleGroup — single</Heading>
+          <ToggleGroup type="single" defaultValue="left">
+            <ToggleGroupItem value="left" aria-label="Align left">Left</ToggleGroupItem>
+            <ToggleGroupItem value="center" aria-label="Align center">Center</ToggleGroupItem>
+            <ToggleGroupItem value="right" aria-label="Align right">Right</ToggleGroupItem>
+            <ToggleGroupItem value="justify" aria-label="Justify">Justify</ToggleGroupItem>
+          </ToggleGroup>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">ToggleGroup — multiple (outline)</Heading>
+          <ToggleGroup type="multiple" variant="outline" defaultValue={["bold", "italic"]}>
+            <ToggleGroupItem value="bold"><strong>B</strong></ToggleGroupItem>
+            <ToggleGroupItem value="italic"><em>I</em></ToggleGroupItem>
+            <ToggleGroupItem value="underline"><u>U</u></ToggleGroupItem>
+            <ToggleGroupItem value="strike"><s>S</s></ToggleGroupItem>
+          </ToggleGroup>
+        </div>
+      </section>
+
+      <Separator className="mx-auto max-w-6xl" />
+
+      {/* ===== BOOTSTRAP EXTRAS (Carousel, File/Color/Datalist, Figure/Blockquote) ===== */}
+      <section id="bs-extras" className="mx-auto max-w-6xl scroll-mt-20 space-y-10 px-8 py-16">
+        <header>
+          <Heading level={2} size="3xl">More</Heading>
+          <p className="mt-1 text-foreground-muted">Carousel, file + color inputs, datalist, figure, blockquote.</p>
+        </header>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Carousel</Heading>
+          <Carousel opts={{ loop: true }} className="max-w-2xl mx-auto">
+            <CarouselContent>
+              {[
+                { tone: "bg-brand-700",   label: "Slide 1" },
+                { tone: "bg-accent-500",  label: "Slide 2" },
+                { tone: "bg-neutral-700", label: "Slide 3" },
+                { tone: "bg-success",     label: "Slide 4" },
+                { tone: "bg-info",        label: "Slide 5" },
+              ].map((s, idx) => (
+                <CarouselItem key={idx}>
+                  <div className={`flex h-48 items-center justify-center rounded-md ${s.tone} text-neutral-50 text-2xl font-semibold`}>
+                    {s.label}
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Carousel — multi-up</Heading>
+          <Carousel opts={{ align: "start" }} className="max-w-3xl mx-auto">
+            <CarouselContent>
+              {Array.from({ length: 8 }).map((_, idx) => (
+                <CarouselItem key={idx} className="md:basis-1/2 lg:basis-1/3">
+                  <Card>
+                    <CardBody className="text-center font-mono text-2xl text-foreground-muted">
+                      {idx + 1}
+                    </CardBody>
+                  </Card>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">File input</Heading>
+          <div className="grid gap-4 md:max-w-md">
+            <FileInput name="single-file" />
+            <FileInput name="multi-file" multiple buttonText="Upload assets" />
+            <FileInput name="img-file" accept="image/*" size="sm" />
+            <FileInput name="img-invalid" invalid placeholder="Required" />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Color input</Heading>
+          <div className="flex flex-wrap items-center gap-4">
+            <ColorInput defaultValue="#014c6c" />
+            <ColorInput defaultValue="#d98a24" size="lg" />
+            <ColorInput defaultValue="#10b981" size="sm" showHex={false} />
+            <ColorInput defaultValue="#ef4444" invalid />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Datalist (native autocomplete)</Heading>
+          <FormField className="md:max-w-md">
+            <Label htmlFor="ds-datalist-city">City</Label>
+            <Input
+              id="ds-datalist-city"
+              list="ds-cities"
+              placeholder="Start typing..."
+            />
+            <Datalist id="ds-cities">
+              <DatalistOption value="Boston" />
+              <DatalistOption value="Brooklyn" />
+              <DatalistOption value="Chicago" />
+              <DatalistOption value="Los Angeles" />
+              <DatalistOption value="New York" />
+              <DatalistOption value="Portland" />
+              <DatalistOption value="San Francisco" />
+              <DatalistOption value="Seattle" />
+            </Datalist>
+            <FormHelperText>Type the first letter to see suggestions.</FormHelperText>
+          </FormField>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Blockquote</Heading>
+          <div className="space-y-6 max-w-2xl">
+            <Blockquote>
+              The web is a system of constraints. Good design embraces them.
+              <Cite>JZ, on building this thing</Cite>
+            </Blockquote>
+            <Blockquote align="center">
+              Centered blockquotes work for callouts in long-form content.
+              <Cite>Bootstrap convention</Cite>
+            </Blockquote>
+            <Blockquote align="end">
+              Right-aligned variant flips the rule to the opposite edge.
+              <Cite>Style guide</Cite>
+            </Blockquote>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Figure</Heading>
+          <Figure>
+            <div className="flex h-40 w-80 items-center justify-center rounded-md bg-brand-700 text-neutral-50 text-sm font-mono">
+              [image placeholder]
+            </div>
+            <FigureCaption>
+              A caption sits below the image in muted footnote style.
+            </FigureCaption>
+          </Figure>
+        </div>
+      </section>
     </main>
+  );
+}
+
+function DropdownMenuDemo() {
+  const [bookmarks, setBookmarks] = useState(true);
+  const [urls, setUrls] = useState(false);
+  const [view, setView] = useState<"compact" | "comfortable" | "cozy">(
+    "comfortable",
+  );
+
+  return (
+    <div className="flex flex-wrap items-center gap-3">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline-secondary">Open menu</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56">
+          <DropdownMenuLabel>My account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>
+            Profile
+            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Billing
+            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            Settings
+            <DropdownMenuShortcut>⌘,</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem disabled>API (coming soon)</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="text-danger focus:text-danger">
+            Log out
+            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="outline-primary">View options</Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56">
+          <DropdownMenuLabel>Sidebar</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuCheckboxItem
+            checked={bookmarks}
+            onCheckedChange={(c) => setBookmarks(Boolean(c))}
+          >
+            Show bookmarks
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem
+            checked={urls}
+            onCheckedChange={(c) => setUrls(Boolean(c))}
+          >
+            Show full URLs
+          </DropdownMenuCheckboxItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuLabel>Density</DropdownMenuLabel>
+          <DropdownMenuRadioGroup
+            value={view}
+            onValueChange={(v) => setView(v as typeof view)}
+          >
+            <DropdownMenuRadioItem value="compact">Compact</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="comfortable">Comfortable</DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="cozy">Cozy</DropdownMenuRadioItem>
+          </DropdownMenuRadioGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  );
+}
+
+function ToastDemo() {
+  const { toast } = useToast();
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <Button
+        variant="outline-secondary"
+        onClick={() =>
+          toast({
+            title: "Project saved",
+            description: "Your changes have been published.",
+          })
+        }
+      >
+        Default
+      </Button>
+      <Button
+        variant="success"
+        onClick={() =>
+          toast({
+            variant: "success",
+            title: "Render complete",
+            description: "render-pipeline-v3.mp4 is ready.",
+          })
+        }
+      >
+        Success
+      </Button>
+      <Button
+        variant="warning"
+        onClick={() =>
+          toast({
+            variant: "warning",
+            title: "Approaching quota",
+            description: "You've used 80% of your monthly render minutes.",
+          })
+        }
+      >
+        Warning
+      </Button>
+      <Button
+        variant="danger"
+        onClick={() =>
+          toast({
+            variant: "danger",
+            title: "Upload failed",
+            description: "Connection lost. We'll retry automatically.",
+            action: { label: "Retry now", onClick: () => {} },
+          })
+        }
+      >
+        Danger + action
+      </Button>
+      <Button
+        variant="info"
+        onClick={() =>
+          toast({
+            variant: "info",
+            title: "Tip",
+            description: "Hold ⌥ to drag-resize the panel.",
+          })
+        }
+      >
+        Info
+      </Button>
+    </div>
   );
 }
