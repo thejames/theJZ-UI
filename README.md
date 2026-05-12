@@ -1,6 +1,6 @@
 # @jameszambon/ui
 
-Private design system for jameszambon Next.js apps. Ships React components and a Tailwind v4 CSS theme.
+Design system for jameszambon Next.js apps. Ships React components and a Tailwind v4 CSS theme.
 
 ## Install
 
