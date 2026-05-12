@@ -37,6 +37,7 @@ git push --follow-tags && npm publish     # push the tag, then publish to npm
 | Git tag | npm |
 |---|---|
 <!-- version-map-rows -->
+| `v2026.0512b` | `0.0.10` |
 | `v2026.0512a` | `0.0.9` |
 | `v2026.0512` | `0.0.8` |
 | `v2026.0511a` | `0.0.7` |
