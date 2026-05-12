@@ -28,6 +28,7 @@ import {
   Checkbox,
   Code,
   DateInput,
+  TimeInput,
   FormErrorMessage,
   FormField,
   FormHelperText,
@@ -589,6 +590,56 @@ export default function DesignSystemPage() {
               <Label htmlFor="ds-date-invalid">Invalid</Label>
               <DateInput id="ds-date-invalid" defaultValue="2026-05-11" invalid aria-describedby="ds-date-invalid-msg" />
               <FormErrorMessage id="ds-date-invalid-msg">Pick a date in the future.</FormErrorMessage>
+            </FormField>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Time picker</Heading>
+          <p className="text-sm text-foreground-muted">
+            Native <Code>&lt;input type=&quot;time&quot;&gt;</Code> on touch devices; themed column popover on desktop.
+            Wire format is always 24-hour <Code>HH:MM</Code>; the <Code>display</Code> prop only changes the visible UI.
+          </p>
+          <div className="grid grid-cols-1 gap-6 rounded-md border border-border bg-surface p-6 md:grid-cols-3">
+            <FormField>
+              <Label htmlFor="ds-time-basic">Basic (24h, step=5)</Label>
+              <TimeInput id="ds-time-basic" name="time-basic" />
+            </FormField>
+            <FormField>
+              <Label htmlFor="ds-time-12h">12-hour display</Label>
+              <TimeInput id="ds-time-12h" name="time-12h" display="12h" defaultValue="09:30" />
+            </FormField>
+            <FormField>
+              <Label htmlFor="ds-time-bounded">Min / max (09:00&ndash;17:00)</Label>
+              <TimeInput
+                id="ds-time-bounded"
+                name="time-bounded"
+                min="09:00"
+                max="17:00"
+                step={15}
+                defaultValue="12:00"
+              />
+            </FormField>
+          </div>
+
+          <div className="grid grid-cols-3 gap-6 rounded-md border border-border bg-surface p-6">
+            {BUTTON_SIZES.map((s) => (
+              <div key={s} className="space-y-3">
+                <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">{s}</div>
+                <TimeInput size={s} defaultValue="14:30" />
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 rounded-md border border-border bg-surface p-6 md:grid-cols-2">
+            <FormField>
+              <Label htmlFor="ds-time-disabled">Disabled</Label>
+              <TimeInput id="ds-time-disabled" defaultValue="14:30" disabled />
+            </FormField>
+            <FormField>
+              <Label htmlFor="ds-time-invalid">Invalid</Label>
+              <TimeInput id="ds-time-invalid" defaultValue="14:30" invalid aria-describedby="ds-time-invalid-msg" />
+              <FormErrorMessage id="ds-time-invalid-msg">Pick a time during business hours.</FormErrorMessage>
             </FormField>
           </div>
         </div>

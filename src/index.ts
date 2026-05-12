@@ -64,3 +64,5 @@ export type { TextProps } from "./components/Text";
 
 export { DateInput } from "./components/DateInput";
 export type { DateInputProps } from "./components/DateInput";
+export { TimeInput } from "./components/TimeInput";
+export type { TimeInputProps } from "./components/TimeInput";
