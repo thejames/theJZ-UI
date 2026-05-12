@@ -61,3 +61,6 @@ export { Spinner } from "./components/Spinner";
 export type { SpinnerProps } from "./components/Spinner";
 export { Text } from "./components/Text";
 export type { TextProps } from "./components/Text";
+
+export { DateInput } from "./components/DateInput";
+export type { DateInputProps } from "./components/DateInput";

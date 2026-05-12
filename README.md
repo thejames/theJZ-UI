@@ -61,6 +61,16 @@ Why the order matters:
 - `theme.css` defines those tokens. Imported AFTER your `@theme` block, the package's tokens override yours on collision — so the package looks like itself rather than picking up your app's overrides for tokens it depends on.
 - `@custom-variant dark (.dark &)` makes Tailwind's `dark:` variant fire when an ancestor has the `.dark` class. Without it, Tailwind v4 falls back to `prefers-color-scheme: dark` and the toggle in your app won't drive any `dark:` utility classes you write. The package's own bundled utilities have this baked in at compile time, but your code needs the declaration too.
 
+### DateInput stylesheet
+
+If you use `DateInput`, also import react-day-picker's base stylesheet once globally:
+
+```css
+@import "react-day-picker/style.css";
+```
+
+The package's `theme.css` re-themes rdp under the `.jz-datepicker-popover` scope using the design system's semantic tokens (so dark mode flips automatically), but does **not** bundle rdp's base sheet — that's the consumer's responsibility, so apps that don't use DateInput don't pay the bundle cost. `react-day-picker` is a regular dependency of `@jameszambon/ui`, so no separate install needed.
+
 ### Inter font
 
 This package declares Inter in `--font-sans` but does **not** bundle font files. Consuming apps load Inter themselves. Recommended pattern using `next/font/google` in `app/layout.tsx`:

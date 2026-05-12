@@ -220,3 +220,88 @@
   --color-warning-foreground: var(--color-yellow-300);
   --color-info-foreground:    var(--color-cyan-300);
 }
+
+/* ============================================================
+ * react-day-picker (DateInput) — theme overrides
+ *
+ * Scoped under .jz-datepicker-popover so they apply only inside our popover.
+ * Consumers must also `import "react-day-picker/style.css"` once globally;
+ * this block only re-themes rdp's defaults using semantic tokens (so dark
+ * mode flips automatically via the .dark variant on the page).
+ * ============================================================ */
+
+.jz-datepicker-popover .rdp-root {
+  --rdp-accent-color: var(--color-brand-700);
+  --rdp-accent-background-color: var(--color-brand-100);
+  --rdp-day-height: 2.25rem;
+  --rdp-day-width: 2.25rem;
+  --rdp-day_button-height: 2rem;
+  --rdp-day_button-width: 2rem;
+  --rdp-day_button-border-radius: var(--radius-md);
+  --rdp-nav_button-height: 2rem;
+  --rdp-nav_button-width: 2rem;
+  --rdp-nav-height: 2.25rem;
+  --rdp-weekday-padding: 0.25rem 0;
+  font-size: var(--text-sm);
+  margin: 0;
+  color: var(--color-foreground);
+}
+
+.jz-datepicker-popover .rdp-month_caption {
+  font-weight: var(--font-weight-semibold);
+  font-size: 0.95rem;
+}
+
+.jz-datepicker-popover .rdp-day_button {
+  border-radius: var(--radius-md);
+}
+
+.jz-datepicker-popover .rdp-today:not(.rdp-selected) .rdp-day_button {
+  border: 1px solid var(--color-brand-700);
+}
+
+.jz-datepicker-popover .rdp-selected .rdp-day_button {
+  background: var(--color-brand-700);
+  color: var(--color-neutral-50);
+  border: 1px solid var(--color-brand-700);
+}
+
+.jz-datepicker-popover .rdp-button_previous,
+.jz-datepicker-popover .rdp-button_next {
+  border-radius: var(--radius-md);
+  color: var(--color-foreground-muted);
+}
+
+.jz-datepicker-popover .rdp-button_previous:hover,
+.jz-datepicker-popover .rdp-button_next:hover {
+  background: var(--color-surface-muted);
+  color: var(--color-foreground);
+}
+
+.jz-datepicker-popover .rdp-weekday {
+  color: var(--color-foreground-muted);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+}
+
+.jz-datepicker-popover .rdp-outside .rdp-day_button {
+  color: var(--color-foreground-subtle);
+}
+
+/* Dark-mode tweaks: brand-700 is too dark on the elevated dark surface.
+   Use brand-500 for selection/today border so they read properly. */
+.dark .jz-datepicker-popover .rdp-root {
+  --rdp-accent-color: var(--color-brand-500);
+  --rdp-accent-background-color: color-mix(in oklab, var(--color-brand-500) 20%, transparent);
+}
+
+.dark .jz-datepicker-popover .rdp-today:not(.rdp-selected) .rdp-day_button {
+  border-color: var(--color-brand-500);
+}
+
+.dark .jz-datepicker-popover .rdp-selected .rdp-day_button {
+  background: var(--color-brand-500);
+  border-color: var(--color-brand-500);
+  color: var(--color-neutral-950);
+}

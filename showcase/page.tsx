@@ -27,6 +27,7 @@ import {
   CardTitle,
   Checkbox,
   Code,
+  DateInput,
   FormErrorMessage,
   FormField,
   FormHelperText,
@@ -541,6 +542,54 @@ export default function DesignSystemPage() {
               <option value="" disabled>Disabled select</option>
             </Select>
             <Textarea disabled defaultValue="Disabled textarea" />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <Heading level={3} size="lg">Date picker</Heading>
+          <p className="text-sm text-foreground-muted">
+            Native <Code>&lt;input type=&quot;date&quot;&gt;</Code> on touch devices; themed react-day-picker popover on
+            desktop. Wire format is always YYYY-MM-DD. Requires <Code>react-day-picker/style.css</Code> imported once globally.
+          </p>
+          <div className="grid grid-cols-1 gap-6 rounded-md border border-border bg-surface p-6 md:grid-cols-3">
+            <FormField>
+              <Label htmlFor="ds-date-basic">Basic</Label>
+              <DateInput id="ds-date-basic" name="date-basic" />
+            </FormField>
+            <FormField>
+              <Label htmlFor="ds-date-default">Default value</Label>
+              <DateInput id="ds-date-default" name="date-default" defaultValue="2026-05-11" />
+            </FormField>
+            <FormField>
+              <Label htmlFor="ds-date-bounded">Min / max (May 2026)</Label>
+              <DateInput
+                id="ds-date-bounded"
+                name="date-bounded"
+                min="2026-05-01"
+                max="2026-05-31"
+              />
+            </FormField>
+          </div>
+
+          <div className="grid grid-cols-3 gap-6 rounded-md border border-border bg-surface p-6">
+            {BUTTON_SIZES.map((s) => (
+              <div key={s} className="space-y-3">
+                <div className="text-xs font-semibold uppercase tracking-wider text-foreground-subtle">{s}</div>
+                <DateInput size={s} defaultValue="2026-05-11" />
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 rounded-md border border-border bg-surface p-6 md:grid-cols-2">
+            <FormField>
+              <Label htmlFor="ds-date-disabled">Disabled</Label>
+              <DateInput id="ds-date-disabled" defaultValue="2026-05-11" disabled />
+            </FormField>
+            <FormField>
+              <Label htmlFor="ds-date-invalid">Invalid</Label>
+              <DateInput id="ds-date-invalid" defaultValue="2026-05-11" invalid aria-describedby="ds-date-invalid-msg" />
+              <FormErrorMessage id="ds-date-invalid-msg">Pick a date in the future.</FormErrorMessage>
+            </FormField>
           </div>
         </div>
 
