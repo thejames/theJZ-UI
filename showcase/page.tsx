@@ -336,7 +336,7 @@ export default function DesignSystemPage() {
       <header className="mx-auto max-w-6xl px-8 pt-16 pb-8">
         <div className="flex items-center gap-3">
           <Heading level={1} size="5xl">@jameszambon/ui</Heading>
-          <Badge variant="accent" soft>v2026.0512</Badge>
+          <Badge variant="accent" soft>v2026.0512a</Badge>
         </div>
         <p className="mt-2 max-w-2xl text-lg text-foreground-muted">
           Design system reference for JZ Productions. Bootstrap structure, brand colors, Tailwind v4.
